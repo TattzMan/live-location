@@ -1,0 +1,145 @@
+form{
+  position: fixed;
+  bottom: 10px;
+  height: 30px;
+  width: 500px;
+
+  display: flex;
+  align-items: center;
+}
+.Add-new-load{
+  flex: 1;
+
+  height: 25px;
+  border-radius: 13px;
+
+
+
+  padding-left: 20px;
+  font-size: 16px;
+
+  border: 1px solid rgb(61, 212, 99);
+
+  border-radius: 50px;
+
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+}
+form > button{
+  height: 29px;
+  width: 30px;
+  border: 1px solid rgb(14, 206, 62);
+
+  margin-right:8px ;
+  margin-left: -5px;
+
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  background-color: rgb(9, 148, 44);
+}
+.Add-loadBtn{
+  position: fixed;
+  bottom: 10px;
+  height: 30px;
+  width: 80px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgb(192, 37, 37);
+}
+/* Small screens (less than 576px) */
+@media only screen and (max-width: 575px) {
+  form {
+    position: static; /* Remove fixed position */
+    width: 100%; /* Change to full width */
+    height: 50px; /* Increase height */
+    display: flex;
+    flex-direction: column; /* Change to column layout */
+    justify-content: center;
+    align-items: center;
+  }
+  .Add-new-load {
+    width: 90%; /* Adjust width */
+    margin-bottom: 10px; /* Add margin bottom */
+    border-radius: 25px; /* Adjust border radius */
+    border-top-right-radius: 25px; /* Adjust border radius */
+    border-bottom-right-radius: 25px; /* Adjust border radius */
+  }
+  form > button {
+    width: 30px; /* Reduce width */
+    margin-left: 0; /* Remove margin left */
+  }
+  .Add-loadBtn {
+    position: static; /* Remove fixed position */
+    width: 100%; /* Change to full width */
+    height: 50px; /* Increase height */
+    margin-top: 10px; /* Add margin top */
+    border-radius: 25px; /* Adjust border radius */
+  }
+}
+
+/* Medium screens (between 576px and 992px) */
+@media only screen and (min-width: 576px) and (max-width: 991px) {
+  form {
+    position: static; /* Remove fixed position */
+    width: 100%; /* Change to full width */
+    height: 50px; /* Adjust height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .Add-new-load {
+    width: 70%; /* Adjust width */
+    margin-right: 10px; /* Add margin right */
+    border-radius: 20px; /* Adjust border radius */
+    border-top-right-radius: 0; /* Adjust border radius */
+    border-bottom-right-radius: 0; /* Adjust border radius */
+  }
+  form > button {
+    width: 40px; /* Increase width */
+    margin-left: -10px; /* Adjust margin left */
+  }
+  .Add-loadBtn {
+    position: static; /* Remove fixed position */
+    width: 30%; /* Adjust width */
+    height: 50px; /* Adjust height */
+    border-radius: 20px; /* Adjust border radius */
+  }
+}
+
+/* Large screens (greater than 1200px) */
+@media only screen and (min-width: 1200px) {
+  form {
+    position: fixed; /* Restore fixed position */
+    bottom: 10px; /* Restore bottom position */
+    width: 500px; /* Restore width */
+    height: 30px; /* Restore height */
+    display: flex;
+    align-items: center;
+  }
+  .Add-new-load {
+    width: 70%; /* Adjust width */
+    margin-right: 10px; /* Add margin right */
+    border-radius: 13px; /* Restore border radius */
+    border-top-right-radius: 20px; /* Restore border radius */
+    border-bottom-right-radius: 20px; /* Restore border radius */
+  }
+  form > button {
+    width: 30px; /* Restore width */
+    margin-left: -5px; /* Restore margin left */
+    border-top-right-radius: 7px; /* Restore border radius */
+    border-bottom-right-radius: 7px; /* Restore border radius */
+  }
+  .Add-loadBtn {
+    position: fixed; /* Restore fixed position */
+    bottom: 10px; /* Restore bottom position */
+    width: 80px; /* Restore width */
+    height: 30px; /* Restore height */
+    border-radius: 0; /* Remove border radius */
+    justify-content: center;
+    align-items: center;
+  }
+}

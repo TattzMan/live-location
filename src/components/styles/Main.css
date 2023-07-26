@@ -1,0 +1,123 @@
+.Main-grid{
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr ;
+
+  row-gap: 40px;
+  column-gap: 15px;
+
+}
+.truck-image{
+  width: 100%;
+  border-radius: 9px;
+  margin-bottom: 10px;
+}
+.card-tittle{
+  overflow: hidden;
+  text-overflow:ellipsis ;
+  display: grid;
+  grid-template-columns: 1ff 1fr 1fr;
+}
+.truck-name{
+  margin-left: 50px;
+  margin-bottom: 10px;
+}
+.About{
+  display: flex;
+  align-items: center;
+}
+.star{
+  height: 30px;
+  margin-right: 7px;
+}
+.truck-name{
+  font-style: italic;
+}
+.price{
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.price > span{
+  margin-right: 8px;
+}
+.location{
+  font-size: 15px;
+}
+/* Small screens (less than 576px) */
+@media only screen and (max-width: 575px) {
+  .Main-grid {
+    grid-template-columns: 1fr; /* Change to one column grid layout */
+    row-gap: 20px; /* Reduce row gap */
+    column-gap: 0; /* Remove column gap */
+  }
+  .truck-image {
+    margin-bottom: 5px; /* Reduce margin bottom */
+  }
+  .card-tittle {
+    grid-template-columns: 1fr; /* Change to one column grid layout */
+    margin-bottom: 5px; /* Reduce margin bottom */
+  }
+  .truck-name {
+    margin-left: 0; /* Remove left margin */
+    margin-bottom: 5px; /* Reduce margin bottom */
+  }
+  .About {
+    align-items: flex-start; /* Align items to left */
+  }
+  .star {
+    height: 20px; /* Reduce star height */
+    margin-right: 3px; /* Reduce margin right */
+  }
+  .price, .location {
+    font-size: 16px; /* Reduce font size */
+  }
+}
+
+/* Medium screens (between 576px and 768px) */
+@media only screen and (min-width: 576px) and (max-width: 952px) {
+  .Main-grid {
+    grid-template-columns: repeat(2, 1fr); /* Change to two column grid layout */
+    row-gap: 30px; /* Reduce row gap */
+    column-gap: 10px; /* Reduce column gap */
+  }
+  .truck-name {
+    margin-left: 20px; /* Add left margin */
+  }
+  .About {
+    align-items: center; /* Align items to center */
+  }
+  .star {
+    height: 25px; /* Increase star height */
+    margin-right: 5px; /* Increase margin right */
+  }
+  .price, .location {
+    font-size: 16px; /* Increase font size */
+  }
+}
+
+/* Large screens (greater than 992px) */
+@media only screen and (min-width: 992px) {
+  .Main-grid {
+    grid-template-columns: repeat(3, 1fr); /* Change to four column grid layout */
+    row-gap: 40px; /* Restore row gap */
+    column-gap: 15px; /* Restore column gap */
+  }
+  .card-tittle {
+    margin-bottom: 10px; /* Restore margin bottom */
+  }
+  .truck-name {
+    margin-left: 50px; /* Restore left margin */
+    margin-bottom: 10px; /* Restore margin bottom */
+  }
+  .About {
+    flex-direction: row; /* Restore row layout */
+    align-items: center; /* Restore alignment */
+  }
+  .star {
+    height: 30px; /* Restore star height */
+    margin-right: 7px; /* Restore margin right */
+  }
+  .price, .location {
+    font-size: 16px; /* Restore font size */
+  }
+}
