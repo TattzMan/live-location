@@ -82,11 +82,11 @@ function Header(props){
         console.log("fuck again")
     )
   } 
-    React.memo(BulkTrailers())
-    React.memo(SideTipper())
-    React.memo(LowBeds())
-    React.memo(tankers() )
-    React.memo(tauntliner() )
+    BulkTrailers()
+    SideTipper()
+    LowBeds()
+    tankers() 
+    tauntliner() 
 
   function setErythingFalse(){
     setBulkTrailer(prevStae => false)
@@ -117,8 +117,9 @@ function Header(props){
         <div className="right-section">
           <div className="addLoad" onClick={props.addLoadState} >Loads</div>
           <div className="addLoad" onClick={displayDropdown} >Add truck</div>
-            <button onClick={setErythingFalse}>back</button>
           <DropDown/>
+        { dropDown && <button onClick={setErythingFalse} className="backButton">back</button>}
+
           </div>
 
       </header>

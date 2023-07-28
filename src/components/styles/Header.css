@@ -110,15 +110,25 @@ background-color: rgb(102, 100, 100);
 
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;  
+  justify-content: center;  
+  align-items: center;
 }
 .dropDown > button{
-  height: 25px;
+  height: 35px;
+  margin: 7px;
   width: 130px;
-  margin: 8px;
+  background-color: #42495a;
+  border: none;
+  cursor: pointer;
 }
-.dropDown > button{
-  width: 100px;
+
+.backButton{
+  position: absolute;
+  top: 58px;
+  right: 0px;
+  border: none;
+  background-color: rgb(197, 21, 21);
+  width: 40px;
 }
 
 

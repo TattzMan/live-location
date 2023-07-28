@@ -1,6 +1,6 @@
+import React from "react"
 import truck1 from "../../public/images/thumbnails/istockphoto-696059172-612x612.jpg"
-import  unlikedStar from "../../public/images/icons/grade_FILL0_wght400_GRAD0_opsz48.svg"
-import likedstar from "../../public/images/icons/star_rate_black_24dp.svg"
+
 
 
 export default [
@@ -17,8 +17,6 @@ export default [
     locationFrom: "Harare",
     locationTo : "Masvingo",
 
-    likedstar : likedstar,
-    notLikedStar : unlikedStar,
      on : false
   },
 
@@ -34,8 +32,6 @@ export default [
   rating : 200 ,
   locationFrom: "Harare",
     locationTo : "Masvingo",
-    likedstar : likedstar,
-    notLikedStar : unlikedStar,
     on : false
     },
     {
@@ -51,8 +47,6 @@ export default [
 
         locationFrom: "Harare",
         locationTo : "Masvingo",
-        likedstar : likedstar,
-        notLikedStar : unlikedStar,
         on : false
       },
 
@@ -70,8 +64,6 @@ export default [
 
       locationFrom: "Harare",
       locationTo : "Masvingo",
-      likedstar : likedstar,
-      notLikedStar : unlikedStar,
       on : false
     } ,  {
       id:5,
@@ -86,8 +78,6 @@ export default [
       locationFrom: "Harare",
       locationTo : "Masvingo",
       
-      likedstar : likedstar,
-      notLikedStar : unlikedStar,
       on : false
     },
 
@@ -103,8 +93,6 @@ export default [
     rating : 41 ,
     locationFrom: "Harare",
       locationTo : "Masvingo",
-      likedstar : likedstar,
-      notLikedStar : unlikedStar,
       on : false
     },
     {
@@ -120,8 +108,6 @@ export default [
 
       locationFrom: "Harare",
       locationTo : "Masvingo",
-      likedstar : likedstar,
-      notLikedStar : unlikedStar,
       on : false
     },
 
@@ -139,8 +125,6 @@ export default [
 
     locationFrom: "Harare",
     locationTo : "Masvingo",
-    likedstar : likedstar,
-    notLikedStar : unlikedStar,
     on : false
     } ,  {
       id:9,
@@ -155,8 +139,6 @@ export default [
       locationFrom: "Harare",
       locationTo : "Masvingo",
       
-      likedstar : likedstar,
-      notLikedStar : unlikedStar,
       on : false
     },
 
@@ -172,8 +154,6 @@ export default [
     rating : 45 ,
     locationFrom: "Harare",
       locationTo : "Masvingo",
-      likedstar : likedstar,
-      notLikedStar : unlikedStar,
       on : false
     },
     {
@@ -189,8 +169,6 @@ export default [
 
       locationFrom: "Harare",
       locationTo : "Masvingo",
-      likedstar : likedstar,
-      notLikedStar : unlikedStar,
       on : false
     },
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import "./App.css"
 import Header from "./components/Header";
 import AddLoad from "./components/AddLoad";
@@ -18,19 +18,141 @@ import BulkTrailersData from "./components/DataBase/BulkTrailersData";
 import SideTippers from "./components/pages/SideTippers";
 import SideTipperData from "./components/DataBase/SideTipperData";
 
-import Taultliners from "./components/pages/Taultliner";
+import Tauntliners from "./components/pages/Taultliner";
 import TautlinerData from "./components/DataBase/TautlinerData";
 
+import { db, storage } from "./components/config/fireBase"
+import { collection, getDocs , doc ,updateDoc} from "firebase/firestore"
+import { getDownloadURL, listAll, ref } from 'firebase/storage';
 
-function App(){      
+
+function App(){     
+ 
   
-  let [ BulkTrailer , setBulkTrailer] = React.useState(BulkTrailersData)
-  let [ tankers , setTanker] = React.useState(TankersData)
-  let [ LowBed , setLowBeds] = React.useState(LowBedsData)
-  let [ SideTipper , setSideTipper] = React.useState(SideTipperData)
-  let [ Taultliner , setTautliner] = React.useState(TautlinerData)
-
   let [sideBarNames , setSideBarName] = React.useState(SideBarData)
+  
+  
+  
+  const BulkTrailersDB = collection(db , "BulkTrailers")
+  const [BulkTrailer , setBulkTrailer] = React.useState([])
+
+  const getBulktrailers = async()=>{
+    //read data 
+    //set movieList 
+    try{
+      const data = await getDocs(BulkTrailersDB)
+      const filteredData = data.docs.map((doc)=>({
+        ...doc.data(),
+        id : doc.id,
+      }))
+
+      setBulkTrailer(filteredData)
+    }catch(err){
+      console.error(err)
+    }
+  }
+    
+  
+  React.useEffect(()=>{
+    getBulktrailers()
+  }, [])
+
+    
+  const LowBedsDB = collection(db , "LowBeds")
+  let [ LowBed , setLowBeds] = React.useState([])
+
+  const getLoBeds= async()=>{
+    //read data 
+    //set movieList 
+    try{
+      const data = await getDocs(LowBedsDB)
+      const filteredData = data.docs.map((doc)=>({
+        ...doc.data(),
+        id : doc.id,
+      }))
+
+      setLowBeds(filteredData)
+    }catch(err){
+      console.error(err)
+    }
+  }
+    
+  
+  React.useEffect(()=>{
+    getLoBeds()
+  }, [])
+
+      
+  const SideTipperDB = collection(db , "sideTippers")
+  let [ SideTipper , setSideTipper] = React.useState([])
+
+  const getSideTippers= async()=>{
+    //read data 
+    //set movieList 
+    try{
+      const data = await getDocs(SideTipperDB)
+      const filteredData = data.docs.map((doc)=>({
+        ...doc.data(),
+        id : doc.id,
+      }))
+
+      setSideTipper(filteredData)
+    }catch(err){
+      console.error(err)
+    }
+  }
+    
+  
+  React.useEffect(()=>{
+    getSideTippers()
+  }, [])
+
+        
+  const TankersDB = collection(db , "tankers")
+  let [ tankers , setTanker] = React.useState([])
+
+  const getTankers= async()=>{
+    //read data 
+    //set movieList 
+    try{
+      const data = await getDocs(TankersDB)
+      const filteredData = data.docs.map((doc)=>({
+        ...doc.data(),
+        id : doc.id,
+      }))
+
+      setTanker(filteredData)
+    }catch(err){
+      console.error(err)
+    }
+  }
+  React.useEffect(()=>{
+    getTankers()
+  }, [])
+
+  const TaultlinerDB = collection(db , "tauntliner")
+  let [ Taultliner , setTautliner] = React.useState([])
+
+  const getTauntliner= async()=>{
+    //read data 
+    //set movieList 
+    try{
+      const data = await getDocs(TaultlinerDB)
+      const filteredData = data.docs.map((doc)=>({
+        ...doc.data(),
+        id : doc.id,
+      }))
+
+      setTautliner(filteredData)
+    }catch(err){
+      console.error(err)
+    }
+  }
+    
+  
+  React.useEffect(()=>{
+    getTauntliner()
+  }, [])
 
   function toggleSideBar (id){
 
@@ -60,14 +182,43 @@ function App(){
       })
     })
   }
-  function toggleBulkTrailer (id){
-    setBulkTrailer(prevTruck => {
-      return prevTruck.map( oneTruck =>{
-        return oneTruck.id === id ? {...oneTruck , on : !oneTruck.on } : oneTruck
+  // function toggleBulkTrailer (id){
+  //   setBulkTrailer(prevTruck => {
+  //     return prevTruck.map( oneTruck =>{
+  //       return oneTruck.id === id ? {...oneTruck , like : !oneTruck.like } : oneTruck
                 
-      })
-    })
+  //     })
+  //   })
+  // }
+
+
+  function toggleBulkTrailer(id) {
+    setBulkTrailer(prevTruck => {
+      return prevTruck.map(oneTruck => {
+        if (oneTruck.id === id) {
+          const newLikeStatus = !oneTruck.like;
+          const newRating = oneTruck.like ? oneTruck.rating - 1 : oneTruck.rating + 1;
+          const docRef = doc(collection(db, "BulkTrailers"), id);
+          updateDoc(docRef, {
+            like: newLikeStatus,
+            rating: newRating
+          }).then(() => {
+            console.log("Document successfully updated!");
+          }).catch((error) => {
+            console.error("Error updating document: ", error);
+          });
+          return {
+            ...oneTruck,
+            like: newLikeStatus,
+            rating: newRating
+          };
+        } else {
+          return oneTruck;
+        }
+      });
+    });
   }
+
   function toggleSideTipper (id){
     setSideTipper(prevTruck => {
       return prevTruck.map( oneTruck =>{
@@ -76,7 +227,7 @@ function App(){
       })
     })
   }
-
+  
   function toggleTautliner (id){
     setTautliner (prevTruck => {
       return prevTruck.map( oneTruck =>{
@@ -95,25 +246,26 @@ function App(){
       {
         if (oneName.id === 1 && oneName.state === true){
           
-
-           trucks = BulkTrailer.map(truck =>{      
+ 
+           trucks = BulkTrailer.map(truck =>{ 
             return(
               < BulkTrailers
-              liked = {truck.on}
+            liked = {truck.like }
             key = {truck.id}
             item = {truck}
             handleClick = {()=> toggleBulkTrailer(truck.id)}
             />     
-            
-            )})
+          
+            )
+          })
           }    
           
-          else if (oneName.id === 3 && oneName.state === true){
+           if (oneName.id === 3 && oneName.state === true){
             trucks = LowBed.map(truck =>{      
               
               return(
                 <LowBeds
-                liked = {truck.on}
+                liked = {truck.like}
                 key = {truck.id}
                 item = {truck}
                 handleClick = {()=> toggleLowBed(truck.id)}
@@ -127,7 +279,7 @@ function App(){
                   
                   return(
                     <Tankers
-                    liked = {truck.on}
+                    liked = {truck.like}
                     key = {truck.id}
                     item = {truck}
                     handleClick = {()=> toggleTanker(truck.id)}
@@ -141,7 +293,7 @@ function App(){
             
             return(
               <SideTippers
-              liked = {truck.on}
+              liked = {truck.like}
               key = {truck.id}
               item = {truck}
               handleClick = {()=> toggleSideTipper(truck.id)}
@@ -154,7 +306,7 @@ function App(){
         trucks = Taultliner.map(truck =>{      
           
           return(
-            <Taultliners
+            <Tauntliners
             liked = {truck.on}
             key = {truck.id}
             item = {truck}
