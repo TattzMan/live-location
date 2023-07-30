@@ -17,7 +17,7 @@
   overflow: hidden;
   text-overflow:ellipsis ;
   display: grid;
-  grid-template-columns: 1ff 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .truck-name{
   margin-left: 50px;

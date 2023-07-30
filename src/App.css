@@ -2,7 +2,7 @@ body{
  border: none;
  margin: 0;
 
- padding-top: 80px;
+ padding-top: 100px;
  padding-left: 240px;
 
  background-color:  #23242a;
@@ -32,7 +32,7 @@ h2{
 /* Large screens (greater than 1200px) */
 @media only screen and (min-width: 1200px) {
   body {
-    padding-top: 80px; /* Restore top padding */
+    padding-top: 300px; /* Restore top padding */
     padding-left: 240px; /* Restore left padding */
   }
 }

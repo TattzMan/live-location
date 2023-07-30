@@ -53,7 +53,16 @@ function AddLoad(){
 
   return(
     <div>
-      <div>
+      <div className="displayLoad">
+        <h1>Comapny name</h1>
+        <h3>contact</h3>
+        <h1>type of load </h1>
+        <h3>from Harare to kadoma</h3>
+        <h3>Rate 50 per tonne</h3>
+        <h3> payment terms</h3>
+        <h3>Requirements</h3>
+        <p>additional info </p>
+
         {loadsList.map((load)=>(
           <div>{load.loads}</div>
         ))}

@@ -15,7 +15,7 @@ function BulkTrailers(props){
   // rating : rating,
   // like : props.liked
   // })
-
+  
   return(
     <div >
 

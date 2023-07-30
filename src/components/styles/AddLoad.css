@@ -50,6 +50,12 @@ form > button{
 
   background-color: rgb(192, 37, 37);
 }
+.displayLoad{
+  height: 400px;
+  width: 300px;
+  border: 2px solid red;
+}
+
 /* Small screens (less than 576px) */
 @media only screen and (max-width: 575px) {
   form {
@@ -80,6 +86,21 @@ form > button{
     border-radius: 25px; /* Adjust border radius */
   }
 }
+.loads{
+  position: fixed;
+  top: 65px;
+  height: 250px;
+  right: 0;
+  left: 230px;
+  background-color:  #23242a;
+  display: flex;
+}
+.frontloadDisplay{
+  height: 200px;
+  border: 2px red double;
+  width: 250px;
+}
+
 
 /* Medium screens (between 576px and 992px) */
 @media only screen and (min-width: 576px) and (max-width: 991px) {

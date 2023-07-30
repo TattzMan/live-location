@@ -7,7 +7,15 @@ function BulkTrailers(props){
 
   console.log(props.liked)
   const starIcon = props.liked ? likedstar : unlikedStar 
+  // let rating = props.liked ? props.item.rating + 1 :  props.item.rating 
+  
+  // const docRef = doc(collection(db , "BulkTrailers"), props.item.id)
 
+  // updateDoc(docRef, {
+  // rating : rating,
+  // like : props.liked
+  // })n
+  
   return(
     <div >
 
@@ -24,7 +32,6 @@ function BulkTrailers(props){
        On Delivery  $<span>{props.item.onDelivery}</span> </p>
 
       <p className="location"> From {props.item.fromLocation} to {props.item.toLocation} </p>
-      <p>contact : {props.item.contact}</p>
 
     </div>
   )

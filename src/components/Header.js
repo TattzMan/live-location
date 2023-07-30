@@ -10,7 +10,7 @@ import tankers from "./addTankers";
 import tauntliner from "./addTauntliner";
 
 function Header(props){
-
+ 
   let [menu , seMenu] = React.useState(true)
   
   function toggleSideBar(){
@@ -61,8 +61,7 @@ function Header(props){
     return(
       dropDown ?
       <div className="dropDown">
-
-        <button onClick={toggleBulkTrailer}>Bulk Trailers</button>
+        <button onClick={toggleBulkTrailer}>Bulk trailers</button>
         {addBulkTrailer && BulkTrailers()}
 
         <button onClick={toggleSideTipper}>SideTipper</button>
@@ -95,12 +94,32 @@ function Header(props){
     setTauntliner(prevStae => false)
     setSideTipper(prevStae => false)
   }
-    
+  
+  const [filteredData, setFilteredData] = React.useState([]);
+  const [wordEntered, setWordEntered] = React.useState("");
+
+  const handleFilter = (event) => {
+    const searchWord = event.target.value;
+    setWordEntered(searchWord);
+    const newFilter = props.data.filter((value) => {
+      return value.CompanyName.toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === "") {
+      setFilteredData([]);
+    } else {
+      setFilteredData(newFilter);
+    }
+  };
+  const clearInput = () => {
+    setFilteredData([]);
+    setWordEntered("");
+  };
 
     return(
       <header>
 
-        {menu ? props.sideBar : console.log("fuvl")}
+        {menu && props.sideBar }
         
         <div className="left-section"> 
           <img src={currentMneu} onClick={toggleSideBar} />
@@ -108,10 +127,25 @@ function Header(props){
         </div>
 
         <div className="middle-section">
-          <input type="text" className="search-bar" placeholder="Search" />
+          <input 
+          type="text" 
+          className="search-bar" 
+          placeholder="Search"
+          onChange={handleFilter}
+           />
+
            <button>
            <img src={searchIcon} width="50px" />
            </button>
+           <div className="weed">
+            {
+              filteredData.map((value , key)=>{
+                return(
+                  <div className="dataSearched">{value.CompanyName}    </div>
+                )
+              })
+            }
+             </div>
         </div>
 
         <div className="right-section">

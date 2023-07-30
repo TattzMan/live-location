@@ -69,6 +69,7 @@ function App(){
       const filteredData = data.docs.map((doc)=>({
         ...doc.data(),
         id : doc.id,
+
       }))
 
       setLowBeds(filteredData)
@@ -364,10 +365,13 @@ function App(){
         trucks = <AddLoad/>  
         : console.log("weed")  
 
+        const allData = [ ...BulkTrailer , ...LowBed , ...SideTipper , ...tankers , ...Taultliner]
+
     return(
     <div>
       <Header    
         addLoadState ={toggleAddLoad}
+        data = {allData}
         sideBar = {
 
           <aside className="sise-bar">
@@ -397,8 +401,19 @@ function App(){
           </aside>
         }
       />
-
- 
+         <div className='loads'>
+          <div className='frontloadDisplay'>
+          <h3>Comapny name</h3>
+        <p>Contact : 0787884434</p>
+        <p>Type of load :coal </p>
+        <p>From Harare to kadoma</p>
+        <p>Rate 50 per tonne</p>
+        <p> Payment terms</p>
+        <p>Requirements</p>
+        <p>Additional info </p>   
+        </div>
+        </div>
+       
    
       <section className="Main-grid"> 
         {trucks}
