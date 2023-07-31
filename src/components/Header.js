@@ -8,6 +8,7 @@ import SideTipper from "./addSideTipper";
 import LowBeds from "./addLowBeds";
 import tankers from "./addTankers";
 import tauntliner from "./addTauntliner";
+import addLoaadDB from "./addloadDB";
 
 function Header(props){
  
@@ -56,11 +57,41 @@ function Header(props){
   function toggleTauntliner(){
     setTauntliner(prevBulkTrailer => !prevBulkTrailer)
   }    
-    
+
+  const [addTrucks , setAddTrucks] = React.useState(false)
+
+  function displayAddTrucks(){
+    setAddTrucks(prevsate => !prevsate)
+  }
+
+  const [addLoads , setAddloads] = React.useState(false)
+
+  function displayAddLooads(){
+    setAddloads(prevsate => !prevsate)
+  }
+
+
   function DropDown(){
     return(
       dropDown ?
+
       <div className="dropDown">
+        <button onClick={displayAddLooads} >add load</button>
+        { addLoads && addLoaadDB() }
+
+        <button onClick={displayAddTrucks}>add turck</button>
+        { addTrucks && displayTrucks() }   
+
+      </div>
+      :
+      console.log("fuck again")      
+    )
+  } 
+  addLoaadDB()
+
+    function displayTrucks(){
+      return(
+        <div className="dropDown">
         <button onClick={toggleBulkTrailer}>Bulk trailers</button>
         {addBulkTrailer && BulkTrailers()}
 
@@ -76,11 +107,10 @@ function Header(props){
         <button onClick={toggleTauntliner}>tauntliner</button>
         {addTauntliner && tauntliner()}
 
-      </div>
-        :
-        console.log("fuck again")
-    )
-  } 
+      </div>     
+      )
+    }
+
     BulkTrailers()
     SideTipper()
     LowBeds()

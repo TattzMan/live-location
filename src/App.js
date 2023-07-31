@@ -24,6 +24,7 @@ import TautlinerData from "./components/DataBase/TautlinerData";
 import { db, storage } from "./components/config/fireBase"
 import { collection, getDocs , doc ,updateDoc} from "firebase/firestore"
 import { getDownloadURL, listAll, ref } from 'firebase/storage';
+import MiniLoad from './components/miniLoads';
 
 
 function App(){     
@@ -354,7 +355,25 @@ function App(){
          <p className="ratingNames" key={bestTrucks.id}> {bestTrucks.name} </p>) )
 
 
-       
+  const [loadsList, setLoadlist] = React.useState([]);
+  const loadsCollection = collection(db, "Loads");
+
+  const getLoadsList = async () => {
+    try {
+      const data = await getDocs(loadsCollection);
+      const filteredData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id
+      }));
+      setLoadlist(filteredData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  React.useEffect(() => {
+    getLoadsList();
+  }, []);
       let [addLoad , setaddLoad] = React.useState(false)
 
       function toggleAddLoad(){
@@ -362,8 +381,24 @@ function App(){
       }
   
       addLoad ?
-        trucks = <AddLoad/>  
+        trucks = loadsList.map(load => {
+          return(
+           
+            <AddLoad
+              item = {load}
+            />
+          )
+        })
         : console.log("weed")  
+        
+      const miniLoad =  loadsList.map(load =>{
+
+          return(
+            <MiniLoad
+              item = {load}
+            />
+          )
+        })
 
         const allData = [ ...BulkTrailer , ...LowBed , ...SideTipper , ...tankers , ...Taultliner]
 
@@ -401,17 +436,8 @@ function App(){
           </aside>
         }
       />
-         <div className='loads'>
-          <div className='frontloadDisplay'>
-          <h3>Comapny name</h3>
-        <p>Contact : 0787884434</p>
-        <p>Type of load :coal </p>
-        <p>From Harare to kadoma</p>
-        <p>Rate 50 per tonne</p>
-        <p> Payment terms</p>
-        <p>Requirements</p>
-        <p>Additional info </p>   
-        </div>
+         <div className='miniloads'>
+        {miniLoad}
         </div>
        
    
