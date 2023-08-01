@@ -11,7 +11,7 @@ import tauntliner from "./addTauntliner";
 import addLoaadDB from "./addloadDB";
 import { signOut} from  'firebase/auth'
 import { auth  } from "./config/fireBase"
-
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function Header(props){
  
@@ -25,12 +25,11 @@ function Header(props){
 
 
   let  [dropDown , setDropdown] = React.useState(false)
+  function displayDropdown(){ 
+    setDropdown(prevDropdown => !prevDropdown)     
+  }
 
   
-  function displayDropdown(){
-    setDropdown(prevDropdown => !prevDropdown)
-    
-  }
 
   let [addBulkTrailer , setBulkTrailer] = React.useState(false)  
   function toggleBulkTrailer(){
@@ -137,6 +136,10 @@ function Header(props){
     }
   }
 
+  const addNewCss = dropDown ? {
+ 
+   
+  } : {};
 
     return(
       <header>
@@ -145,7 +148,7 @@ function Header(props){
         
         <div className="left-section"> 
           <img src={currentMneu} onClick={toggleSideBar} />
-         <h3>Truck Connect</h3>
+         <h3>Truckerz</h3>
         </div>
 
         <div className="middle-section">
@@ -163,11 +166,11 @@ function Header(props){
         </div>
 
         <div className="right-section">
-          <div className="addLoad" onClick={props.addLoadState} >Loads</div>
-          <div className="addLoad" onClick={displayDropdown} >Add truck</div>
+          <button className="addLoad " style={addNewCss} onClick={props.addLoadState}  >Loads</button>
+          <div className="addLoad " onClick={displayDropdown} >Add </div> 
           <DropDown/>
         { dropDown && <button onClick={setErythingFalse} className="backButton">back</button>}
-          <button className="addLoad" onClick={logout}> Sign out</button>
+        <div onClick={logout} > <LogoutIcon/> </div>
 
           </div>
 

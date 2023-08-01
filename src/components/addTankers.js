@@ -73,6 +73,7 @@ function Tankers(){
     <form className="dropDown" onSubmit={handleSubmit}>
 
       <input
+      className="inputFIle"
       type="file"
       onChange={(e)=>{setImageUpload(e.target.files[0])}}
       />

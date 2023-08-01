@@ -1,43 +1,4 @@
-form{
-  position: fixed;
-  bottom: 10px;
-  height: 30px;
-  width: 500px;
 
-  display: flex;
-  align-items: center;
-}
-.Add-new-load{
-  flex: 1;
-
-  height: 25px;
-  border-radius: 13px;
-
-
-
-  padding-left: 20px;
-  font-size: 16px;
-
-  border: 1px solid rgb(61, 212, 99);
-
-  border-radius: 50px;
-
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-
-}
-form > button{
-  height: 29px;
-  width: 30px;
-  border: 1px solid rgb(14, 206, 62);
-
-  margin-right:8px ;
-  margin-left: -5px;
-
-  border-top-right-radius: 7px;
-  border-bottom-right-radius: 7px;
-  background-color: rgb(9, 148, 44);
-}
 .Add-loadBtn{
   position: fixed;
   bottom: 10px;
@@ -50,10 +11,8 @@ form > button{
 
   background-color: rgb(192, 37, 37);
 }
-.displayLoad{
-  width: 300px;
-  border: 2px solid red;
-  background-color: red;
+.bigLoad{
+  z-index: 50;
 }
 
 /* Small screens (less than 576px) */
@@ -103,8 +62,8 @@ form > button{
   display: none;
 }
 .frontloadDisplay{
-  height: 200px;
-  border: 2px red double;
+  height: 230px;
+  border: 2px  double red ;
   width: 250px;
   margin: 7px;
   white-space: normal;
@@ -112,9 +71,22 @@ form > button{
   flex-shrink: 0;
   flex-grow: 0;
   cursor: pointer;
+  overflow: hidden;
 }
-
-
+.frontloadDisplay > p {
+  margin-bottom: 8px;
+  font-size: medium;
+  color: rgb(151, 159, 165);
+  font-size: 17px;
+}
+.frontloadDisplay >h3{
+  margin: 7px;
+}
+.spaninMini{
+  margin: 4px;
+  color: white;
+  font-size: 16px;
+}
 /* Medium screens (between 576px and 992px) */
 @media only screen and (min-width: 576px) and (max-width: 991px) {
   form {

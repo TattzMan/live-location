@@ -12,7 +12,7 @@ function AddLoad( props){
 
 
   return(
-    <div>
+    <div className="bigLoad">
         <h1 >Comapny {props.item.companyName} </h1>
         <h1>type of load {props.item.typeofLoad} </h1>
         <h3>contact {props.item.contact} </h3>

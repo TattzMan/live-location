@@ -448,11 +448,16 @@ function App(){
   }, []);
       let [addLoad , setaddLoad] = React.useState(false)
 
+      useEffect(() => {
+        document.body.style.paddingTop = addLoad ? '60px' : '320px';
+      }, [addLoad]);
+
       function toggleAddLoad(){
         setaddLoad(prevState => !prevState)
       }
-  
-      addLoad ?
+
+      let miniLoad
+      if(addLoad === true){  
         trucks = loadsList.map(load => {
           return(
            
@@ -461,9 +466,8 @@ function App(){
             />
           )
         })
-        : console.log("weed")  
-        
-      const miniLoad =  loadsList.map(load =>{
+      }else{       
+         miniLoad =  loadsList.map(load =>{
 
           return(
             <MiniLoad
@@ -471,9 +475,11 @@ function App(){
             />
           )
         })
+      }
 
- 
-        const allData = [ ...BulkTrailer , ...LowBed , ...SideTipper , ...tankers , ...Taultliner]
+        
+        const allData = [ ...BulkTrailer , ...LowBed , ...SideTipper , ...tankers , ...Taultliner ]
+          
 
         const [filteredData, setFilteredData] = React.useState([]);
         const [wordEntered, setWordEntered] = React.useState("");
@@ -482,7 +488,9 @@ function App(){
           const searchWord = event.target.value;
           setWordEntered(searchWord);
           const newFilter = allData.filter((value) => {
-            return value.CompanyName.toLowerCase().includes(searchWord.toLowerCase());
+            console.log(value )
+            
+            return    ( value.CompanyName ||  value.fromLocation || value.toLocation ).toLowerCase().includes(searchWord.toLowerCase());
           });
       
           if (searchWord === "") {
@@ -495,6 +503,17 @@ function App(){
           setFilteredData([]);
           setWordEntered("");
         };
+        
+        const displaySearched =  filteredData.slice(0, 15).map((value , key)=>{
+            return(
+              <div className="dataItem">
+              <div className='wordsSearched' >{value.CompanyName} </div>
+              <div className='wordsSearched' >{value.fromLocation  } </div>
+              <div className='wordsSearched' >{value.toLocation  } </div>
+              </div>
+            )
+          })
+        
 
     return(
     <div>
@@ -503,8 +522,7 @@ function App(){
       <Header
         addLoadState ={toggleAddLoad}
         handleFilter = {handleFilter}
-        sideBar = {
-
+       sideBar = {
           <aside className="sise-bar">
           <div className="all-names" >
 
@@ -533,21 +551,17 @@ function App(){
           
           </aside>
         }
-      />  
-              <div className="weed">
-            {
-              filteredData.map((value , key)=>{
-                return(
-                  <div className="dataSearched">{value.CompanyName}    </div>
-                )
-              })
-            }
+      />      { filteredData.length > 0 && (
+              <div className='displaySearched' >
+              {displaySearched}
              </div>
+              )
+              }
 
-         <div className='miniloads'>
+        
+      <div className='miniloads'>
         {miniLoad}
         </div>
-       
    
       <section className="Main-grid"> 
         {trucks}
