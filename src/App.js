@@ -30,7 +30,7 @@ import MiniLoad from './components/miniLoads';
 
 
 function App(){  
-     
+
   const [currentUser , setCurrentUser] = React.useState(null)
 
   useEffect(() => {
@@ -306,7 +306,7 @@ function App(){
         });
       });
     }
-  
+
 
     
     let trucks 
