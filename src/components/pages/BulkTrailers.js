@@ -5,7 +5,6 @@ import likedstar from "../../public/images/icons/star_rate_black_24dp.svg"
 
 function BulkTrailers(props){
 
-  console.log(props.liked)
   const starIcon = props.liked ? likedstar : unlikedStar 
   // let rating = props.liked ? props.item.rating + 1 :  props.item.rating 
   

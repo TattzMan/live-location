@@ -183,6 +183,7 @@ function Header(props){
           <div className="addLoad" onClick={displayDropdown} >Add truck</div>
           <DropDown/>
         { dropDown && <button onClick={setErythingFalse} className="backButton">back</button>}
+          <button className="addLoad"> Sign in</button>
 
           </div>
 

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Auth from './components/auth';
+
 import "./App.css"
 import Header from "./components/Header";
 import AddLoad from "./components/AddLoad";
@@ -21,14 +23,23 @@ import SideTipperData from "./components/DataBase/SideTipperData";
 import Tauntliners from "./components/pages/Taultliner";
 import TautlinerData from "./components/DataBase/TautlinerData";
 
-import { db, storage } from "./components/config/fireBase"
+import { auth, db, storage } from "./components/config/fireBase"
 import { collection, getDocs , doc ,updateDoc} from "firebase/firestore"
 import { getDownloadURL, listAll, ref } from 'firebase/storage';
 import MiniLoad from './components/miniLoads';
 
 
-function App(){     
- 
+function App(){  
+     
+  const [currentUser , setCurrentUser] = React.useState(null)
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+    });
+    return unsubscribe;
+  }, []);
+
   
   let [sideBarNames , setSideBarName] = React.useState(SideBarData)
   
@@ -167,22 +178,52 @@ function App(){
 
   }
 
-  function toggleTanker (id){
+  function toggleTanker(id) {
     setTanker(prevTruck => {
-      return prevTruck.map( oneTruck =>{
-        return oneTruck.id === id ? {...oneTruck , on : !oneTruck.on } : oneTruck
-                
-      })
-  })
+      return prevTruck.map(oneTruck => {
+        if (oneTruck.id === id) {
+          const newLikeStatus = !oneTruck.like;
+          const newRating = oneTruck.like ? oneTruck.rating - 1 : oneTruck.rating + 1;
+          const docRef = doc(collection(db, "tankers"), id);
+        updateDoc(docRef, {
+            like: newLikeStatus,
+            rating: newRating
+          })
+         
+          return {
+            ...oneTruck,
+            like: newLikeStatus,
+            rating: newRating
+          };
+        } else {
+          return oneTruck;
+        }
+      });
+    });
   }
 
-  function toggleLowBed (id){
-    setLowBeds (prevTruck => {
-      return prevTruck.map( oneTruck =>{
-        return oneTruck.id === id ? {...oneTruck , on : !oneTruck.on } : oneTruck
-                
-      })
-    })
+  function toggleLowBed(id) {
+    setLowBeds(prevTruck => {
+      return prevTruck.map(oneTruck => {
+        if (oneTruck.id === id) {
+          const newLikeStatus = !oneTruck.like;
+          const newRating = oneTruck.like ? oneTruck.rating - 1 : oneTruck.rating + 1;
+          const docRef = doc(collection(db, "LowBeds"), id);
+          updateDoc(docRef, {
+            like: newLikeStatus,
+            rating: newRating
+          })
+         
+          return {
+            ...oneTruck,
+            like: newLikeStatus,
+            rating: newRating
+          };
+        } else {
+          return oneTruck;
+        }
+      });
+    });
   }
   // function toggleBulkTrailer (id){
   //   setBulkTrailer(prevTruck => {
@@ -204,11 +245,8 @@ function App(){
           updateDoc(docRef, {
             like: newLikeStatus,
             rating: newRating
-          }).then(() => {
-            console.log("Document successfully updated!");
-          }).catch((error) => {
-            console.error("Error updating document: ", error);
-          });
+          })
+         
           return {
             ...oneTruck,
             like: newLikeStatus,
@@ -221,24 +259,55 @@ function App(){
     });
   }
 
-  function toggleSideTipper (id){
+  function toggleSideTipper(id) {
     setSideTipper(prevTruck => {
-      return prevTruck.map( oneTruck =>{
-        return oneTruck.id === id ? {...oneTruck , on : !oneTruck.on } : oneTruck
-                
-      })
-    })
+      return prevTruck.map(oneTruck => {
+        if (oneTruck.id === id) {
+          const newLikeStatus = !oneTruck.like;
+          const newRating = oneTruck.like ? oneTruck.rating - 1 : oneTruck.rating + 1;
+          const docRef = doc(collection(db, "sideTippers"), id);
+          updateDoc(docRef, {
+            like: newLikeStatus,
+            rating: newRating
+          })
+         
+          return {
+            ...oneTruck,
+            like: newLikeStatus,
+            rating: newRating
+          };
+        } else {
+          return oneTruck;
+        }
+      });
+    });
   }
+
+    function toggleTautliner(id) {
+      setTautliner(prevTruck => {
+        return prevTruck.map(oneTruck => {
+          if (oneTruck.id === id) {
+            const newLikeStatus = !oneTruck.like;
+            const newRating = oneTruck.like ? oneTruck.rating - 1 : oneTruck.rating + 1;
+            const docRef = doc(collection(db, "tauntliner"), id);
+            updateDoc(docRef, {
+              like: newLikeStatus,
+              rating: newRating
+            })
+          
+            return {
+              ...oneTruck,
+              like: newLikeStatus,
+              rating: newRating
+            };
+          } else {
+            return oneTruck;
+          }
+        });
+      });
+    }
   
-  function toggleTautliner (id){
-    setTautliner (prevTruck => {
-      return prevTruck.map( oneTruck =>{
-        return oneTruck.id === id ? {...oneTruck , on : !oneTruck.on } : oneTruck
-                
-      })
-    })
-  }
-    
+
     
     let trucks 
 
@@ -329,31 +398,34 @@ function App(){
         )
       } )
 
+
+
+
       const sortRatingBulkTrailer = BulkTrailer.sort((a , b)=> b.rating -  a.rating)
       const topRatingsBulk = sortRatingBulkTrailer.slice(0 , 2)
-      const  takeBestBulks = topRatingsBulk.map(Bulks => (
-         <p className="ratingNames" key={ Bulks.id}>{Bulks.name}</p>) )
-    
-      const sortRatingLowBed = LowBed.sort((a , b)=> b.rating -  a.rating)
+       const     takeBestBulks = topRatingsBulk.map(Bulks => (
+         <p className="ratingNames" key={ Bulks.id}>{Bulks.CompanyName}</p>) )
+         
+    const sortRatingLowBed = LowBed.sort((a , b)=> b.rating -  a.rating)
       const topRatingsLowbed = sortRatingLowBed.slice(0 , 2)
-      const  takeBestLowbeds = topRatingsLowbed.map(Lowbed =>(
-         <p className="ratingNames" key={Lowbed.id}>{Lowbed.name}</p>) )
-    
+       const   takeBestLowbeds = topRatingsLowbed.map(Lowbed =>(
+        <p className="ratingNames" key={Lowbed.id}>{Lowbed.CompanyName}</p>) )
+
       const sortRatingSideTipper = SideTipper.sort((a , b)=> b.rating -  a.rating)
       const topRatingSideTipper = sortRatingSideTipper.slice(0 , 2)
-      const  takeBestSideTipper = topRatingSideTipper.map(sideTipper => (
-      <p className="ratingNames" key={sideTipper.id}>{sideTipper.name}</p>) )
-    
+       const   takeBestSideTipper = topRatingSideTipper.map(sideTipper => (
+      <p className="ratingNames" key={sideTipper.id}>{sideTipper.CompanyName}</p>) )
+
       const sortRatingTaultliner = Taultliner.sort((a , b)=> b.rating -  a.rating)
       const topRatingsTaultliner = sortRatingTaultliner.slice(0 , 2)
-      const  takeBestTaultliner = topRatingsTaultliner.map(Taultliner => (
-      <p className="ratingNames" key={Taultliner.id}>{Taultliner.name}</p>) )
+       const  takeBestTaultliner = topRatingsTaultliner.map(Taultliner => (
+      <p className="ratingNames" key={Taultliner.id}>{Taultliner.CompanyName}</p>) )
 
       const sortRatingsTankers = tankers.sort((a , b)=> b.rating - a.rating)
       const topRatingsTanker = sortRatingsTankers.slice(0 , 2)
-      const takeBestTanker = topRatingsTanker.map(bestTrucks => (
-         <p className="ratingNames" key={bestTrucks.id}> {bestTrucks.name} </p>) )
-
+       const takeBestTanker = topRatingsTanker.map(bestTrucks => (
+        <p className="ratingNames" key={bestTrucks.id}> {bestTrucks.CompanyName} </p>) )
+      
 
   const [loadsList, setLoadlist] = React.useState([]);
   const loadsCollection = collection(db, "Loads");
@@ -400,11 +472,14 @@ function App(){
           )
         })
 
+ 
         const allData = [ ...BulkTrailer , ...LowBed , ...SideTipper , ...tankers , ...Taultliner]
 
     return(
     <div>
-      <Header    
+      { currentUser ?
+      <div>
+      <Header
         addLoadState ={toggleAddLoad}
         data = {allData}
         sideBar = {
@@ -428,11 +503,13 @@ function App(){
           </div>
     
           <h3 className="most-reviewd">Most reviewed</h3>
-          {takeBestTanker}  
-          {takeBestBulks}
-          {takeBestLowbeds}
-          {takeBestSideTipper}
-          {takeBestTaultliner}
+
+            {takeBestBulks}
+            {takeBestSideTipper}
+            {takeBestLowbeds}
+            {takeBestTanker}  
+            {takeBestTaultliner}
+          
           </aside>
         }
       />
@@ -445,11 +522,15 @@ function App(){
         {trucks}
       
       </section>
-     
+      </div>
+     : <Auth/>
+      }
 
+    
       </div>
        ) 
 
     }
 export default App
+
 

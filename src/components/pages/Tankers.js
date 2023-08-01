@@ -5,7 +5,6 @@ import likedstar from "../../public/images/icons/star_rate_black_24dp.svg"
 
 function Tankers(props){
 
-  console.log(props.liked)
   const starIcon = props.liked ? likedstar : unlikedStar 
 
   return(
