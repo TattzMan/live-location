@@ -9,6 +9,9 @@ import LowBeds from "./addLowBeds";
 import tankers from "./addTankers";
 import tauntliner from "./addTauntliner";
 import addLoaadDB from "./addloadDB";
+import { signOut} from  'firebase/auth'
+import { auth  } from "./config/fireBase"
+
 
 function Header(props){
  
@@ -125,26 +128,15 @@ function Header(props){
     setSideTipper(prevStae => false)
   }
   
-  const [filteredData, setFilteredData] = React.useState([]);
-  const [wordEntered, setWordEntered] = React.useState("");
-
-  const handleFilter = (event) => {
-    const searchWord = event.target.value;
-    setWordEntered(searchWord);
-    const newFilter = props.data.filter((value) => {
-      return value.CompanyName.toLowerCase().includes(searchWord.toLowerCase());
-    });
-
-    if (searchWord === "") {
-      setFilteredData([]);
-    } else {
-      setFilteredData(newFilter);
+  const logout = async ()=>{
+    
+    try{
+    await signOut(auth)
+    }catch (err){
+      console.error(err)
     }
-  };
-  const clearInput = () => {
-    setFilteredData([]);
-    setWordEntered("");
-  };
+  }
+
 
     return(
       <header>
@@ -161,21 +153,13 @@ function Header(props){
           type="text" 
           className="search-bar" 
           placeholder="Search"
-          onChange={handleFilter}
+          onChange={props.handleFilter}
            />
 
            <button>
            <img src={searchIcon} width="50px" />
            </button>
-           <div className="weed">
-            {
-              filteredData.map((value , key)=>{
-                return(
-                  <div className="dataSearched">{value.CompanyName}    </div>
-                )
-              })
-            }
-             </div>
+   
         </div>
 
         <div className="right-section">
@@ -183,7 +167,7 @@ function Header(props){
           <div className="addLoad" onClick={displayDropdown} >Add truck</div>
           <DropDown/>
         { dropDown && <button onClick={setErythingFalse} className="backButton">back</button>}
-          <button className="addLoad"> Sign in</button>
+          <button className="addLoad" onClick={logout}> Sign out</button>
 
           </div>
 

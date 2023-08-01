@@ -475,13 +475,34 @@ function App(){
  
         const allData = [ ...BulkTrailer , ...LowBed , ...SideTipper , ...tankers , ...Taultliner]
 
+        const [filteredData, setFilteredData] = React.useState([]);
+        const [wordEntered, setWordEntered] = React.useState("");
+      
+        const handleFilter = (event) => {
+          const searchWord = event.target.value;
+          setWordEntered(searchWord);
+          const newFilter = allData.filter((value) => {
+            return value.CompanyName.toLowerCase().includes(searchWord.toLowerCase());
+          });
+      
+          if (searchWord === "") {
+            setFilteredData([]);
+          } else {
+            setFilteredData(newFilter);
+          }
+        };
+        const clearInput = () => {
+          setFilteredData([]);
+          setWordEntered("");
+        };
+
     return(
     <div>
       { currentUser ?
       <div>
       <Header
         addLoadState ={toggleAddLoad}
-        data = {allData}
+        handleFilter = {handleFilter}
         sideBar = {
 
           <aside className="sise-bar">
@@ -512,7 +533,17 @@ function App(){
           
           </aside>
         }
-      />
+      />  
+              <div className="weed">
+            {
+              filteredData.map((value , key)=>{
+                return(
+                  <div className="dataSearched">{value.CompanyName}    </div>
+                )
+              })
+            }
+             </div>
+
          <div className='miniloads'>
         {miniLoad}
         </div>

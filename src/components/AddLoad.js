@@ -14,8 +14,8 @@ function AddLoad( props){
   return(
     <div>
         <h1 >Comapny {props.item.companyName} </h1>
-        <h3>contact {props.item.contact} </h3>
         <h1>type of load {props.item.typeofLoad} </h1>
+        <h3>contact {props.item.contact} </h3>
         <h3>from {props.item.fromLocation} to {props.item.toLocation} </h3>
         <h3>Rate {props.item.ratePerTonne} per tonne</h3>
         <h3> payment terms {props.item.paymentTerms} </h3>

@@ -36,7 +36,6 @@ header{
 
   display: flex;
   align-items: center;
-  background-color: lightblue;
 }
 .search-bar{
   flex: 1;

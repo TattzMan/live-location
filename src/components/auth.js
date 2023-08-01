@@ -1,5 +1,5 @@
 import { auth , googleProviser } from "./config/fireBase"
-import {createUserWithEmailAndPassword , signInWithPopup , signOut} from  'firebase/auth'
+import {createUserWithEmailAndPassword , signInWithPopup } from  'firebase/auth'
 import React from "react"
 
 
@@ -25,14 +25,7 @@ function Auth(){
     }
   }
 
-  const logout = async ()=>{
-    
-    try{
-    await signOut(auth)
-    }catch (err){
-      console.error(err)
-    }
-  }
+
 
 
   return(
@@ -51,7 +44,6 @@ function Auth(){
 
     <button onClick={singinWithGoogle} >sing in with google</button>
 
-    <button onClick={logout}>logout</button>
 
     </div>
   )
