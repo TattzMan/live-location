@@ -449,7 +449,7 @@ function App(){
       let [addLoad , setaddLoad] = React.useState(false)
 
       useEffect(() => {
-        document.body.style.paddingTop = addLoad ? '60px' : '320px';
+        document.body.style.paddingTop = addLoad ? '70px' : '320px';
       }, [addLoad]);
 
       function toggleAddLoad(){
@@ -508,8 +508,8 @@ function App(){
             return(
               <div className="dataItem">
               <div className='wordsSearched' >{value.CompanyName} </div>
-              <div className='wordsSearched' >{value.fromLocation  } </div>
-              <div className='wordsSearched' >{value.toLocation  } </div>
+              <div  className='wordsSearched' >from {value.fromLocation } </div>
+              <div className='wordsSearched' >to {value.toLocation  } </div>
               </div>
             )
           })
@@ -521,6 +521,7 @@ function App(){
       <div>
       <Header
         addLoadState ={toggleAddLoad}
+        addBulkTrailer ={ getBulktrailers}
         handleFilter = {handleFilter}
        sideBar = {
           <aside className="sise-bar">

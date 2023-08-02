@@ -14,12 +14,15 @@ import { auth  } from "./config/fireBase"
 import LogoutIcon from '@mui/icons-material/Logout';
 
 function Header(props){
- 
+
   let [menu , seMenu] = React.useState(true)
+
+
   
   function toggleSideBar(){
     seMenu(prevMenu => !prevMenu)
   }
+
 
   let currentMneu = menu ? closeHum : openHum
 
@@ -141,11 +144,18 @@ function Header(props){
    
   } : {};
 
+  const [addMiniSearch , setMiniSearch] = React.useState(true)
+    
+   function handleMinisearchBar(){
+    setMiniSearch(prevState => !prevState )
+   }
     return(
-      <header>
-
-        {menu && props.sideBar }
+      <div>
+      {addMiniSearch ?
+        <header>
+          
         
+        {menu && props.sideBar }
         <div className="left-section"> 
           <img src={currentMneu} onClick={toggleSideBar} />
          <h3>Truckerz</h3>
@@ -159,13 +169,15 @@ function Header(props){
           onChange={props.handleFilter}
            />
 
-           <button>
+           <button className="SearchButton">
            <img src={searchIcon} width="50px" />
            </button>
    
         </div>
 
         <div className="right-section">
+
+          {window.innerWidth <= 500 && <img src={searchIcon} onClick={handleMinisearchBar} width="30px" /> }            
           <button className="addLoad " style={addNewCss} onClick={props.addLoadState}  >Loads</button>
           <div className="addLoad " onClick={displayDropdown} >Add </div> 
           <DropDown/>
@@ -174,7 +186,26 @@ function Header(props){
 
           </div>
 
+     
+
+
       </header>
+      :  <header>  
+     
+          <input 
+          type="text" 
+          className="search-bar" 
+          placeholder="Search"
+          onChange={props.handleFilter}
+           />
+
+        <button className="SearchButton">
+           <img src={searchIcon} width="30px" />
+           </button>
+
+       </header>
+        }
+</div>
     )
 }
 

@@ -44,8 +44,57 @@
 .location{
   font-size: 15px;
 }
+.authDiv{
+  display: flex;
+  align-items: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  top: 130px;
+  left: 500px;
+  height: 300px;
+}
+.authDiv > h1{
+  font-style: italic;
+  color: rgb(34, 243, 34);
+  margin-bottom: 1px;
+}
+.authDiv > h3{
+  font-style: italic;
+  color: rgb(164, 89, 238) ;
+}
+ 
+.singIN{
+  height: 30px;
+  width: 250px;
+  margin-bottom : 20px;
+  border-radius: 7px;
+  padding: 4px;
+}
+.singIN:focus{
+  border: 5px solid #007bff ;
+}
+.singInButton{
+  height: 30px;
+  background-color: rgb(47, 201, 47);
+  border: none;
+  width: 80px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.googleButton{
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
 /* Small screens (less than 576px) */
 @media only screen and (max-width: 575px) {
+  .authDiv{
+    top: 100px;
+    left: 50px;
+    right: 30px;
+    height: 200px;
+  }  
   .Main-grid {
     grid-template-columns: 1fr; /* Change to one column grid layout */
     row-gap: 20px; /* Reduce row gap */
@@ -76,6 +125,13 @@
 
 /* Medium screens (between 576px and 768px) */
 @media only screen and (min-width: 576px) and (max-width: 952px) {
+  .authDiv{
+    top: 200px;
+    left: 150px;
+    right: 100px;
+    height: 700px;
+  }  
+
   .Main-grid {
     grid-template-columns: repeat(2, 1fr); /* Change to two column grid layout */
     row-gap: 30px; /* Reduce row gap */

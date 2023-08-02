@@ -60,3 +60,27 @@ You're about to initialize a Firebase project in this directory:
 [info] 
 [info] ✔  Success! Logged into GitHub as ppyaya 
 [info] 
+[debug] [2023-08-02T15:56:38.672Z] ----------------------------------------------------------------------
+[debug] [2023-08-02T15:56:38.676Z] Command:       /home/yaya/.nvm/versions/node/v20.5.0/bin/node /home/yaya/.nvm/versions/node/v20.5.0/bin/firebase init
+[debug] [2023-08-02T15:56:38.676Z] CLI Version:   12.4.6
+[debug] [2023-08-02T15:56:38.677Z] Platform:      linux
+[debug] [2023-08-02T15:56:38.677Z] Node Version:  v20.5.0
+[debug] [2023-08-02T15:56:38.677Z] Time:          Wed Aug 02 2023 17:56:38 GMT+0200 (Central Africa Time)
+[debug] [2023-08-02T15:56:38.677Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-02T15:56:38.688Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-08-02T15:56:38.773Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-02T15:56:38.774Z] > authorizing via signed-in user (kelvinyaya8@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/yaya/Documents/programs/truckers
+
+[debug] [2023-08-02T15:56:40.061Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-08-02T15:56:40.062Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
