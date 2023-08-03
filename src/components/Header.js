@@ -12,10 +12,11 @@ import addLoaadDB from "./addloadDB";
 import { signOut} from  'firebase/auth'
 import { auth  } from "./config/fireBase"
 import LogoutIcon from '@mui/icons-material/Logout';
+import logo from '../public/images/logo/Original.svg'
 
 function Header(props){
 
-  let [menu , seMenu] = React.useState(true)
+  let [menu , seMenu] = React.useState(false)
 
 
   
@@ -84,7 +85,7 @@ function Header(props){
         <button onClick={displayAddLooads} >add load</button>
         { addLoads && addLoaadDB() }
 
-        <button onClick={displayAddTrucks}>add turck</button>
+        <button onClick={displayAddTrucks}>add Truck</button>
         { addTrucks && displayTrucks() }   
 
       </div>
@@ -158,7 +159,7 @@ function Header(props){
         {menu && props.sideBar }
         <div className="left-section"> 
           <img src={currentMneu} onClick={toggleSideBar} />
-         <h3>Truckerz</h3>
+         <img src={logo} className="logo" />
         </div>
 
         <div className="middle-section">

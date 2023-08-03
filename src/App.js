@@ -27,6 +27,9 @@ import { auth, db, storage } from "./components/config/fireBase"
 import { collection, getDocs , doc ,updateDoc} from "firebase/firestore"
 import { getDownloadURL, listAll, ref } from 'firebase/storage';
 import MiniLoad from './components/miniLoads';
+import logoOnBody from './public/images/logo/Linkedin Hero Image.png'
+require('events').EventEmitter.defaultMaxListeners = 15;
+
 
 
 function App(){  
@@ -516,7 +519,7 @@ function App(){
         
 
     return(
-    <div>
+    <body>
       { currentUser ?
       <div>
       <Header
@@ -559,7 +562,6 @@ function App(){
               )
               }
 
-        
       <div className='miniloads'>
         {miniLoad}
         </div>
@@ -573,7 +575,7 @@ function App(){
       }
 
     
-      </div>
+      </body>
        ) 
 
     }

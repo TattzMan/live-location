@@ -5,14 +5,14 @@
   top: 64px;
   width: 220px;
 
-  border: 1px solid rgb(206, 102, 102);
+  border: 1px solid #007bff ;
   border-top: none;
- background-color:  #23242a;
+ background-color:  white;
   
 }
 .all-names{
   margin-top: 10px;
-  background-color: rgb(48, 47, 47);
+  background-color: white;
   height: 305px;
   display: flex;
   flex-direction: column;
@@ -124,13 +124,16 @@
 
 }
 
+ /* Small screens (less than 576px) */
+ @media only screen and (max-width: 575px) {
+}
 /* Medium screens (between 576px and 992px) */
 @media only screen and (min-width: 576px) and (max-width: 991px) {
   .sise-bar {
     width: 220px; /* Restore width */
     height: calc(100% - 50px); /* Adjust height */
     top: 64px; /* Restore top position */
-    border: 1px solid rgb(206, 102, 102); /* Restore border */
+    border: 1px solid #007bff ; /* Restore border */
     border-top: none;
 
   }
@@ -160,7 +163,7 @@
     width: 220px; /* Restore width */
     height: calc(100vh - 64px); /* Adjust height to fill viewport */
     top: 64px; /* Restore top position */
-    border: 1px solid rgb(206, 102, 102); /* Restore border */
+    border: 1px solid #007bff ; /* Restore border */
     border-top: none;
   }
   .all-names {
