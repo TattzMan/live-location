@@ -39,7 +39,7 @@ function Tauntliner(){
       if(imageUpload === null) return
       const imageRef = ref(storage , `tauntliner/${imageUpload.name + v4() }`)
       uploadBytes(imageRef , imageUpload).then(()=>{
-        alert("image uploaded")
+        alert("refresh page to see changes")
       })
     }
 

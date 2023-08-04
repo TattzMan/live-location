@@ -38,7 +38,7 @@ function SideTipper(props){
       if(imageUpload === null) return
       const imageRef = ref(storage , `sideTippers/${imageUpload.name + v4() }`)
       uploadBytes(imageRef , imageUpload).then(()=>{
-        alert("image uploaded")
+        alert("Refresh page to see changes")
       })
     }
 

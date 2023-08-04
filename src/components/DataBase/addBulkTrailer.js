@@ -39,7 +39,7 @@ function BulkTrailers( param ) {
     if (imageUpload === null) return;
     const imageRef = ref(storage, `BulkTrailer/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      alert("image");
+      alert("refresh page to see changes");
     });
   };
 

@@ -39,7 +39,7 @@ function Tankers(){
       if(imageUpload === null) return
       const imageRef = ref(storage , `tankers/${imageUpload.name + v4() }`)
       uploadBytes(imageRef , imageUpload).then(()=>{
-        alert("image uploaded")
+        alert("refresh page to see changes")
       })
     }
 

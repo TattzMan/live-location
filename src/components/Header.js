@@ -12,7 +12,7 @@ import addLoaadDB from "./DataBase/addloadDB";
 import { signOut} from  'firebase/auth'
 import { auth  } from "./config/fireBase"
 import LogoutIcon from '@mui/icons-material/Logout';
-import logo from '../public/images/logo/Original.svg'
+import logo from '../public/images/logo/Original on Transparent.png'
 
 function Header(props){
 
@@ -25,7 +25,7 @@ function Header(props){
   }
 
 
-  let currentMneu = menu ? <MenuOpenIcon onClick={toggleSideBar} /> : <MenuIcon onClick={toggleSideBar}/>
+  let currentMneu = menu ? <MenuOpenIcon onClick={toggleSideBar} className="menu" /> : <MenuIcon onClick={toggleSideBar} className="menu"/>
 
 
   let  [dropDown , setDropdown] = React.useState(false)
@@ -181,8 +181,8 @@ function Header(props){
 
           {window.innerWidth <= 500 && < SearchIcon  onClick={handleMinisearchBar} width="30px" /> }   
 
-          <button className="addLoad " style={addNewCss} onClick={props.addLoadState}  >Loads</button>
-          <div className="addLoad " onClick={displayDropdown} >Add </div> 
+          <button className="addLoad" style={addNewCss} onClick={props.addLoadState}  >Loads</button>
+          <div className="addLoad" onClick={displayDropdown} >Add </div> 
           <DropDown/>
         { dropDown && <button onClick={setErythingFalse} className="backButton">back</button>}
         <div onClick={logout} > <LogoutIcon/> </div>

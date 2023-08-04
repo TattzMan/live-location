@@ -39,7 +39,7 @@ function LowBeds(){
       if(imageUpload === null) return
       const imageRef = ref(storage , `LowBeds/${imageUpload.name + v4() }`)
       uploadBytes(imageRef , imageUpload).then(()=>{
-        alert("image uploaded")
+        alert("refresh page to see changes")
       })
     }
 

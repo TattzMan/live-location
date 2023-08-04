@@ -19,8 +19,11 @@ header{
   align-items: center;
   flex-shrink: 0;
 }
+.menu{
+  margin: 5px;
+}
 .left-section > img{
-  height: 25px;
+  height: 40px;
   margin-left: 10px;
   margin-right: 3px;
   cursor: pointer;
@@ -118,6 +121,7 @@ header{
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color: white;
 }
 .addLoad:hover{
 background-color: rgb(102, 100, 100);
@@ -181,7 +185,8 @@ background-color: rgb(102, 100, 100);
     display: none;
   }
 .logo{
-  width: 100px;
+  width: 125px;
+  height: 25px;
 }
   .right-section {
   width: 200px;
