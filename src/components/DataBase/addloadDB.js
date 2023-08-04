@@ -1,6 +1,6 @@
 import React from "react";
 import { collection, getDocs, doc, addDoc } from "firebase/firestore";
-import { db } from "./config/fireBase";
+import { db } from "../config/fireBase";
 
 function AddLoadDB() {
   const loadsCollection = collection(db, "Loads");

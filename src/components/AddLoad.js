@@ -1,13 +1,7 @@
 import React from "react"
 import "./styles/AddLoad.css"
-import MiniLoad from "./miniLoads"
 
 function AddLoad( props){
-  let [swichBetwnLoad , setstate] = React.useState(true)
-  
-  function togglestateLoad(){
-    setstate(prevState => !prevState)
-  }
 
 
 

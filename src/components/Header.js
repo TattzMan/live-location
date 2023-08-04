@@ -1,14 +1,14 @@
 import React from "react";
 import "./styles/Header.css"
-import searchIcon from "../public/images/icons/search.svg"
-import openHum from "../public/images/icons/menu_FILL0_wght400_GRAD0_opsz48.svg"
-import closeHum from "../public/images/icons/menu_open_FILL0_wght400_GRAD0_opsz48.svg"
-import BulkTrailers from "./addBulkTrailer";
-import SideTipper from "./addSideTipper";
-import LowBeds from "./addLowBeds";
-import tankers from "./addTankers";
-import tauntliner from "./addTauntliner";
-import addLoaadDB from "./addloadDB";
+import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import BulkTrailers from "./DataBase/addBulkTrailer";
+import SideTipper from "./DataBase/addSideTipper";
+import LowBeds from "./DataBase/addLowBeds";
+import tankers from "./DataBase/addTankers";
+import tauntliner from "./DataBase/addTauntliner";
+import addLoaadDB from "./DataBase/addloadDB";
 import { signOut} from  'firebase/auth'
 import { auth  } from "./config/fireBase"
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -25,7 +25,7 @@ function Header(props){
   }
 
 
-  let currentMneu = menu ? closeHum : openHum
+  let currentMneu = menu ? <MenuOpenIcon onClick={toggleSideBar} /> : <MenuIcon onClick={toggleSideBar}/>
 
 
   let  [dropDown , setDropdown] = React.useState(false)
@@ -118,7 +118,8 @@ function Header(props){
     }
 
     BulkTrailers()
-    SideTipper()
+   SideTipper() 
+
     LowBeds()
     tankers() 
     tauntliner() 
@@ -158,7 +159,7 @@ function Header(props){
         
         {menu && props.sideBar }
         <div className="left-section"> 
-          <img src={currentMneu} onClick={toggleSideBar} />
+          {currentMneu }
          <img src={logo} className="logo" />
         </div>
 
@@ -171,14 +172,15 @@ function Header(props){
            />
 
            <button className="SearchButton">
-           <img src={searchIcon} width="50px" />
+           <SearchIcon/>
            </button>
    
         </div>
 
         <div className="right-section">
 
-          {window.innerWidth <= 500 && <img src={searchIcon} onClick={handleMinisearchBar} width="30px" /> }            
+          {window.innerWidth <= 500 && < SearchIcon  onClick={handleMinisearchBar} width="30px" /> }   
+
           <button className="addLoad " style={addNewCss} onClick={props.addLoadState}  >Loads</button>
           <div className="addLoad " onClick={displayDropdown} >Add </div> 
           <DropDown/>
@@ -201,7 +203,7 @@ function Header(props){
            />
 
         <button className="SearchButton">
-           <img src={searchIcon} width="30px" />
+           <SearchIcon width="30px" />
            </button>
 
        </header>

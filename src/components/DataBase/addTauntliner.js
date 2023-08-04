@@ -1,15 +1,15 @@
 import React from "react"
-import {db } from "./config/fireBase"
+import {db } from "../config/fireBase"
 import { collection, addDoc } from 'firebase/firestore';
-import { storage } from "./config/fireBase";
+import { storage } from "../config/fireBase";
 import {getDownloadURL, ref , uploadBytes} from "firebase/storage"
 import {v4} from "uuid"
 
-function SideTipper(){
+function Tauntliner(){
 
   
   // specify the database to use
-  const SideTippersDB = collection(db,"sideTippers")
+  const tauntlinerDB = collection(db,"tauntliner")
 
   const [formDta , setFormData] = React.useState({
     CompanyName : "",
@@ -37,7 +37,7 @@ function SideTipper(){
 
     const uploadImage = ()=>{
       if(imageUpload === null) return
-      const imageRef = ref(storage , `sideTippers/${imageUpload.name + v4() }`)
+      const imageRef = ref(storage , `tauntliner/${imageUpload.name + v4() }`)
       uploadBytes(imageRef , imageUpload).then(()=>{
         alert("image uploaded")
       })
@@ -45,13 +45,13 @@ function SideTipper(){
 
     const handleSubmit = async(event)=>{
       event.preventDefault()
-      const imageRef = ref(storage , `sideTippers/${imageUpload.name}`)
+      const imageRef = ref(storage , `tauntliner/${imageUpload.name}`)
        await uploadBytes(imageRef , imageUpload)
        // get image  url 
        let imageUrl = await getDownloadURL(imageRef)
 
       try{
-        await addDoc(SideTippersDB ,{
+        await addDoc(tauntlinerDB ,{
           onDelivery :formDta.onDelivery,
           CompanyName : formDta.CompanyName,
           fromLocation : formDta.fromLocation,
@@ -78,7 +78,7 @@ function SideTipper(){
       />
 
       <input
-        placeholder="Side Tipper"
+        placeholder="Tauntliner"
         type="text"
         onChange={handlechange}
         name="CompanyName"
@@ -116,15 +116,15 @@ function SideTipper(){
         name="toLocation"
         value={formDta.toLocation}
           />
-            <input
-            placeholder="Contact"
-            type="text"
-            onChange={handlechange}
-            name="contact"
-            value={formDta.contact}
+               <input
+        placeholder="Contact"
+        type="text"
+        onChange={handlechange}
+        name="contact"
+        value={formDta.contact}
           />
             <button onClick={uploadImage} >submit</button>
           </form>
   )
 }
-export default SideTipper
+export default Tauntliner

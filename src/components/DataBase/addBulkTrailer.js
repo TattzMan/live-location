@@ -1,7 +1,7 @@
 import React from "react";
-import { db } from "./config/fireBase";
+import { db } from "../config/fireBase";
 import { collection, addDoc } from "firebase/firestore";
-import { storage } from "./config/fireBase";
+import { storage } from "../config/fireBase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 

@@ -1,15 +1,15 @@
 import React from "react"
-import {db } from "./config/fireBase"
+import {db } from "../config/fireBase"
 import { collection, addDoc } from 'firebase/firestore';
-import { storage } from "./config/fireBase";
+import { storage } from "../config/fireBase";
 import {getDownloadURL, ref , uploadBytes} from "firebase/storage"
 import {v4} from "uuid"
 
-function Tauntliner(){
+function LowBeds(){
 
   
   // specify the database to use
-  const tauntlinerDB = collection(db,"tauntliner")
+  const LowBedsDB = collection(db,"LowBeds")
 
   const [formDta , setFormData] = React.useState({
     CompanyName : "",
@@ -37,7 +37,7 @@ function Tauntliner(){
 
     const uploadImage = ()=>{
       if(imageUpload === null) return
-      const imageRef = ref(storage , `tauntliner/${imageUpload.name + v4() }`)
+      const imageRef = ref(storage , `LowBeds/${imageUpload.name + v4() }`)
       uploadBytes(imageRef , imageUpload).then(()=>{
         alert("image uploaded")
       })
@@ -45,13 +45,13 @@ function Tauntliner(){
 
     const handleSubmit = async(event)=>{
       event.preventDefault()
-      const imageRef = ref(storage , `tauntliner/${imageUpload.name}`)
+      const imageRef = ref(storage , `LowBeds/${imageUpload.name}`)
        await uploadBytes(imageRef , imageUpload)
        // get image  url 
        let imageUrl = await getDownloadURL(imageRef)
 
       try{
-        await addDoc(tauntlinerDB ,{
+        await addDoc(LowBedsDB ,{
           onDelivery :formDta.onDelivery,
           CompanyName : formDta.CompanyName,
           fromLocation : formDta.fromLocation,
@@ -78,7 +78,7 @@ function Tauntliner(){
       />
 
       <input
-        placeholder="Tauntliner"
+        placeholder="LowBed"
         type="text"
         onChange={handlechange}
         name="CompanyName"
@@ -116,15 +116,15 @@ function Tauntliner(){
         name="toLocation"
         value={formDta.toLocation}
           />
-               <input
-        placeholder="Contact"
-        type="text"
-        onChange={handlechange}
-        name="contact"
-        value={formDta.contact}
+          <input
+            placeholder="Contact"
+            type="text"
+            onChange={handlechange}
+            name="contact"
+            value={formDta.contact}
           />
             <button onClick={uploadImage} >submit</button>
           </form>
   )
 }
-export default Tauntliner
+export default LowBeds

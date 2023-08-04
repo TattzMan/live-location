@@ -2,7 +2,8 @@
 .bigLoad{
   z-index: 50;
   border: 3px double #007bff ;
-  padding-bottom: 10px;
+  padding: 10px;
+
 }
 .miniloads{
   position: fixed;
@@ -10,7 +11,7 @@
   height: 250px;
   right: 0;
   left: 230px;
-  background-color:  white;
+  background-color:  #23242a;
   display: flex;
   white-space: nowrap;
   overflow-x: auto;

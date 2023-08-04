@@ -1,15 +1,15 @@
 import React from "react"
-import {db } from "./config/fireBase"
+import {db } from "../config/fireBase"
 import { collection, addDoc } from 'firebase/firestore';
-import { storage } from "./config/fireBase";
+import { storage } from "../config/fireBase";
 import {getDownloadURL, ref , uploadBytes} from "firebase/storage"
 import {v4} from "uuid"
 
-function LowBeds(){
+function Tankers(){
 
   
   // specify the database to use
-  const LowBedsDB = collection(db,"LowBeds")
+  const TankersDB = collection(db,"tankers")
 
   const [formDta , setFormData] = React.useState({
     CompanyName : "",
@@ -37,7 +37,7 @@ function LowBeds(){
 
     const uploadImage = ()=>{
       if(imageUpload === null) return
-      const imageRef = ref(storage , `LowBeds/${imageUpload.name + v4() }`)
+      const imageRef = ref(storage , `tankers/${imageUpload.name + v4() }`)
       uploadBytes(imageRef , imageUpload).then(()=>{
         alert("image uploaded")
       })
@@ -45,13 +45,13 @@ function LowBeds(){
 
     const handleSubmit = async(event)=>{
       event.preventDefault()
-      const imageRef = ref(storage , `LowBeds/${imageUpload.name}`)
+      const imageRef = ref(storage , `tankers/${imageUpload.name}`)
        await uploadBytes(imageRef , imageUpload)
        // get image  url 
        let imageUrl = await getDownloadURL(imageRef)
 
       try{
-        await addDoc(LowBedsDB ,{
+        await addDoc(TankersDB ,{
           onDelivery :formDta.onDelivery,
           CompanyName : formDta.CompanyName,
           fromLocation : formDta.fromLocation,
@@ -73,12 +73,13 @@ function LowBeds(){
     <form className="dropDown" onSubmit={handleSubmit}>
 
       <input
+      className="inputFIle"
       type="file"
       onChange={(e)=>{setImageUpload(e.target.files[0])}}
       />
 
       <input
-        placeholder="LowBed"
+        placeholder="tankers"
         type="text"
         onChange={handlechange}
         name="CompanyName"
@@ -116,15 +117,15 @@ function LowBeds(){
         name="toLocation"
         value={formDta.toLocation}
           />
-          <input
-            placeholder="Contact"
-            type="text"
-            onChange={handlechange}
-            name="contact"
-            value={formDta.contact}
+               <input
+        placeholder="Contact"
+        type="text"
+        onChange={handlechange}
+        name="contact"
+        value={formDta.contact}
           />
             <button onClick={uploadImage} >submit</button>
           </form>
   )
 }
-export default LowBeds
+export default Tankers

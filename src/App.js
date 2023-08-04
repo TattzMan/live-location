@@ -9,25 +9,18 @@ import SideBar from "./components/SideBar";
 import SideBarData from "./components/SideBarData";
 
 import Tankers from "./components/pages/Tankers";
-import TankersData from "./components/DataBase/TankersData";
 
 import LowBeds from "./components/pages/LowBeds";
-import LowBedsData from "./components/DataBase/LowBedsData"
 
 import BulkTrailers from "./components/pages/BulkTrailers";
-import BulkTrailersData from "./components/DataBase/BulkTrailersData";
 
 import SideTippers from "./components/pages/SideTippers";
-import SideTipperData from "./components/DataBase/SideTipperData";
 
 import Tauntliners from "./components/pages/Taultliner";
-import TautlinerData from "./components/DataBase/TautlinerData";
 
 import { auth, db, storage } from "./components/config/fireBase"
 import { collection, getDocs , doc ,updateDoc} from "firebase/firestore"
-import { getDownloadURL, listAll, ref } from 'firebase/storage';
 import MiniLoad from './components/miniLoads';
-import logoOnBody from './public/images/logo/Linkedin Hero Image.png'
 require('events').EventEmitter.defaultMaxListeners = 15;
 
 
@@ -525,6 +518,7 @@ function App(){
       <Header
         addLoadState ={toggleAddLoad}
         addBulkTrailer ={ getBulktrailers}
+        addSideTippers = { getSideTippers}
         handleFilter = {handleFilter}
        sideBar = {
           <aside className="sise-bar">

@@ -1,6 +1,6 @@
 
 header{
-  background-color:  white;
+  background-color:  #23242a;
   display: flex;
   min-height: 65px;
 
@@ -44,7 +44,7 @@ header{
   padding-left: 20px;
   font-size: 16px;
 
-  border: 1px solid rgb(206, 102, 102);
+  border: 1px solid red;
 
   border-radius: 50px;
 
@@ -56,6 +56,7 @@ header{
   font-size: 20px;
   padding-left: 10px;
 }
+
 .displaySearched{
   position: absolute;
   z-index: 300;
@@ -63,7 +64,7 @@ header{
   right: 400px;
   left: 350px;
   height: 250px;
-  background-color: white ;
+  background-color: #23242a ;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   overflow: hidden;
   overflow-y: auto;
@@ -88,7 +89,7 @@ header{
   height: 40px;
   width: 60px;
 
-  border: 1px solid rgb(206, 102, 102);
+  border: 1px solid rgb(253, 31, 31);
 
   margin-right:8px ;
   margin-left: -5px;
@@ -97,10 +98,9 @@ header{
   border-bottom-right-radius: 20px;
   background-color: rgb(99, 98, 98);
 }
-.middle-section > button > img{
-  height: 20px;
+.SearchButton:hover{
+  background-color: rgb(126, 123, 123) ;
 }
-
 
 .right-section{
   display: flex;
@@ -126,7 +126,7 @@ background-color: rgb(102, 100, 100);
   background-color: rgb(129, 124, 124);
 }
 .dropDown{
- background-color:  white;
+ background-color:  #23242a ;
   height: 350px;
   width: 180px;
   position:fixed;

@@ -7,12 +7,12 @@
 
   border: 1px solid #007bff ;
   border-top: none;
- background-color:  white;
+ background-color: #23242a;
   
 }
 .all-names{
   margin-top: 10px;
-  background-color: white;
+  background-color: #23242a;
   height: 305px;
   display: flex;
   flex-direction: column;
