@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Auth from './components/auth';
 
 import "./App.css"
 import Header from "./components/Header";
@@ -25,16 +24,10 @@ require('events').EventEmitter.defaultMaxListeners = 15;
 
 
 
+
 function App(){  
 
-  const [currentUser , setCurrentUser] = React.useState(null)
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setCurrentUser(user);
-    });
-    return unsubscribe;
-  }, []);
 
   
   let [sideBarNames , setSideBarName] = React.useState(SideBarData)
@@ -442,15 +435,23 @@ function App(){
   React.useEffect(() => {
     getLoadsList();
   }, []);
+
+
       let [addLoad , setaddLoad] = React.useState(false)
 
       useEffect(() => {
         document.body.style.paddingTop = addLoad ? '70px' : '320px';
       }, [addLoad]);
 
+
       function toggleAddLoad(){
+
         setaddLoad(prevState => !prevState)
+
       }
+
+   
+    
 
       let miniLoad
       if(addLoad === true){  
@@ -513,7 +514,6 @@ function App(){
 
     return(
     <body>
-      { currentUser ?
       <div>
       <Header
         addLoadState ={toggleAddLoad}
@@ -565,8 +565,6 @@ function App(){
       
       </section>
       </div>
-     : <Auth/>
-      }
 
     
       </body>

@@ -1,3 +1,4 @@
+import Auth from '../components/auth'
 import React from "react";
 import "./styles/Header.css"
 import SearchIcon from '@mui/icons-material/Search';
@@ -14,7 +15,11 @@ import { auth  } from "./config/fireBase"
 import LogoutIcon from '@mui/icons-material/Logout';
 import logo from '../public/images/logo/Original on Transparent.png'
 
+
 function Header(props){
+
+
+
 
   let [menu , seMenu] = React.useState(false)
 
@@ -27,11 +32,26 @@ function Header(props){
 
   let currentMneu = menu ? <MenuOpenIcon onClick={toggleSideBar} className="menu" /> : <MenuIcon onClick={toggleSideBar} className="menu"/>
 
+  const [currentUser , setCurrentUser] = React.useState(null)
+
+  React.useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+    });
+    return unsubscribe;
+  }, []);
+
 
   let  [dropDown , setDropdown] = React.useState(false)
+
+
   function displayDropdown(){ 
-    setDropdown(prevDropdown => !prevDropdown)     
-  }
+  
+    setDropdown(prevDropdown => !prevDropdown)    
+  
+}
+    
+
 
   
 
@@ -151,6 +171,8 @@ function Header(props){
    function handleMinisearchBar(){
     setMiniSearch(prevState => !prevState )
    }
+ 
+
     return(
       <div>
       {addMiniSearch ?
@@ -179,10 +201,19 @@ function Header(props){
 
         <div className="right-section">
 
-          {window.innerWidth <= 500 && < SearchIcon  onClick={handleMinisearchBar} width="30px" /> }   
+          {window.innerWidth <= 500 && < SearchIcon  onClick={handleMinisearchBar} width="30px" /> }
 
           <button className="addLoad" style={addNewCss} onClick={props.addLoadState}  >Loads</button>
-          <div className="addLoad" onClick={displayDropdown} >Add </div> 
+      
+        { dropDown === true && currentUser === null ?
+                <Auth/>
+                :
+            <div className="addLoad" onClick={displayDropdown} >Add </div> 
+
+              }
+
+
+
           <DropDown/>
         { dropDown && <button onClick={setErythingFalse} className="backButton">back</button>}
         <div onClick={logout} > <LogoutIcon/> </div>

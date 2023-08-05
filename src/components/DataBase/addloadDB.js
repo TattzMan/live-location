@@ -11,7 +11,7 @@ function AddLoadDB() {
     contact: "",
     fromLocation: "",
     toLocation: "",
-    ratePerTonne: 0,
+    ratePerTonne: '',
     paymentTerms: "",
     requirements: "",
     additionalInfo: ""
@@ -91,7 +91,7 @@ function AddLoadDB() {
     onChange={handleTypedText}
     name="ratePerTonne"
     value={formData.ratePerTonne}
-    type="number"
+    type="text"
   />
 
   <input

@@ -4,7 +4,7 @@ function MiniLoad(props){
 
   return(
     <div className='frontloadDisplay'>
-          <h3>Comapny name <span className="spaninMini">{props.item.companyName}</span> </h3>
+          <h3>Company name <span className="spaninMini">{props.item.companyName}</span> </h3>
         <p>Type of load : <span className="spaninMini">{props.item.typeofLoad}</span> </p>
         <p>Contact : <span className="spaninMini">{props.item.contact}</span></p>
         <p>From <span className="spaninMini">{props.item.fromLocation}</span> to <span className="spaninMini">{props.item.toLocation}</span></p>

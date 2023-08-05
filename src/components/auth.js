@@ -29,6 +29,7 @@ function Auth(){
 
 
   return(
+    <div className="makeBackgroundColor">
     <div className="authDiv">
       <h1>WELCOME TO TRUCKERZ</h1>
       <h3>ALL LOADS AND TRUCKS CONNECTED</h3>
@@ -48,6 +49,7 @@ function Auth(){
 
     <button onClick={singinWithGoogle} className="googleButton" > <img src={googlePic} height='35px' /> </button>
 
+    </div>
     </div>
   )
 }

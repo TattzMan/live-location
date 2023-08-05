@@ -1,7 +1,7 @@
 
 .bigLoad{
   z-index: 50;
-  border: 3px double #007bff ;
+  border: 3px double rgb(129, 124, 124) ;
   padding: 10px;
 
 }
@@ -23,7 +23,7 @@
 }
 .frontloadDisplay{
   height: 230px;
-  border: 2px  double #007bff  ;
+  border: 2px  double rgb(129, 124, 124) ;
   width: 250px;
   margin: 7px;
   white-space: normal;
