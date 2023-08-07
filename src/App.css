@@ -19,17 +19,17 @@ body{
  /* Small screens (less than 576px) */
  @media only screen and (max-width: 575px) {
    body {
-     padding-top: 7px; /* Reduce top padding */
-       padding-right:7px ;
-     padding-left: 7px; /* Reduce left padding */
+    padding-top: 0; 
+    padding-right:7px ;
+     padding-left: 7px; 
    }
  }
  
  /* Medium screens (between 576px and 992px) */
  @media only screen and (min-width: 576px) and (max-width: 991px) {
    body {
-     padding-top: 70px; /* Adjust top padding */
-     padding-left: 60px; /* Adjust left padding */
+     padding-top: 60px; 
+     padding-left: 60px; 
      padding-right:15px ;
       }
  }
@@ -37,9 +37,9 @@ body{
  /* Large screens (greater than 1200px) */
  @media only screen and (min-width: 1200px) {
    body {
-     padding-top: 5px; /* Restore top padding */
-     padding-left: 120px; /* Restore left padding */
-     padding-right:15px ;
+     padding-top: 5px; 
+      padding-left: 120px; 
+      padding-right:15px ;
 
    }
  }

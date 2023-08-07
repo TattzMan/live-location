@@ -13,8 +13,6 @@ function LowBeds(){
 
   const [formDta , setFormData] = React.useState({
     CompanyName : "",
-    onLoading : 6,
-    onDelivery : 9,
     fromLocation : "",
     toLocation : "",
     like : false,
@@ -52,10 +50,8 @@ function LowBeds(){
 
       try{
         await addDoc(LowBedsDB ,{
-          onDelivery :formDta.onDelivery,
           CompanyName : formDta.CompanyName,
           fromLocation : formDta.fromLocation,
-          onLoading : formDta.onLoading,
           toLocation : formDta.toLocation,
           like : formDta.like,
           rating : formDta.rating,
@@ -85,23 +81,6 @@ function LowBeds(){
         name="CompanyName"
         value={formDta.CompanyName}
          />
-
-         <input
-        placeholder="loading ammount"
-        type="number"
-        onChange={handlechange}
-        name="onLoading"
-        value={formDta.onLoading}
-        />
-
-        <input
-         placeholder="delivery ammount"
-         type="number"
-         onChange={handlechange}
-         name="onDelivery"
-         value={formDta.onDelivery}
-         />
-
       <input
         placeholder="from location"
         type="text"
@@ -109,7 +88,6 @@ function LowBeds(){
         name="fromLocation"
         value={formDta.fromLocation}
          />
-
         <input
         placeholder="to location"
         type="text"

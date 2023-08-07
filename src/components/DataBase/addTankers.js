@@ -13,8 +13,6 @@ function Tankers(){
 
   const [formDta , setFormData] = React.useState({
     CompanyName : "",
-    onLoading : 6,
-    onDelivery : 9,
     fromLocation : "",
     toLocation : "",
     like : false,
@@ -52,10 +50,8 @@ function Tankers(){
 
       try{
         await addDoc(TankersDB ,{
-          onDelivery :formDta.onDelivery,
           CompanyName : formDta.CompanyName,
           fromLocation : formDta.fromLocation,
-          onLoading : formDta.onLoading,
           toLocation : formDta.toLocation,
           like : formDta.like,
           rating : formDta.rating,
@@ -85,23 +81,6 @@ function Tankers(){
         name="CompanyName"
         value={formDta.CompanyName}
          />
-
-         <input
-        placeholder="loading ammount"
-        type="number"
-        onChange={handlechange}
-        name="onLoading"
-        value={formDta.onLoading}
-        />
-
-        <input
-         placeholder="delivery ammount"
-         type="number"
-         onChange={handlechange}
-         name="onDelivery"
-         value={formDta.onDelivery}
-         />
-
       <input
         placeholder="from location"
         type="text"

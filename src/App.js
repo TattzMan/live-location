@@ -441,7 +441,7 @@ function App(){
       let [addLoad , setaddLoad] = React.useState(false)
 
       useEffect(() => {
-        document.body.style.paddingTop = addLoad ? '70px' : '350px';
+        document.body.style.paddingTop = addLoad ? '70px' : '250px';
       }, [addLoad]);
 
 
