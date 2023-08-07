@@ -102,10 +102,10 @@ function Header(props){
       dropDown ?
 
       <div className="dropDown">
-        <button onClick={displayAddLooads} >add load</button>
+        <button onClick={displayAddLooads}  className='firstButtonIsnDrop' >add load</button>
         { addLoads && addLoaadDB() }
 
-        <button onClick={displayAddTrucks}>add Truck</button>
+        <button onClick={displayAddTrucks} className='firstButtonIsnDrop' >add Truck</button>
         { addTrucks && displayTrucks() }   
 
       </div>
@@ -118,19 +118,19 @@ function Header(props){
     function displayTrucks(){
       return(
         <div className="dropDown">
-        <button onClick={toggleBulkTrailer}>Bulk trailers</button>
+        <button onClick={toggleBulkTrailer} className='specifytruck'>Bulk trailers</button>
         {addBulkTrailer && BulkTrailers()}
 
-        <button onClick={toggleSideTipper}>SideTipper</button>
+        <button onClick={toggleSideTipper} className='specifytruck'>SideTipper</button>
         {addSideTipper && SideTipper()}
 
-        <button onClick={toggleLowBeds}>Low Beds</button>
+        <button onClick={toggleLowBeds} className='specifytruck'>Low Beds</button>
         {addLowBeds && LowBeds()}
 
-        <button onClick={toggleTankers}>tankers</button>
+        <button onClick={toggleTankers} className='specifytruck'>tankers</button>
         {addTankers && tankers()}
 
-        <button onClick={toggleTauntliner}>tauntliner</button>
+        <button onClick={toggleTauntliner} className='specifytruck'>tauntliner</button>
         {addTauntliner && tauntliner()}
 
       </div>     
@@ -182,7 +182,7 @@ function Header(props){
         {menu && props.sideBar }
         <div className="left-section"> 
           {currentMneu }
-         <img src={logo} className="logo" />
+         <h1>Truckerz</h1>
         </div>
 
         <div className="middle-section">

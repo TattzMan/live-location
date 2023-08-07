@@ -1,6 +1,7 @@
 import React from "react";
-import { collection, getDocs, doc, addDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { db } from "../config/fireBase";
+import { v4 as uuidv4 } from "uuid";
 
 function AddLoadDB() {
   const loadsCollection = collection(db, "Loads");
@@ -11,10 +12,11 @@ function AddLoadDB() {
     contact: "",
     fromLocation: "",
     toLocation: "",
-    ratePerTonne: '',
+    ratePerTonne: "",
     paymentTerms: "",
     requirements: "",
-    additionalInfo: ""
+    additionalInfo: "",
+    backgroundColor : ""
   });
 
   function handleTypedText(event) {
@@ -29,12 +31,12 @@ function AddLoadDB() {
   }
 
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      await addDoc(loadsCollection, {
+
+      const docRef = await addDoc(loadsCollection, {
         companyName: formData.companyName,
         typeofLoad: formData.typeofLoad,
         contact: formData.contact,
@@ -43,13 +45,28 @@ function AddLoadDB() {
         ratePerTonne: formData.ratePerTonne,
         paymentTerms: formData.paymentTerms,
         requirements: formData.requirements,
-        additionalInfo: formData.additionalInfo
+        additionalInfo: formData.additionalInfo,
+        backgroundColor : formData.backgroundColor
       });
 
+      setFormData({
+        companyName: "",
+        typeofLoad: "",
+        contact: "",
+        fromLocation: "",
+        toLocation: "",
+        ratePerTonne: "",
+        paymentTerms: "",
+        requirements: "",
+        additionalInfo: ""
+      });
     } catch (err) {
       console.error(err);
     }
   };
+
+
+
 
   return (
     <form className="dropDown" onSubmit={handleSubmit}>

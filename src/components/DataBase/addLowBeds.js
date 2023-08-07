@@ -75,6 +75,7 @@ function LowBeds(){
       <input
       type="file"
       onChange={(e)=>{setImageUpload(e.target.files[0])}}
+      placeholder="weed"
       />
 
       <input

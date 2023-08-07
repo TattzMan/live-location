@@ -1,10 +1,18 @@
 import React from "react";
 
 function MiniLoad(props){
+  
+// click a div 
+// find its id
+// if clicked div === id
+// display big div
+// with the same info
+// 
+
 
   return(
-    <div className='frontloadDisplay'>
-          <h3>Company name <span className="spaninMini">{props.item.companyName}</span> </h3>
+    <div className='frontloadDisplay' onClick={props.handleClick}>
+        <h3>Company name <span className="spaninMini">{props.item.companyName}</span> </h3>
         <p>Type of load : <span className="spaninMini">{props.item.typeofLoad}</span> </p>
         <p>Contact : <span className="spaninMini">{props.item.contact}</span></p>
         <p>From <span className="spaninMini">{props.item.fromLocation}</span> to <span className="spaninMini">{props.item.toLocation}</span></p>

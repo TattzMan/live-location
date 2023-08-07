@@ -426,6 +426,7 @@ function App(){
         ...doc.data(),
         id: doc.id
       }));
+      filteredData.sort((a, b) => a.timestamp - b.timestamp);
       setLoadlist(filteredData);
     } catch (err) {
       console.error(err);
@@ -440,7 +441,7 @@ function App(){
       let [addLoad , setaddLoad] = React.useState(false)
 
       useEffect(() => {
-        document.body.style.paddingTop = addLoad ? '70px' : '320px';
+        document.body.style.paddingTop = addLoad ? '70px' : '350px';
       }, [addLoad]);
 
 
@@ -451,7 +452,30 @@ function App(){
       }
 
    
-    
+      // function handleClick(id){
+      //   setaddLoad(state => !state)        
+      //   setLoadlist(prevLoad => {
+      //     return prevLoad.map( oneLoad =>{
+      //       console.log(id)
+      //       return oneLoad.id === id ? { ...oneLoad ,  backgroundColor: "green" }  :  oneLoad         
+      //   })
+      //   })
+      // }
+
+      function handleClick(id) {
+        setaddLoad(state => !state);
+      
+        setLoadlist(prevLoad => {
+          const updatedLoadList = prevLoad.map(oneLoad => ({
+            ...oneLoad,
+            backgroundColor: oneLoad.id === id ? "#F2F2F2" : "#EDEDED"
+          }));
+      
+          const sortedLoadList = updatedLoadList.sort((a, b) => a.backgroundColor === "#F2F2F2" ? -1 : b.backgroundColor === "#F2F2F2" ? 1 : 0);
+      
+          return sortedLoadList;
+        });
+      }
 
       let miniLoad
       if(addLoad === true){  
@@ -460,20 +484,24 @@ function App(){
            
             <AddLoad
               item = {load}
+              backgroundColor = {load.backgroundColor}
             />
           )
         })
-      }else{       
+      }
+      else{       
          miniLoad =  loadsList.map(load =>{
 
           return(
             <MiniLoad
               item = {load}
+              handleClick = {()=>handleClick(load.id) }
             />
           )
         })
       }
 
+   
         
         const allData = [ ...BulkTrailer , ...LowBed , ...SideTipper , ...tankers , ...Taultliner ]
           

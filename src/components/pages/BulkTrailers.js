@@ -31,6 +31,7 @@ function BulkTrailers(props){
        On Delivery  $<span>{props.item.onDelivery}</span> </p>
 
       <p className="location"> From {props.item.fromLocation} to {props.item.toLocation} </p>
+      <p>contact {props.item.contact}</p>
 
     </div>
   )

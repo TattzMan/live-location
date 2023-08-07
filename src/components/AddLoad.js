@@ -2,18 +2,19 @@ import React from "react"
 import "./styles/AddLoad.css"
 
 function AddLoad( props){
-
-
+  const styles = {
+    backgroundColor : props.backgroundColor
+  }
 
   return(
-    <div className="bigLoad">
-        <h1 >Comapny {props.item.companyName} </h1>
-        <h1>type of load {props.item.typeofLoad} </h1>
-        <h3>contact {props.item.contact} </h3>
-        <h3>from {props.item.fromLocation} to {props.item.toLocation} </h3>
-        <h3>Rate {props.item.ratePerTonne} per tonne</h3>
-        <h3> payment terms {props.item.paymentTerms} </h3>
-        <h3>Requirements {props.item.requirements} </h3>
+    <div className="bigLoad" style={styles} >
+        <h3>Company {props.item.companyName} </h3>
+        <p>type of load {props.item.typeofLoad} </p>
+        <p>contact {props.item.contact} </p>
+        <p>from {props.item.fromLocation} to {props.item.toLocation} </p>
+        <p>Rate {props.item.ratePerTonne} per tonne</p>
+        <p> payment terms {props.item.paymentTerms} </p>
+        <p>Requirements {props.item.requirements} </p>
         <p>additional info {props.item.additionalInfo} </p>
 
            
