@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import Auth from './components/auth'  
+import Username from './components/username';
 import "./App.css"
 import Header from "./components/Header";
 import AddLoad from "./components/AddLoad";
@@ -27,8 +28,14 @@ require('events').EventEmitter.defaultMaxListeners = 15;
 
 function App(){  
 
+  const [currentUser , setCurrentUser] = React.useState(null)
 
-
+  React.useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+    });
+    return unsubscribe;
+  }, []);
   
   let [sideBarNames , setSideBarName] = React.useState(SideBarData)
   
@@ -542,6 +549,9 @@ function App(){
 
     return(
     <body>
+    { currentUser  ?
+                
+      <div>
       <div>
       <Header
         addLoadState ={toggleAddLoad}
@@ -587,18 +597,20 @@ function App(){
       <div className='miniloads'>
         {miniLoad}
         </div>
-   
+   <Username/>
       <section className="Main-grid"> 
         {trucks}
       
       </section>
       </div>
-
-    
-      </body>
-       ) 
-
+      </div>            
+       :
+       <Auth/>
     }
+      </body>
+       )
+      }
+
 export default App
 
 

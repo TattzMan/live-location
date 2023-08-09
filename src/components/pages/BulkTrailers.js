@@ -5,6 +5,12 @@ import likedstar from "../../public/images/icons/star_rate_black_24dp.svg"
 
 function BulkTrailers(props){
 
+// db.collection('users').doc(user.id).get().then(doc => {
+//   const html = `<div> ${doc.data().bio} </div>`
+// })
+
+
+  
   const starIcon = props.liked ? likedstar : unlikedStar   
   return(
     <div >

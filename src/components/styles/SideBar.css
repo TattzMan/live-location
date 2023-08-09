@@ -144,7 +144,7 @@
   .sise-bar {
     width: 220px; /* Restore width */
     height: calc(100% - 50px); /* Adjust height */
-    top: 64px; /* Restore top position */
+    top: 94px; /* Restore top position */
     border-top: none;
 
   }
@@ -173,7 +173,7 @@
     position: fixed; /* Restore position */
     width: 220px; /* Restore width */
     height: calc(100vh - 64px); /* Adjust height to fill viewport */
-    top: 64px; /* Restore top position */
+    top: 94px; /* Restore top position */
     border-top: none;
   }
   .all-names {

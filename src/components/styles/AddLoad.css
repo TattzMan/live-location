@@ -21,7 +21,7 @@
   overflow-x: auto;
   -ms-overflow-style: none ;
   scrollbar-width: none;
-  background-color: red;
+  background-color: white;
 }
 .miniloads::-webkit-scrollbar {
   display: none;

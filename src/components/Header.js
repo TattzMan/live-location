@@ -1,4 +1,3 @@
-import Auth from '../components/auth'
 import React from "react";
 import "./styles/Header.css"
 import SearchIcon from '@mui/icons-material/Search';
@@ -32,14 +31,7 @@ function Header(props){
 
   let currentMneu = menu ? <MenuOpenIcon onClick={toggleSideBar} className="menu" /> : <MenuIcon onClick={toggleSideBar} className="menu"/>
 
-  const [currentUser , setCurrentUser] = React.useState(null)
 
-  React.useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setCurrentUser(user);
-    });
-    return unsubscribe;
-  }, []);
 
 
   let  [dropDown , setDropdown] = React.useState(false)
@@ -205,12 +197,7 @@ function Header(props){
 
           <button className="addLoad" style={addNewCss} onClick={props.addLoadState}  >Loads</button>
       
-        { dropDown === true && currentUser === null ?
-                <Auth/>
-                :
-            <div className="addLoad" onClick={displayDropdown} >Add </div> 
-
-              }
+              <div className="addLoad" onClick={displayDropdown} >Add </div> 
 
 
 

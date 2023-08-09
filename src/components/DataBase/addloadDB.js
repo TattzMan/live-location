@@ -1,7 +1,7 @@
 import React from "react";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../config/fireBase";
-import { v4 as uuidv4 } from "uuid";
+import { db, auth } from "../config/fireBase";
+import { collection, doc, getDoc , addDoc } from 'firebase/firestore';
+
 
 function AddLoadDB() {
   const loadsCollection = collection(db, "Loads");
@@ -29,7 +29,27 @@ function AddLoadDB() {
       };
     });
   }
+  const [ username , setUsername] = React.useState('');
 
+  React.useEffect(() => {
+    const fetchBio = async () => {
+      try {
+        if (auth.currentUser) {
+          const userId = auth.currentUser.uid;
+
+          const docRef = doc(db, 'usernames', userId);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            setUsername(docSnap.data().username);
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchBio();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,7 +57,7 @@ function AddLoadDB() {
     try {
 
       const docRef = await addDoc(loadsCollection, {
-        companyName: formData.companyName,
+        companyName: username,
         typeofLoad: formData.typeofLoad,
         contact: formData.contact,
         fromLocation: formData.fromLocation,
@@ -70,12 +90,6 @@ function AddLoadDB() {
 
   return (
     <form className="dropDown" onSubmit={handleSubmit}>
-      <input
-    placeholder="company name"
-    onChange={handleTypedText}
-    name="companyName"
-    value={formData.companyName}
-  />
 
   <input
     placeholder="type of load"
