@@ -1,13 +1,12 @@
 import React from "react";
 import { db, auth } from "../config/fireBase";
-import { collection, doc, getDoc , addDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
 
 
 function AddLoadDB() {
   const loadsCollection = collection(db, "Loads");
 
   const [formData, setFormData] = React.useState({
-    companyName: "",
     typeofLoad: "",
     contact: "",
     fromLocation: "",
@@ -16,7 +15,7 @@ function AddLoadDB() {
     paymentTerms: "",
     requirements: "",
     additionalInfo: "",
-    backgroundColor : ""
+    backgroundColor: ""
   });
 
   function handleTypedText(event) {
@@ -50,13 +49,29 @@ function AddLoadDB() {
 
     fetchBio();
   }, []);
+  
+  const [userId, setUserId] = React.useState('');
+
+  React.useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        if (auth.currentUser) {
+          setUserId(auth.currentUser.uid);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchUserId();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-
       const docRef = await addDoc(loadsCollection, {
+        userId: userId, // Add the user ID to the document
         companyName: username,
         typeofLoad: formData.typeofLoad,
         contact: formData.contact,
@@ -66,7 +81,7 @@ function AddLoadDB() {
         paymentTerms: formData.paymentTerms,
         requirements: formData.requirements,
         additionalInfo: formData.additionalInfo,
-        backgroundColor : formData.backgroundColor
+        backgroundColor: formData.backgroundColor
       });
 
       setFormData({
@@ -78,15 +93,13 @@ function AddLoadDB() {
         ratePerTonne: "",
         paymentTerms: "",
         requirements: "",
-        additionalInfo: ""
+        additionalInfo: "",
+        backgroundColor: ""
       });
     } catch (err) {
       console.error(err);
     }
   };
-
-
-
 
   return (
     <form className="dropDown" onSubmit={handleSubmit}>
@@ -149,5 +162,6 @@ function AddLoadDB() {
 </form>
   );
 }
+
 
 export default AddLoadDB;
