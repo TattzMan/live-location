@@ -19,7 +19,7 @@ import SideTippers from "./components/pages/SideTippers";
 import Tauntliners from "./components/pages/Taultliner";
 
 import { auth, db, storage } from "./components/config/fireBase"
-import { collection, getDocs , doc ,updateDoc} from "firebase/firestore"
+import { collection, getDocs , doc ,updateDoc , query , getDoc , where } from "firebase/firestore"
 import MiniLoad from './components/miniLoads';
 require('events').EventEmitter.defaultMaxListeners = 15;
 
@@ -421,28 +421,48 @@ function App(){
       const topRatingsTanker = sortRatingsTankers.slice(0 , 2)
        const takeBestTanker = topRatingsTanker.map(bestTrucks => (
         <p className="ratingNames" key={bestTrucks.id}> {bestTrucks.CompanyName} </p>) )
-      
 
-  const [loadsList, setLoadlist] = React.useState([]);
-  const loadsCollection = collection(db, "Loads");
+        
+        const [loadsList, setLoadsList] = useState([]);
+
+  const loadsCollection = collection(db, 'Loads');
 
   const getLoadsList = async () => {
     try {
       const data = await getDocs(loadsCollection);
-      const filteredData = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id
-      }));
-      filteredData.sort((a, b) => a.timestamp - b.timestamp);
-      setLoadlist(filteredData);
+      const userIds = new Set(); // To keep track of unique user IDs
+
+      const filteredData = [];
+
+      data.docs.forEach((doc) => {
+        const userId = doc.data().userId;
+
+        // If we haven't processed an item for this user yet, add it to the filteredData array
+        if (!userIds.has(userId)) {
+          const item = {
+            id: doc.id,
+            companyName: doc.data().companyName,
+            typeofLoad: doc.data().typeofLoad,
+            fromLocation: doc.data().fromLocation,
+            toLocation: doc.data().toLocation,
+            ratePerTonne: doc.data().ratePerTonne,
+          };
+
+          filteredData.push(item);
+          userIds.add(userId);
+        }
+      });
+
+      setLoadsList(filteredData);
     } catch (err) {
       console.error(err);
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getLoadsList();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependenc
 
 
       let [addLoad , setaddLoad] = React.useState(false)
@@ -469,22 +489,24 @@ function App(){
       //   })
       // }
 
-      function handleClick(id) {
-        setaddLoad(state => !state);
-      
-        setLoadlist(prevLoad => {
-          const updatedLoadList = prevLoad.map(oneLoad => ({
-            ...oneLoad,
-            backgroundColor: oneLoad.id === id ? "#F2F2F2" : "#EDEDED"
-          }));
-      
-          const sortedLoadList = updatedLoadList.sort((a, b) => a.backgroundColor === "#F2F2F2" ? -1 : b.backgroundColor === "#F2F2F2" ? 1 : 0);
-      
-          return sortedLoadList;
-        });
-      }
+      // function handleClick(id) {
+        // setaddLoad(state => !state);
+      // 
+        // setLoadlist(prevLoad => {
+          // const updatedLoadList = prevLoad.map(oneLoad => ({
+            // ...oneLoad,
+            // backgroundColor: oneLoad.id === id ? "#F2F2F2" : "#EDEDED"
+          // }));
+      // 
+          // const sortedLoadList = updatedLoadList.sort((a, b) => a.backgroundColor === "#F2F2F2" ? -1 : b.backgroundColor === "#F2F2F2" ? 1 : 0);
+      // 
+          // return sortedLoadList;
+        // });
+      // }
+
 
       let miniLoad
+
       if(addLoad === true){  
         trucks = loadsList.map(load => {
           return(
@@ -495,21 +517,22 @@ function App(){
             />
           )
         })
-      }
-      else{       
-         miniLoad =  loadsList.map(load =>{
-
-          return(
-            <MiniLoad
-              item = {load}
-              handleClick = {()=>handleClick(load.id) }
-            />
-          )
-        })
-      }
-
-   
+      } else{          
+       miniLoad =  loadsList.map((item) => {
         
+        return (
+          <div>
+              <MiniLoad key={item.id} item={item} />
+          </div>
+        );
+      })
+
+    
+     }
+
+  
+       
+     
         const allData = [ ...BulkTrailer , ...LowBed , ...SideTipper , ...tankers , ...Taultliner ]
           
 
@@ -612,5 +635,4 @@ function App(){
       }
 
 export default App
-
 

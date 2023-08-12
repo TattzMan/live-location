@@ -91,6 +91,7 @@ function Header(props){
 
   function DropDown(){
     return(
+
       dropDown ?
 
       <div className="dropDown">
@@ -102,7 +103,7 @@ function Header(props){
 
       </div>
       :
-      console.log("fuck again")      
+      console.log("weed")      
     )
   } 
   addLoaadDB()
