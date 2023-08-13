@@ -21,6 +21,7 @@ import Tauntliners from "./components/pages/Taultliner";
 import { auth, db, storage } from "./components/config/fireBase"
 import { collection, getDocs , doc ,updateDoc , query , getDoc , where } from "firebase/firestore"
 import MiniLoad from './components/miniLoads';
+import { fetchSignInMethodsForEmail } from 'firebase/auth';
 require('events').EventEmitter.defaultMaxListeners = 15;
 
 
@@ -423,13 +424,29 @@ function App(){
         <p className="ratingNames" key={bestTrucks.id}> {bestTrucks.CompanyName} </p>) )
 
         
-        const [loadsList, setLoadsList] = useState([]);
+       
+      let [addLoad , setaddLoad] = React.useState(false)
 
-  const loadsCollection = collection(db, 'Loads');
+      useEffect(() => {
+        document.body.style.paddingTop = addLoad ? '70px' : '250px';
+      }, [addLoad]);
 
-  const getLoadsList = async () => {
+
+      function toggleAddLoad(){
+
+        setaddLoad(prevState => !prevState)
+
+      }
+
+
+
+      const [mainLoadsList, setMainLoadsList] = useState([]);
+
+  const mainLoadsCollection = collection(db, 'Loads');
+
+  const getMainLoadsList = async () => {
     try {
-      const data = await getDocs(loadsCollection);
+      const data = await getDocs(mainLoadsCollection);
       const userIds = new Set(); // To keep track of unique user IDs
 
       const filteredData = [];
@@ -453,30 +470,18 @@ function App(){
         }
       });
 
-      setLoadsList(filteredData);
+      setMainLoadsList(filteredData);
     } catch (err) {
       console.error(err);
     }
   };
 
   useEffect(() => {
-    getLoadsList();
+    getMainLoadsList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependenc
 
 
-      let [addLoad , setaddLoad] = React.useState(false)
-
-      useEffect(() => {
-        document.body.style.paddingTop = addLoad ? '70px' : '250px';
-      }, [addLoad]);
-
-
-      function toggleAddLoad(){
-
-        setaddLoad(prevState => !prevState)
-
-      }
 
    
       // function handleClick(id){
@@ -504,11 +509,53 @@ function App(){
         // });
       // }
 
+      const [loadsList, setLoadsList] = useState([]);
+      const [allThingsByUser, setAllThings] = useState([]);
+
+      const fetchBio = async (userId) => {
+        try {
+          const querySnapshot = await getDocs(
+            query(collection(db, 'Loads'), where('userId', '==', userId))
+          );
+          const userBio = querySnapshot.docs.map((doc) => doc.data());
+          setAllThings(userBio);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      
+      const loadsCollection = collection(db, 'Loads');
+      
+      const getLoadsList = async () => {
+        try {
+          const data = await getDocs(loadsCollection);
+          const filteredData = data.docs.map((doc) => ({
+            id: doc.id,
+            userId: doc.data().userId,
+            companyName: doc.data().companyName,
+            typeofLoad: doc.data().typeofLoad,
+            fromLocation: doc.data().fromLocation,
+            toLocation: doc.data().toLocation,
+            ratePerTonne: doc.data().ratePerTonne,
+          }));
+      
+          setLoadsList(filteredData);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      
+      useEffect(() => {
+        getLoadsList();
+      }, []);
+      
+    console.log(allThingsByUser)
 
       let miniLoad
 
       if(addLoad === true){  
         trucks = loadsList.map(load => {
+
           return(
            
             <AddLoad
@@ -518,18 +565,21 @@ function App(){
           )
         })
       } else{          
-       miniLoad =  loadsList.map((item) => {
         
-        return (
-          <div>
-              <MiniLoad key={item.id} item={item} />
-          </div>
-        );
-      })
+         miniLoad = loadsList.map((item) => {
+          return (
+            <MiniLoad
+              key={item.id}
+              item={item}
+              handleClickOneData={() => fetchBio(item.userId)}
+            />
+          );
+        });
+        
+   
 
-    
      }
-
+     
   
        
      
@@ -545,7 +595,7 @@ function App(){
           const newFilter = allData.filter((value) => {
             console.log(value )
             
-            return    ( value.CompanyName ||  value.fromLocation || value.toLocation ).toLowerCase().includes(searchWord.toLowerCase());
+            return ( value.CompanyName ||  value.fromLocation || value.toLocation ).toLowerCase().includes(searchWord.toLowerCase());
           });
       
           if (searchWord === "") {
