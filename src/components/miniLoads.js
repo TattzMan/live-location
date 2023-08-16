@@ -1,16 +1,12 @@
-
-
-
 import React from 'react';
 
-function MiniLoad({ item, handleClickOneData }) {
-
-  // const handleItemClick = () => {
-    // handleClick(item.id);
-  // };
+const MiniLoad = ({ item, handleClickOneData }) => {
+  const handleClick = () => {
+    handleClickOneData(item.userId);
+  };
 
   return (
-    <div className="frontloadDisplay"  >
+    <div className="frontloadDisplay">
       <h3>
         Company name <span className="spaninMini">{item.companyName}</span>
       </h3>
@@ -24,10 +20,9 @@ function MiniLoad({ item, handleClickOneData }) {
       <p>
         Rate <span className="spaninMini">{item.ratePerTonne}</span>
       </p>
-      <button onClick={handleClickOneData} >more</button>
-
+      <button onClick={handleClick}>more</button>
     </div>
   );
-}
+};
 
 export default MiniLoad;

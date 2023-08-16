@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Auth from './components/auth'  
-import Username from './components/username';
 import "./App.css"
 import Header from "./components/Header";
 import AddLoad from "./components/AddLoad";
@@ -22,6 +21,8 @@ import { auth, db, storage } from "./components/config/fireBase"
 import { collection, getDocs , doc ,updateDoc , query , getDoc , where } from "firebase/firestore"
 import MiniLoad from './components/miniLoads';
 import { fetchSignInMethodsForEmail } from 'firebase/auth';
+import ThingsByUser from './components/ThingsByUser'
+
 require('events').EventEmitter.defaultMaxListeners = 15;
 
 
@@ -441,8 +442,11 @@ function App(){
 
 
       const [mainLoadsList, setMainLoadsList] = useState([]);
+  const [loadsList, setLoadsList] = useState([]);
+  const [allThingsByUser, setAllThings] = useState([]);
 
   const mainLoadsCollection = collection(db, 'Loads');
+  const loadsCollection = collection(db, 'Loads');
 
   const getMainLoadsList = async () => {
     try {
@@ -463,6 +467,7 @@ function App(){
             fromLocation: doc.data().fromLocation,
             toLocation: doc.data().toLocation,
             ratePerTonne: doc.data().ratePerTonne,
+            userId: userId,
           };
 
           filteredData.push(item);
@@ -476,14 +481,51 @@ function App(){
     }
   };
 
+  const fetchBio = async (userId) => {
+    try {
+      const querySnapshot = await getDocs(
+        query(collection(db, 'Loads'), where('userId', '==', userId))
+      );
+      const userItems = querySnapshot.docs.map((doc) => doc.data());
+      setAllThings(userItems);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getLoadsList = async () => {
+    try {
+      const data = await getDocs(loadsCollection);
+      const filteredData = data.docs.map((doc) => ({
+        id: doc.id,
+        userId: doc.data().userId,
+        companyName: doc.data().companyName,
+        typeofLoad: doc.data().typeofLoad,
+        fromLocation: doc.data().fromLocation,
+        toLocation: doc.data().toLocation,
+        ratePerTonne: doc.data().ratePerTonne,
+      }));
+
+      setLoadsList(filteredData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     getMainLoadsList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Empty dependenc
+    getLoadsList();
+  }, []);
 
+  const handleClickOneData = (userId) => {
+    fetchBio(userId);
+  };
 
+    useEffect(() => {
+      document.body.style.paddingTop = allThingsByUser.length > 0 ? '70px' : '250px';
+    }, [allThingsByUser]);
 
-   
+  
       // function handleClick(id){
       //   setaddLoad(state => !state)        
       //   setLoadlist(prevLoad => {
@@ -509,47 +551,7 @@ function App(){
         // });
       // }
 
-      const [loadsList, setLoadsList] = useState([]);
-      const [allThingsByUser, setAllThings] = useState([]);
 
-      const fetchBio = async (userId) => {
-        try {
-          const querySnapshot = await getDocs(
-            query(collection(db, 'Loads'), where('userId', '==', userId))
-          );
-          const userBio = querySnapshot.docs.map((doc) => doc.data());
-          setAllThings(userBio);
-        } catch (err) {
-          console.error(err);
-        }
-      };
-      
-      const loadsCollection = collection(db, 'Loads');
-      
-      const getLoadsList = async () => {
-        try {
-          const data = await getDocs(loadsCollection);
-          const filteredData = data.docs.map((doc) => ({
-            id: doc.id,
-            userId: doc.data().userId,
-            companyName: doc.data().companyName,
-            typeofLoad: doc.data().typeofLoad,
-            fromLocation: doc.data().fromLocation,
-            toLocation: doc.data().toLocation,
-            ratePerTonne: doc.data().ratePerTonne,
-          }));
-      
-          setLoadsList(filteredData);
-        } catch (err) {
-          console.error(err);
-        }
-      };
-      
-      useEffect(() => {
-        getLoadsList();
-      }, []);
-      
-    console.log(allThingsByUser)
 
       let miniLoad
 
@@ -564,9 +566,18 @@ function App(){
             />
           )
         })
-      } else{          
-        
-         miniLoad = loadsList.map((item) => {
+      }else if(allThingsByUser.length > 0 ){
+        trucks = allThingsByUser.map((item)=>{
+          return(
+          <ThingsByUser
+            item = {item}
+            allThingsByUser = {setAllThings}
+          />
+          )
+        })
+      }     
+      else {         
+         miniLoad = mainLoadsList.map((item) => {
           return (
             <MiniLoad
               key={item.id}
@@ -574,11 +585,8 @@ function App(){
               handleClickOneData={() => fetchBio(item.userId)}
             />
           );
-        });
-        
-   
-
-     }
+        });     
+      }
      
   
        
@@ -670,7 +678,6 @@ function App(){
       <div className='miniloads'>
         {miniLoad}
         </div>
-   <Username/>
       <section className="Main-grid"> 
         {trucks}
       
