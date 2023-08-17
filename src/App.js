@@ -20,23 +20,23 @@ import Tauntliners from "./components/pages/Taultliner";
 import { auth, db, storage } from "./components/config/fireBase"
 import { collection, getDocs , doc ,updateDoc , query , getDoc , where } from "firebase/firestore"
 import MiniLoad from './components/miniLoads';
-import { fetchSignInMethodsForEmail } from 'firebase/auth';
 import ThingsByUser from './components/ThingsByUser'
+import CurrentUser from './components/DisplayCurrentUser'
 
 require('events').EventEmitter.defaultMaxListeners = 15;
 
 
-
-
 function App(){  
-
-  const [currentUser , setCurrentUser] = React.useState(null)
+  const [currentUser, setCurrentUser] = React.useState(null);
 
   React.useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
+    // Check if user is already signed in
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
     });
-    return unsubscribe;
+
+    // Cleanup function
+    return () => unsubscribe();
   }, []);
   
   let [sideBarNames , setSideBarName] = React.useState(SideBarData)
@@ -588,7 +588,52 @@ function App(){
         });     
       }
      
-  
+      const [loads, setLoads] = React.useState([]);
+
+      React.useEffect(() => {
+        const fetchLoads = async () => {
+          try {
+            if (auth.currentUser) {
+              const userId = auth.currentUser.uid;
+
+              const loadsQuery = query(collection(db, "Loads"), where("userId", "==", userId));
+              const querySnapshot = await getDocs(loadsQuery);
+
+              const loadedLoads = [];
+              querySnapshot.forEach((doc) => {
+                loadedLoads.push(doc.data());
+              });
+
+              setLoads(loadedLoads);
+            }
+          } catch (err) {
+            console.error(err);
+          }
+        };
+
+        fetchLoads();
+      }, []);
+
+      const [CurrentUserBtn , setCurrentUserBtn] = React.useState(false)
+
+      function toggleCurrentUser(){
+        setCurrentUserBtn(prevState => !prevState)
+      }
+      if(CurrentUserBtn){
+        trucks = loads.map((item)=>{
+          return(
+            <CurrentUser
+              item = {item}
+            />
+          )
+        })
+      }
+
+
+
+
+
+
        
      
         const allData = [ ...BulkTrailer , ...LowBed , ...SideTipper , ...tankers , ...Taultliner ]
@@ -636,6 +681,7 @@ function App(){
       <div>
       <Header
         addLoadState ={toggleAddLoad}
+        toggleCurrentUser = {toggleCurrentUser}
         addBulkTrailer ={ getBulktrailers}
         addSideTippers = { getSideTippers}
         handleFilter = {handleFilter}
@@ -657,7 +703,6 @@ function App(){
 
           {sideBarName} 
           </div>
-    
           <h3 className="most-reviewd">Most reviewed</h3>
 
             {takeBestBulks}

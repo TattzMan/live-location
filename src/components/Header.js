@@ -12,7 +12,6 @@ import addLoaadDB from "./DataBase/addloadDB";
 import { signOut} from  'firebase/auth'
 import { auth  } from "./config/fireBase"
 import LogoutIcon from '@mui/icons-material/Logout';
-import logo from '../public/images/logo/Original on Transparent.png'
 
 
 function Header(props){
@@ -89,23 +88,19 @@ function Header(props){
   }
 
 
-  function DropDown(){
-    return(
-
-      dropDown ?
-
-      <div className="dropDown">
-        <button onClick={displayAddLooads}  className='firstButtonIsnDrop' >add load</button>
-        { addLoads && addLoaadDB() }
-
-        <button onClick={displayAddTrucks} className='firstButtonIsnDrop' >add Truck</button>
-        { addTrucks && displayTrucks() }   
-
-      </div>
-      :
-      console.log("weed")      
-    )
-  } 
+  function DropDown() {
+    return (
+      dropDown ? (
+        <div className="dropDown">
+          <button onClick={displayAddLooads} className='firstButtonIsnDrop'>add load</button>
+          {addLoads && addLoaadDB()}
+  
+          <button onClick={displayAddTrucks} className='firstButtonIsnDrop'>add Truck</button>
+          {addTrucks && displayTrucks()}
+        </div>
+      ) : null
+    );
+  }
   addLoaadDB()
 
     function displayTrucks(){
@@ -205,7 +200,7 @@ function Header(props){
           <DropDown/>
         { dropDown && <button onClick={setErythingFalse} className="backButton">back</button>}
         <div onClick={logout} > <LogoutIcon/> </div>
-
+        <button onClick={props.toggleCurrentUser} >display</button>
           </div>
 
      
@@ -231,4 +226,4 @@ function Header(props){
     )
 }
 
-export default  React.memo( Header)
+export default  React.memo(Header)

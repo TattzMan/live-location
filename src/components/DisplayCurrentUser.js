@@ -1,15 +1,10 @@
 import React from "react"
 import "./styles/AddLoad.css"
 
-function ThingsByUser( props){
+function CurrentUser( props){
 
-
-  function goBackToMini(){
-    props.allThingsByUser([])
-  }
   return(
     <div className="bigLoad"  >
-      <button onClick={goBackToMini}> less</button>
         <h3>Company {props.item.companyName} </h3>
         <p>Contact : <span className="spaninMini">{props.item.contact}</span></p>
         <p>type of load {props.item.typeofLoad} </p>
@@ -23,4 +18,4 @@ function ThingsByUser( props){
   )
 
 }
-export default React.memo(ThingsByUser)
+export default React.memo( CurrentUser )
