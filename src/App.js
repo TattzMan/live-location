@@ -434,9 +434,7 @@ function App(){
 
 
       function toggleAddLoad(){
-
         setaddLoad(prevState => !prevState)
-
       }
 
 
@@ -551,15 +549,50 @@ function App(){
         // });
       // }
 
+      const [loads, setLoads] = React.useState([]);
 
+      React.useEffect(() => {
+        const fetchLoads = async () => {
+          try {
+            if (auth.currentUser) {
+              const userId = auth.currentUser.uid;
+    
+              const loadsQuery = query(collection(db, "Loads"), where("userId", "==", userId));
+              const querySnapshot = await getDocs(loadsQuery);
+    
+              const loadedLoads = [];
+              querySnapshot.forEach((doc) => {
+                loadedLoads.push(doc.data());
+              });
+    
+              setLoads(loadedLoads);
+            }
+          } catch (err) {
+            console.error(err);
+          }
+        };
+    
+        fetchLoads();
+      }, []);
+      useEffect(() => {
+        document.body.style.paddingTop = CurrentUserBtn ? '70px' : '250px';
+      }, [CurrentUserBtn]);
+      
+      
+      const [CurrentUserBtn , setCurrentUserBtn] = React.useState(false)
+
+      function toggleCurrentUser(){
+        setCurrentUserBtn(prevState => !prevState)
+      }
+     
+       
 
       let miniLoad
 
       if(addLoad === true){  
         trucks = loadsList.map(load => {
 
-          return(
-           
+          return(           
             <AddLoad
               item = {load}
               backgroundColor = {load.backgroundColor}
@@ -575,8 +608,15 @@ function App(){
           />
           )
         })
-      }     
-      else {         
+      }  else  if(CurrentUserBtn ){
+        trucks = loads.map((item)=>{
+          return(
+            <CurrentUser
+              item = {item}
+            />
+          )
+        })
+      }else {         
          miniLoad = mainLoadsList.map((item) => {
           return (
             <MiniLoad
@@ -588,53 +628,7 @@ function App(){
         });     
       }
      
-      const [loads, setLoads] = React.useState([]);
-
-      React.useEffect(() => {
-        const fetchLoads = async () => {
-          try {
-            if (auth.currentUser) {
-              const userId = auth.currentUser.uid;
-
-              const loadsQuery = query(collection(db, "Loads"), where("userId", "==", userId));
-              const querySnapshot = await getDocs(loadsQuery);
-
-              const loadedLoads = [];
-              querySnapshot.forEach((doc) => {
-                loadedLoads.push(doc.data());
-              });
-
-              setLoads(loadedLoads);
-            }
-          } catch (err) {
-            console.error(err);
-          }
-        };
-
-        fetchLoads();
-      }, []);
-
-      const [CurrentUserBtn , setCurrentUserBtn] = React.useState(false)
-
-      function toggleCurrentUser(){
-        setCurrentUserBtn(prevState => !prevState)
-      }
-      if(CurrentUserBtn){
-        trucks = loads.map((item)=>{
-          return(
-            <CurrentUser
-              item = {item}
-            />
-          )
-        })
-      }
-
-
-
-
-
-
-       
+     
      
         const allData = [ ...BulkTrailer , ...LowBed , ...SideTipper , ...tankers , ...Taultliner ]
           

@@ -3,6 +3,7 @@ import "./styles/AddLoad.css"
 
 function CurrentUser( props){
 
+
   return(
     <div className="bigLoad"  >
         <h3>Company {props.item.companyName} </h3>
