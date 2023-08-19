@@ -549,31 +549,31 @@ function App(){
           return sortedLoadList;
         });
       }
-      const [currentUserloads, setLoads] = React.useState([]);
-      
-        const fetchLoads = async () => {
-          try {
-            if (auth.currentUser) {
-              const userId = auth.currentUser.uid;   
-              
-              const loadsQuery = query(collection(db, "Loads"), where("userId", "==", userId));
-              const querySnapshot = await getDocs(loadsQuery);
-    
-              const loadedLoads = [];
-              querySnapshot.forEach((doc) => {
-                loadedLoads.push(doc.data());
-              });
-    
-              setLoads(loadedLoads);
-            }
-          } catch (err) {
-            console.error(err);
+      const [currentUserLoads, setCurrentUserLoads] = React.useState([]);
+
+      const fetchLoads = async () => {
+        try {
+          if (auth.currentUser) {
+            const userId = auth.currentUser.uid;
+            const loadsQuery = query(collection(db, "Loads"), where("userId", "==", userId));
+            const querySnapshot = await getDocs(loadsQuery);
+
+            const loadedLoads = [];
+            querySnapshot.forEach((doc) => {
+              const dataWithId = { id: doc.id, ...doc.data() };
+              loadedLoads.push(dataWithId);
+            });
+
+            setCurrentUserLoads(loadedLoads);
           }
-        };
-    
-        React.useEffect(()=>{
-          fetchLoads();
-        }, [currentUser])
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
+      React.useEffect(() => {
+        fetchLoads();
+      }, [currentUser]);
 
 
       const [CurrentUserBtn , setCurrentUserBtn] = React.useState(false)
@@ -611,7 +611,7 @@ function App(){
           )
         })
       }  else  if(CurrentUserBtn ){
-        trucks = currentUserloads.map((item)=>{
+        trucks = currentUserLoads.map((item)=>{
           console.log(item)
           return(
             <CurrentUser

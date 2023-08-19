@@ -22,7 +22,7 @@ function CurrentUser( props){
         <p> payment terms {props.item.paymentTerms} </p>
         <p>Requirements {props.item.requirements} </p>
         <p>additional info {props.item.additionalInfo} </p>    
-        <button onClick={()=>deleteLoad(props.item.delID)}>Delete</button>    
+        <button onClick={()=>deleteLoad(props.item.id)}>Delete</button>    
       </div>     
   )
 
