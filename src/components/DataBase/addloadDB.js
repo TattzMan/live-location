@@ -1,7 +1,7 @@
 import React from "react";
 import { db, auth } from "../config/fireBase";
 import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
-
+import { v4 as uuidv4 } from 'uuid';
 
 function AddLoadDB() {
   const loadsCollection = collection(db, "Loads");
@@ -67,12 +67,15 @@ function AddLoadDB() {
     fetchUserId();
   }, []);
 
+  const delID = uuidv4();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       const docRef = await addDoc(loadsCollection, {
         userId: userId, // Add the user ID to the document
+        delID : delID ,
         companyName: username,
         typeofLoad: formData.typeofLoad,
         contact: formData.contact,

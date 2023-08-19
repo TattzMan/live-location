@@ -12,40 +12,19 @@ import addLoaadDB from "./DataBase/addloadDB";
 import { signOut} from  'firebase/auth'
 import { auth  } from "./config/fireBase"
 import LogoutIcon from '@mui/icons-material/Logout';
-
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 function Header(props){
-
-
-
-
-  let [menu , seMenu] = React.useState(false)
-
-
-  
+  let [menu , seMenu] = React.useState(false)  
   function toggleSideBar(){
     seMenu(prevMenu => !prevMenu)
   }
-
-
   let currentMneu = menu ? <MenuOpenIcon onClick={toggleSideBar} className="menu" /> : <MenuIcon onClick={toggleSideBar} className="menu"/>
-
-
-
-
   let  [dropDown , setDropdown] = React.useState(false)
-
-
-  function displayDropdown(){ 
-  
-    setDropdown(prevDropdown => !prevDropdown)    
-  
+  function displayDropdown(){   
+    setDropdown(prevDropdown => !prevDropdown)      
 }
-    
-
-
-  
-
   let [addBulkTrailer , setBulkTrailer] = React.useState(false)  
   function toggleBulkTrailer(){
     setBulkTrailer(prevBulkTrailer => !prevBulkTrailer)
@@ -160,16 +139,24 @@ function Header(props){
     setMiniSearch(prevState => !prevState )
    }
  
+   const [smallMenu , setSmallMenu] = React.useState(false)
 
+   function toggleSmallMenu(){
+    setSmallMenu(prevState => !prevState)
+   }
+   if(window.innerWidth >= 500 ){
+    menu = true
+   }
     return(
       <div>
       {addMiniSearch ?
         <header>
           
-        
         {menu && props.sideBar }
         <div className="left-section"> 
-          {currentMneu }
+          
+        {window.innerWidth <= 500 && currentMneu }
+
          <h1>Truckerz</h1>
         </div>
 
@@ -199,8 +186,15 @@ function Header(props){
 
           <DropDown/>
         { dropDown && <button onClick={setErythingFalse} className="backButton">back</button>}
-        <div onClick={logout} > <LogoutIcon/> </div>
-        <button onClick={props.toggleCurrentUser} >display</button>
+        <MoreVertIcon onClick={toggleSmallMenu}/>
+        {smallMenu ?
+        <div className="smallMenu">
+        <div onClick={props.toggleCurrentUser} className="myAccount" > <AccountBoxIcon/> <span>my account </span>  </div>
+        <div onClick={logout} className="logOut">  <span>logout</span> <LogoutIcon/> </div>
+        </div>
+        : null
+        }
+
           </div>
 
      

@@ -9,6 +9,7 @@
  background-color: white;
 
  color: black;  
+ border-right: 1px rgb(192, 192, 192) solid ;
 }
 .all-names{
   margin-top: 10px;

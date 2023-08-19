@@ -1,8 +1,16 @@
 import React from "react"
 import "./styles/AddLoad.css"
+import {deleteDoc , doc} from "firebase/firestore"
+import { db } from './config/fireBase'
+
 
 function CurrentUser( props){
 
+  const deleteLoad = async (id) => {
+    console.log(id);
+    const loadsDocRef = doc(db, 'Loads' , id);
+    await deleteDoc(loadsDocRef);
+  };
 
   return(
     <div className="bigLoad"  >
@@ -13,8 +21,8 @@ function CurrentUser( props){
         <p>Rate {props.item.ratePerTonne} </p>
         <p> payment terms {props.item.paymentTerms} </p>
         <p>Requirements {props.item.requirements} </p>
-        <p>additional info {props.item.additionalInfo} </p>         
-
+        <p>additional info {props.item.additionalInfo} </p>    
+        <button onClick={()=>deleteLoad(props.item.delID)}>Delete</button>    
       </div>     
   )
 

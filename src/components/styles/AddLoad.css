@@ -3,6 +3,7 @@
   z-index: 50;
   padding: 10px;
   background-color: #EDEDED ;
+  position: relative;
 }
 .bigLoad > p{
   margin: 10px;
@@ -27,9 +28,10 @@
   display: none;
 }
 .frontloadDisplay{
+  position: relative;
   background-color: #EDEDED ;
   height: 150px;
-  width: 250px;
+  width: 240px;
   margin: 7px;
   white-space: normal;
   display: inline-block;
@@ -38,6 +40,8 @@
   cursor: pointer;
   overflow: hidden;
   border-radius: 5px;
+  padding-left: 10px;
+
 }
 .frontloadDisplay:hover{
   background-color: #F5F5F5;
@@ -52,13 +56,42 @@
   color: rgb(96, 96, 96);
   font-size: 17px;
 }
-.frontloadDisplay >h3{
-  margin: 7px;
+.moreLessBTN{
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-shadow: none;
+  text-transform: none;
+  font-size: 16;
+  padding: 2px 4px ;
+  border: 1px solid;
+  line-height: 1.5 ;
+  background-color: lightslategray;
+  border-color:  #36454F;
+  color: white; 
+  cursor: pointer;
+}
+.moreLessBTN:hover {
+  background-color: #9FA8B3;; 
+}
+
+.moreLessBTN:active {
+  background-color:#677080; 
 }
 .spaninMini{
   margin: 4px;
   color: black;
   font-size: 16px;
+}
+.miniloadH3Div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.miniloadH3{
+  margin: 10px;
+  text-emphasis-position:initial ;
 }
 
 /* Small screens (less than 576px) */

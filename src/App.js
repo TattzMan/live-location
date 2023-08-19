@@ -18,7 +18,8 @@ import SideTippers from "./components/pages/SideTippers";
 import Tauntliners from "./components/pages/Taultliner";
 
 import { auth, db, storage } from "./components/config/fireBase"
-import { collection, getDocs , doc ,updateDoc , query , getDoc , where } from "firebase/firestore"
+import { collection, getDocs, doc, updateDoc, addDoc, query, where } from 'firebase/firestore';
+
 import MiniLoad from './components/miniLoads';
 import ThingsByUser from './components/ThingsByUser'
 import CurrentUser from './components/DisplayCurrentUser'
@@ -131,6 +132,7 @@ function App(){
         ...doc.data(),
         id : doc.id,
       }))
+
 
       setTanker(filteredData)
     }catch(err){
@@ -524,39 +526,36 @@ function App(){
     }, [allThingsByUser]);
 
   
-      // function handleClick(id){
-      //   setaddLoad(state => !state)        
-      //   setLoadlist(prevLoad => {
-      //     return prevLoad.map( oneLoad =>{
-      //       console.log(id)
-      //       return oneLoad.id === id ? { ...oneLoad ,  backgroundColor: "green" }  :  oneLoad         
-      //   })
-      //   })
-      // }
+      function handleClick(id){
+        setaddLoad(state => !state)        
+        setLoadsList(prevLoad => {
+          return prevLoad.map( oneLoad =>{
+            return oneLoad.id === id ? { ...oneLoad ,  backgroundColor: "green" }  :  oneLoad         
+        })
+        })
+      }
 
-      // function handleClick(id) {
-        // setaddLoad(state => !state);
-      // 
-        // setLoadlist(prevLoad => {
-          // const updatedLoadList = prevLoad.map(oneLoad => ({
-            // ...oneLoad,
-            // backgroundColor: oneLoad.id === id ? "#F2F2F2" : "#EDEDED"
-          // }));
-      // 
-          // const sortedLoadList = updatedLoadList.sort((a, b) => a.backgroundColor === "#F2F2F2" ? -1 : b.backgroundColor === "#F2F2F2" ? 1 : 0);
-      // 
-          // return sortedLoadList;
-        // });
-      // }
-
-      const [loads, setLoads] = React.useState([]);
-
-      React.useEffect(() => {
+      function handleClick(id) {
+        setaddLoad(state => !state);
+      
+        setLoadsList(prevLoad => {
+          const updatedLoadList = prevLoad.map(oneLoad => ({
+            ...oneLoad,
+            backgroundColor: oneLoad.id === id ? "#F2F2F2" : "#EDEDED"
+          }));
+      
+          const sortedLoadList = updatedLoadList.sort((a, b) => a.backgroundColor === "#F2F2F2" ? -1 : b.backgroundColor === "#F2F2F2" ? 1 : 0);
+      
+          return sortedLoadList;
+        });
+      }
+      const [currentUserloads, setLoads] = React.useState([]);
+      
         const fetchLoads = async () => {
           try {
             if (auth.currentUser) {
-              const userId = auth.currentUser.uid;
-    
+              const userId = auth.currentUser.uid;   
+              
               const loadsQuery = query(collection(db, "Loads"), where("userId", "==", userId));
               const querySnapshot = await getDocs(loadsQuery);
     
@@ -572,14 +571,17 @@ function App(){
           }
         };
     
-        fetchLoads();
-      }, []);
+        React.useEffect(()=>{
+          fetchLoads();
+        }, [currentUser])
+
+
+      const [CurrentUserBtn , setCurrentUserBtn] = React.useState(false)
       useEffect(() => {
         document.body.style.paddingTop = CurrentUserBtn ? '70px' : '250px';
       }, [CurrentUserBtn]);
       
       
-      const [CurrentUserBtn , setCurrentUserBtn] = React.useState(false)
 
       function toggleCurrentUser(){
         setCurrentUserBtn(prevState => !prevState)
@@ -604,12 +606,13 @@ function App(){
           return(
           <ThingsByUser
             item = {item}
-            allThingsByUser = {setAllThings}
+            allThingsByUser = {setAllThings}            
           />
           )
         })
       }  else  if(CurrentUserBtn ){
-        trucks = loads.map((item)=>{
+        trucks = currentUserloads.map((item)=>{
+          console.log(item)
           return(
             <CurrentUser
               item = {item}
@@ -623,6 +626,7 @@ function App(){
               key={item.id}
               item={item}
               handleClickOneData={() => fetchBio(item.userId)}
+              handleClickWholeDiv = {()=>handleClick(item.id) }
             />
           );
         });     
@@ -640,8 +644,6 @@ function App(){
           const searchWord = event.target.value;
           setWordEntered(searchWord);
           const newFilter = allData.filter((value) => {
-            console.log(value )
-            
             return ( value.CompanyName ||  value.fromLocation || value.toLocation ).toLowerCase().includes(searchWord.toLowerCase());
           });
       
