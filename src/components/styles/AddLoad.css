@@ -1,9 +1,14 @@
 
 .bigLoad{
-  z-index: 50;
   padding: 10px;
   background-color: #EDEDED ;
   position: relative;
+
+}
+.welcmeMyAcc{
+  z-index: 50;
+
+  background-color: red;
 }
 .bigLoad > p{
   margin: 10px;

@@ -18,7 +18,7 @@ import SideTippers from "./components/pages/SideTippers";
 import Tauntliners from "./components/pages/Taultliner";
 
 import { auth, db, storage } from "./components/config/fireBase"
-import { collection, getDocs, doc, updateDoc, addDoc, query, where } from 'firebase/firestore';
+import { collection, getDocs, doc, updateDoc, addDoc, query, where , getDoc} from 'firebase/firestore';
 
 import MiniLoad from './components/miniLoads';
 import ThingsByUser from './components/ThingsByUser'
@@ -431,7 +431,7 @@ function App(){
       let [addLoad , setaddLoad] = React.useState(false)
 
       useEffect(() => {
-        document.body.style.paddingTop = addLoad ? '70px' : '250px';
+        document.body.style.paddingTop = addLoad ? '70px' : '250px'
       }, [addLoad]);
 
 
@@ -668,7 +668,28 @@ function App(){
             )
           })
         
+          const [ username , setUsername] = React.useState('');
 
+            const weed = async () => {
+              try {
+                if (auth.currentUser) {
+                  const userId = auth.currentUser.uid;
+        
+                  const docRef = doc(db, 'usernames', userId);
+                  const docSnap = await getDoc(docRef);
+                  if (docSnap.exists()) {
+                    setUsername(docSnap.data().username);
+                  }
+                }
+              } catch (err) {
+                console.error(err);
+              }
+            };
+        
+
+          React.useEffect(()=>{
+            weed()
+          }, [currentUser])
     return(
     <body>
     { currentUser  ?
@@ -681,6 +702,7 @@ function App(){
         addBulkTrailer ={ getBulktrailers}
         addSideTippers = { getSideTippers}
         handleFilter = {handleFilter}
+        username = {username}
        sideBar = {
           <aside className="sise-bar">
           <div className="all-names" >

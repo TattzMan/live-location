@@ -240,6 +240,14 @@ background-color: rgb(102, 100, 100);
   background-color: purple;
 
 }
+.EnterCurrentUser{
+  position: fixed;
+  top: 70px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: white;
+}
 
 
  /* Small screens (less than 768px) */

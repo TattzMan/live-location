@@ -1,18 +1,17 @@
 import React from "react"
-import {db } from "../config/fireBase"
-import { collection, addDoc } from 'firebase/firestore';
 import { storage } from "../config/fireBase";
 import {getDownloadURL, ref , uploadBytes} from "firebase/storage"
+import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
+import { db, auth } from "../config/fireBase";
 import {v4} from "uuid"
 
-function LowBeds(){
+function LowBeds(username){
 
   
   // specify the database to use
   const LowBedsDB = collection(db,"LowBeds")
 
   const [formDta , setFormData] = React.useState({
-    CompanyName : "",
     fromLocation : "",
     toLocation : "",
     like : false,
@@ -40,6 +39,7 @@ function LowBeds(){
         alert("refresh page to see changes")
       })
     }
+    
 
     const handleSubmit = async(event)=>{
       event.preventDefault()
@@ -50,7 +50,7 @@ function LowBeds(){
 
       try{
         await addDoc(LowBedsDB ,{
-          CompanyName : formDta.CompanyName,
+          CompanyName : username ,
           fromLocation : formDta.fromLocation,
           toLocation : formDta.toLocation,
           like : formDta.like,
@@ -58,6 +58,11 @@ function LowBeds(){
           contact : formDta.contact,
           imageUrl : imageUrl
         })
+        setFormData({
+          fromLocation: "",
+          toLocation: "",
+          contact: "",
+        });
       }catch(err){
         console.error(err)
       }
@@ -74,13 +79,6 @@ function LowBeds(){
       placeholder="weed"
       />
 
-      <input
-        placeholder="LowBed"
-        type="text"
-        onChange={handlechange}
-        name="CompanyName"
-        value={formDta.CompanyName}
-         />
       <input
         placeholder="from location"
         type="text"

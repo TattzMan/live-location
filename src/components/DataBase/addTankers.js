@@ -1,18 +1,17 @@
 import React from "react"
-import {db } from "../config/fireBase"
-import { collection, addDoc } from 'firebase/firestore';
 import { storage } from "../config/fireBase";
 import {getDownloadURL, ref , uploadBytes} from "firebase/storage"
+import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
+import { db, auth } from "../config/fireBase";
 import {v4} from "uuid"
 
-function Tankers(){
+function Tankers(username){
 
   
   // specify the database to use
   const TankersDB = collection(db,"tankers")
 
   const [formDta , setFormData] = React.useState({
-    CompanyName : "",
     fromLocation : "",
     toLocation : "",
     like : false,
@@ -41,6 +40,8 @@ function Tankers(){
       })
     }
 
+    
+
     const handleSubmit = async(event)=>{
       event.preventDefault()
       const imageRef = ref(storage , `tankers/${imageUpload.name}`)
@@ -50,7 +51,7 @@ function Tankers(){
 
       try{
         await addDoc(TankersDB ,{
-          CompanyName : formDta.CompanyName,
+          CompanyName : username,
           fromLocation : formDta.fromLocation,
           toLocation : formDta.toLocation,
           like : formDta.like,
@@ -58,6 +59,11 @@ function Tankers(){
           contact : formDta.contact,
           imageUrl : imageUrl
         })
+        setFormData({
+          fromLocation: "",
+          toLocation: "",
+          contact: "",
+        });
       }catch(err){
         console.error(err)
       }
@@ -73,14 +79,7 @@ function Tankers(){
       type="file"
       onChange={(e)=>{setImageUpload(e.target.files[0])}}
       />
-
-      <input
-        placeholder="tankers"
-        type="text"
-        onChange={handlechange}
-        name="CompanyName"
-        value={formDta.CompanyName}
-         />
+    
       <input
         placeholder="from location"
         type="text"

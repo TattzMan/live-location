@@ -12,7 +12,7 @@ function CurrentUser( props){
     await deleteDoc(loadsDocRef);
   };
 
-  return(
+  return(    
     <div className="bigLoad"  >
         <h3>Company {props.item.companyName} </h3>
         <p>Contact : <span className="spaninMini">{props.item.contact}</span></p>
@@ -23,7 +23,8 @@ function CurrentUser( props){
         <p>Requirements {props.item.requirements} </p>
         <p>additional info {props.item.additionalInfo} </p>    
         <button onClick={()=>deleteLoad(props.item.id)}>Delete</button>    
-      </div>     
+      </div>   
+
   )
 
 }

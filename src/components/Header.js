@@ -14,6 +14,9 @@ import { auth  } from "./config/fireBase"
 import LogoutIcon from '@mui/icons-material/Logout';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import { useEffect, useState } from 'react';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, doc, updateDoc , getDoc } from 'firebase/firestore';
 
 function Header(props){
   let [menu , seMenu] = React.useState(false)  
@@ -80,7 +83,6 @@ function Header(props){
       ) : null
     );
   }
-  addLoaadDB()
 
     function displayTrucks(){
       return(
@@ -104,12 +106,12 @@ function Header(props){
       )
     }
 
-    BulkTrailers()
-   SideTipper() 
-
-    LowBeds()
-    tankers() 
-    tauntliner() 
+    BulkTrailers(props.username)
+   SideTipper(props.username) 
+   addLoaadDB(props.username)
+    LowBeds(props.username)
+    tankers(props.username) 
+    tauntliner(props.username) 
 
   function setErythingFalse(){
     setBulkTrailer(prevStae => false)
@@ -147,6 +149,54 @@ function Header(props){
    if(window.innerWidth >= 500 ){
     menu = true
    }
+
+   const [NewUserName, setNewUserName] = useState('');
+   const [userId, setUserId] = useState('');
+   const [usernameDB, setUsernameDB] = useState(null);
+   const db = getFirestore();
+ 
+   useEffect(() => {
+     const auth = getAuth();
+     const unsubscribe = onAuthStateChanged(auth, (user) => {
+       if (user) {
+         setUserId(user.uid);
+         setUsernameDB(doc(db, 'usernames', user.uid));
+       } else {
+         setUserId('');
+         setUsernameDB(null);
+       }
+     });
+ 
+     return () => unsubscribe();
+   }, []);
+ 
+   const handleUpdateUsername = async (event) => {
+    event.preventDefault();
+  
+    try {
+      await updateDoc(usernameDB, {
+        username: NewUserName,
+      });
+      console.log('Document updated successfully!');
+      setNewUserName('');
+    } catch (error) {
+      console.error('Error updating document:', error);
+    }
+  };
+
+    const [myAccountBTN , setMyAcountBTN] = React.useState(false)
+
+    function toggleMyAccBTN(){
+      setMyAcountBTN(prevState => !prevState)
+    }
+    const [displayInputUsername , setdisplayInputUsername] = React.useState(false)
+
+    function ttoggleDisplayInputUsername(){
+      setdisplayInputUsername(prevState => !prevState)
+    }
+
+    
+
     return(
       <div>
       {addMiniSearch ?
@@ -189,20 +239,36 @@ function Header(props){
         <MoreVertIcon onClick={toggleSmallMenu}/>
         {smallMenu ?
         <div className="smallMenu">
-        <div onClick={props.toggleCurrentUser} className="myAccount" > <AccountBoxIcon/> <span>my account </span>  </div>
+        {/* <div onClick={props.toggleCurrentUser} className="myAccount" > <AccountBoxIcon/> <span>my account </span>  </div> */}
+        <div onClick={toggleMyAccBTN} className="myAccount" > <AccountBoxIcon/> <span>my account </span>  </div>
+
+        { myAccountBTN && <div className="EnterCurrentUser">
+        <h1>Welcome {props.username}</h1>
+
+        <div onClick={props.toggleCurrentUser} className="myAccount" >Loads   </div>
+        <div onClick={ttoggleDisplayInputUsername}> Enter new username </div>  
+
+             {  displayInputUsername &&  <div >
+        <input
+         type="text"
+         value={NewUserName}
+          onChange={(e)=>setNewUserName(e.target.value)}
+        />
+        <button onClick={handleUpdateUsername}> submit</button>
+        </div> }        
+          </div>}
+          
+   
+          
+
         <div onClick={logout} className="logOut">  <span>logout</span> <LogoutIcon/> </div>
         </div>
         : null
         }
 
           </div>
-
-     
-
-
       </header>
-      :  <header>  
-     
+      :  <header>       
           <input 
           type="text" 
           className="search-bar" 

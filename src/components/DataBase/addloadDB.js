@@ -1,9 +1,8 @@
 import React from "react";
 import { db, auth } from "../config/fireBase";
 import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
-import { v4 as uuidv4 } from 'uuid';
 
-function AddLoadDB() {
+function AddLoadDB (username) {
   const loadsCollection = collection(db, "Loads");
 
   const [formData, setFormData] = React.useState({
@@ -29,27 +28,7 @@ function AddLoadDB() {
     });
   }
   
-  const [ username , setUsername] = React.useState('');
-
-  React.useEffect(() => {
-    const fetchBio = async () => {
-      try {
-        if (auth.currentUser) {
-          const userId = auth.currentUser.uid;
-
-          const docRef = doc(db, 'usernames', userId);
-          const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            setUsername(docSnap.data().username);
-          }
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchBio();
-  }, []);
+  
   
   const [userId, setUserId] = React.useState('');
 
@@ -67,7 +46,6 @@ function AddLoadDB() {
     fetchUserId();
   }, []);
 
-  const delID = uuidv4();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -75,7 +53,6 @@ function AddLoadDB() {
     try {
       const docRef = await addDoc(loadsCollection, {
         userId: userId, // Add the user ID to the document
-        delID : delID ,
         companyName: username,
         typeofLoad: formData.typeofLoad,
         contact: formData.contact,
@@ -89,7 +66,6 @@ function AddLoadDB() {
       });
 
       setFormData({
-        companyName: "",
         typeofLoad: "",
         contact: "",
         fromLocation: "",
@@ -166,6 +142,5 @@ function AddLoadDB() {
 </form>
   );
 }
-
 
 export default AddLoadDB;
