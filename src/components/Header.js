@@ -17,6 +17,9 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, updateDoc , getDoc } from 'firebase/firestore';
+import CurrentUser from '../components/DisplayCurrentUser'
+import SendIcon from '@mui/icons-material/Send';
+
 
 function Header(props){
   let [menu , seMenu] = React.useState(false)  
@@ -189,13 +192,55 @@ function Header(props){
     function toggleMyAccBTN(){
       setMyAcountBTN(prevState => !prevState)
     }
-    const [displayInputUsername , setdisplayInputUsername] = React.useState(false)
+    const [displayInputUsername , setdisplayInputUsername] = React.useState(true)
 
     function ttoggleDisplayInputUsername(){
       setdisplayInputUsername(prevState => !prevState)
+      setCurrentUserBtn(prevState => false)
+
     }
 
-    
+    const [CurrentUserBtn , setCurrentUserBtn] = React.useState(false)
+   
+
+    function toggleCurrentUser(){
+      setCurrentUserBtn(prevState => !prevState)
+    }
+
+    let CurrentUserDisplay
+    if(CurrentUserBtn){
+      CurrentUserDisplay = props.currentUserLoads.map((item)=>{
+      return(
+        <CurrentUser
+          item = {item}
+        />
+      )
+    })
+    }
+    else {
+      CurrentUserDisplay = (
+        <div className="updateUsername">
+          <p>this name will display on your added items</p>
+          <span>username</span>
+          <div className="inputContainer">
+                <input
+            type="text"
+            value={NewUserName}
+            onChange={(e) => setNewUserName(e.target.value)}
+            placeholder="Username"
+            className="userNameInput"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault(); 
+                handleUpdateUsername(e); 
+              }
+            }}
+      />
+          <button onClick={handleUpdateUsername} className="inputUsernameBTN"><SendIcon/></button>
+          </div>
+        </div>
+      );
+    }
 
     return(
       <div>
@@ -232,41 +277,42 @@ function Header(props){
       
               <div className="addLoad" onClick={displayDropdown} >Add </div> 
 
-
-
           <DropDown/>
         { dropDown && <button onClick={setErythingFalse} className="backButton">back</button>}
         <MoreVertIcon onClick={toggleSmallMenu}/>
+
         {smallMenu ?
-        <div className="smallMenu">
-        {/* <div onClick={props.toggleCurrentUser} className="myAccount" > <AccountBoxIcon/> <span>my account </span>  </div> */}
-        <div onClick={toggleMyAccBTN} className="myAccount" > <AccountBoxIcon/> <span>my account </span>  </div>
+          <div className="smallMenu">
+        <div onClick={toggleMyAccBTN} className="myAccount" > <AccountBoxIcon /> <span>my account </span>  </div>
+        <div onClick={logout} className="logOut">  <span>logout</span> <LogoutIcon/> </div>
+
+          </div>
+          : null
+        }
+        
+        
+
 
         { myAccountBTN && <div className="EnterCurrentUser">
         <h1>Welcome {props.username}</h1>
 
-        <div onClick={props.toggleCurrentUser} className="myAccount" >Loads   </div>
-        <div onClick={ttoggleDisplayInputUsername}> Enter new username </div>  
-
-             {  displayInputUsername &&  <div >
-        <input
-         type="text"
-         value={NewUserName}
-          onChange={(e)=>setNewUserName(e.target.value)}
-        />
-        <button onClick={handleUpdateUsername}> submit</button>
-        </div> }        
-          </div>}
-          
-   
-          
-
-        <div onClick={logout} className="logOut">  <span>logout</span> <LogoutIcon/> </div>
+        <div className="sise-bar"> 
+        <div className="all-names">
+        <div onClick={ttoggleDisplayInputUsername} className="name"> Enter new username </div>  
+        <div onClick={toggleCurrentUser} className="name" >Loads   </div>
+        <div className="name">trucks</div>
         </div>
-        : null
-        }
+        </div>
+            
 
+        <div className="currentUserMain">
+        {CurrentUserDisplay}
+        </div>
+
+          </div>}         
           </div>
+
+
       </header>
       :  <header>       
           <input 

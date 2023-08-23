@@ -22,7 +22,6 @@ import { collection, getDocs, doc, updateDoc, addDoc, query, where , getDoc} fro
 
 import MiniLoad from './components/miniLoads';
 import ThingsByUser from './components/ThingsByUser'
-import CurrentUser from './components/DisplayCurrentUser'
 
 require('events').EventEmitter.defaultMaxListeners = 15;
 
@@ -576,20 +575,11 @@ function App(){
       }, [currentUser]);
 
 
-      const [CurrentUserBtn , setCurrentUserBtn] = React.useState(false)
-      useEffect(() => {
-        document.body.style.paddingTop = CurrentUserBtn ? '70px' : '250px';
-      }, [CurrentUserBtn]);
-      
-      
-
-      function toggleCurrentUser(){
-        setCurrentUserBtn(prevState => !prevState)
-      }
      
        
 
       let miniLoad
+    
 
       if(addLoad === true){  
         trucks = loadsList.map(load => {
@@ -609,16 +599,7 @@ function App(){
             allThingsByUser = {setAllThings}            
           />
           )
-        })
-      }  else  if(CurrentUserBtn ){
-        trucks = currentUserLoads.map((item)=>{
-          console.log(item)
-          return(
-            <CurrentUser
-              item = {item}
-            />
-          )
-        })
+        })      
       }else {         
          miniLoad = mainLoadsList.map((item) => {
           return (
@@ -667,7 +648,6 @@ function App(){
               </div>
             )
           })
-        
           const [ username , setUsername] = React.useState('');
 
             const weed = async () => {
@@ -685,11 +665,10 @@ function App(){
                 console.error(err);
               }
             };
-        
+            React.useEffect(()=>{
+              weed()
+            }, [currentUser])
 
-          React.useEffect(()=>{
-            weed()
-          }, [currentUser])
     return(
     <body>
     { currentUser  ?
@@ -698,11 +677,11 @@ function App(){
       <div>
       <Header
         addLoadState ={toggleAddLoad}
-        toggleCurrentUser = {toggleCurrentUser}
         addBulkTrailer ={ getBulktrailers}
         addSideTippers = { getSideTippers}
         handleFilter = {handleFilter}
         username = {username}
+        currentUserLoads = {currentUserLoads}
        sideBar = {
           <aside className="sise-bar">
           <div className="all-names" >

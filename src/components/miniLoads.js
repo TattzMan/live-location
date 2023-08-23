@@ -5,7 +5,6 @@ const MiniLoad = ({ item, handleClickOneData , handleClickWholeDiv}) => {
   const handleClick = () => {
     handleClickOneData(item.userId);
   };
-
   return (
 
     <div className="frontloadDisplay" >
@@ -25,6 +24,7 @@ const MiniLoad = ({ item, handleClickOneData , handleClickWholeDiv}) => {
       <p>
         Rate : <span className="spaninMini">{item.ratePerTonne}</span>
       </p>
+
       </div>
     </div>
   );

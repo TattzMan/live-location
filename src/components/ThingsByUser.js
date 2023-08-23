@@ -17,6 +17,7 @@ function ThingsByUser( props){
         <p>type of load {props.item.typeofLoad} </p>
         <p>from {props.item.fromLocation} to {props.item.toLocation} </p>
         <p>Rate {props.item.ratePerTonne} </p>
+        <p>Due Date {props.item.DueDate} </p>
         <p> payment terms {props.item.paymentTerms} </p>
         <p>Requirements {props.item.requirements} </p>
         <p>additional info {props.item.additionalInfo} </p>         

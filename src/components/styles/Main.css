@@ -74,7 +74,8 @@
   color: rgb(164, 89, 238) ;
 }
  
-.singIN{
+.singIN ,
+.userNameInput{
   height: 30px;
   width: 250px;
   margin-bottom : 20px;
@@ -96,6 +97,56 @@
   background-color: transparent;
   cursor: pointer;
   border: none;
+}
+.currentUserMain{
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr ;
+
+  row-gap: 40px;
+  column-gap: 16px;
+}
+.EnterCurrentUser{
+  position: fixed;
+  top: 70px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: white;
+  padding-left: 240px;
+}
+.updateUsername{
+  position: fixed;
+  top: 100;
+  left: 300px;
+}
+.inputContainer {
+  display: flex;
+  align-items: center;
+}
+.userNameInput{
+  border: none;
+  border-bottom: 1px green solid;
+  margin: 0;
+  background-color: transparent;
+
+}
+.userNameInput:focus{
+  border: none;
+  outline: none;
+}
+.inputUsernameBTN{
+  height: 40px; /* Adjust the height as needed */
+  border: none;
+  border-bottom: 1px green solid;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: -2px;
+}
+.updateUsername > span{
+  font-size: 13px;
+  color: grey;
 }
 
 /* Small screens (less than 576px) */
@@ -167,7 +218,7 @@
 @media only screen and (min-width: 992px) {
   .Main-grid {
     grid-template-columns: repeat(3, 1fr); /* Change to four column grid layout */
-    row-gap: 40px; /* Restore row gap */
+    row-gap: 30px; /* Restore row gap */
     column-gap: 15px; /* Restore column gap */
   }
   .card-tittle {

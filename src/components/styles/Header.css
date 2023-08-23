@@ -153,6 +153,7 @@ background-color: rgb(102, 100, 100);
   flex-direction: column;
   justify-content: space-evenly;  
   align-items: center;
+  z-index: 50;
 }
  
 .dropDown > button{
@@ -203,6 +204,7 @@ background-color: rgb(102, 100, 100);
   flex-direction: column;
   justify-content: space-evenly;  
   align-items: center;
+  z-index: 50;
 }
 .myAccount{
   display: flex;
@@ -240,14 +242,7 @@ background-color: rgb(102, 100, 100);
   background-color: purple;
 
 }
-.EnterCurrentUser{
-  position: fixed;
-  top: 70px;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background-color: white;
-}
+
 
 
  /* Small screens (less than 768px) */

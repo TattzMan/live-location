@@ -5,7 +5,7 @@ function AddLoad( props){
   const styles = {
     backgroundColor : props.backgroundColor
   }
-
+console.log(props.item)
   return(
     <div className="bigLoad" style={styles} >
         <h3>Company {props.item.companyName} </h3>
@@ -14,10 +14,9 @@ function AddLoad( props){
         <p>from {props.item.fromLocation} to {props.item.toLocation} </p>
         <p>Rate {props.item.ratePerTonne} </p>
         <p> payment terms {props.item.paymentTerms} </p>
+        <p>Due Date {props.item.DueDate} </p>
         <p>Requirements {props.item.requirements} </p>
-        <p>additional info {props.item.additionalInfo} </p>
-
-           
+        <p>additional info {props.item.additionalInfo} </p>        
 
       </div>     
   )

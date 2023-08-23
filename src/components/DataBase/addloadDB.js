@@ -2,9 +2,32 @@ import React from "react";
 import { db, auth } from "../config/fireBase";
 import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
 
-function AddLoadDB (username) {
-  const loadsCollection = collection(db, "Loads");
+function AddLoadDB () {
 
+  const [ username , setUsername] = React.useState('');
+
+  React.useEffect(()=>{
+  const weed = async () => {
+    try {
+      if (auth.currentUser) {
+        const userId = auth.currentUser.uid;
+
+        const docRef = doc(db, 'usernames', userId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setUsername(docSnap.data().username);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  weed()
+}, [])
+
+  console.log(username)
+
+  const loadsCollection = collection(db, "Loads");
   const [formData, setFormData] = React.useState({
     typeofLoad: "",
     contact: "",
@@ -14,7 +37,8 @@ function AddLoadDB (username) {
     paymentTerms: "",
     requirements: "",
     additionalInfo: "",
-    backgroundColor: ""
+    backgroundColor: "",
+    date : ""
   });
 
   function handleTypedText(event) {
@@ -29,7 +53,7 @@ function AddLoadDB (username) {
   }
   
   
-  
+
   const [userId, setUserId] = React.useState('');
 
   React.useEffect(() => {
@@ -46,7 +70,6 @@ function AddLoadDB (username) {
     fetchUserId();
   }, []);
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -62,7 +85,8 @@ function AddLoadDB (username) {
         paymentTerms: formData.paymentTerms,
         requirements: formData.requirements,
         additionalInfo: formData.additionalInfo,
-        backgroundColor: formData.backgroundColor
+        backgroundColor: formData.backgroundColor ,
+        DueDate : formData.date
       });
 
       setFormData({
@@ -74,7 +98,8 @@ function AddLoadDB (username) {
         paymentTerms: "",
         requirements: "",
         additionalInfo: "",
-        backgroundColor: ""
+        date : ""
+
       });
     } catch (err) {
       console.error(err);
@@ -83,6 +108,7 @@ function AddLoadDB (username) {
 
   return (
     <form className="dropDown" onSubmit={handleSubmit}>
+
 
   <input
     placeholder="type of load"
@@ -97,6 +123,12 @@ function AddLoadDB (username) {
     name="contact"
     value={formData.contact}
   />
+     <input
+      type="date"
+      name="date"
+      value={formData.date}
+      onChange={handleTypedText}
+    />
 
   <input 
     placeholder="from loacation"
