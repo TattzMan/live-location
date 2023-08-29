@@ -2,7 +2,7 @@ import React from "react";
 import { db, auth } from "../config/fireBase";
 import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
 
-function AddLoadDB () {
+function AddLoadDB (displayAddLooads) {
 
   const [ username , setUsername] = React.useState('');
 
@@ -25,7 +25,6 @@ function AddLoadDB () {
   weed()
 }, [])
 
-  console.log(username)
 
   const loadsCollection = collection(db, "Loads");
   const [formData, setFormData] = React.useState({
@@ -37,7 +36,6 @@ function AddLoadDB () {
     paymentTerms: "",
     requirements: "",
     additionalInfo: "",
-    backgroundColor: "",
     date : ""
   });
 
@@ -85,7 +83,6 @@ function AddLoadDB () {
         paymentTerms: formData.paymentTerms,
         requirements: formData.requirements,
         additionalInfo: formData.additionalInfo,
-        backgroundColor: formData.backgroundColor ,
         DueDate : formData.date
       });
 
@@ -107,69 +104,66 @@ function AddLoadDB () {
   };
 
   return (
-    <form className="dropDown" onSubmit={handleSubmit}>
-
-
+    <form className="addloadDBform" onSubmit={handleSubmit}>
+      <label>type of load</label>
   <input
-    placeholder="type of load"
     onChange={handleTypedText}
     name="typeofLoad"
     value={formData.typeofLoad}
   />
-
+<label>contact</label>
   <input 
-    placeholder="contact"
     onChange={handleTypedText}
     name="contact"
     value={formData.contact}
   />
+  <label>Due date</label>
      <input
       type="date"
       name="date"
       value={formData.date}
       onChange={handleTypedText}
     />
-
+<label>from loacation</label>
   <input 
-    placeholder="from loacation"
     onChange={handleTypedText}
     name="fromLocation"
     value={formData.fromLocation}
   />
+  <label>to location</label>
   <input 
-    placeholder="to location"        
     onChange={handleTypedText}
     name="toLocation"
     value={formData.toLocation}
   />
+  <label>rate per tonne</label>
   <input 
-    placeholder="rate per tonne"
     onChange={handleTypedText}
     name="ratePerTonne"
     value={formData.ratePerTonne}
     type="text"
   />
-
+<label>payment terms</label>
   <input
-    placeholder="payment terms"
     onChange={handleTypedText}
     name="paymentTerms"
     value={formData.paymentTerms}
   />
+  <label>requirements</label>
   <input 
-    placeholder="requirements"
     onChange={handleTypedText}
     name="requirements"
     value={formData.requirements}
   />
 
+<label>Any additional info</label>
   <input 
-    placeholder="Any additional info"
     onChange={handleTypedText}
     name="additionalInfo"
     value={formData.additionalInfo}
   />
-  <button>submit</button>
+
+  <button className="submitINAddload">submit</button>
 
 </form>
   );

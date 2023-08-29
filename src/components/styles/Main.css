@@ -114,6 +114,8 @@
   left: 0;
   background-color: white;
   padding-left: 240px;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
 .updateUsername{
   position: fixed;
@@ -123,7 +125,7 @@
 .inputContainer {
   display: flex;
   align-items: center;
-}
+  }
 .userNameInput{
   border: none;
   border-bottom: 1px green solid;
@@ -144,9 +146,12 @@
   cursor: pointer;
   margin-left: -2px;
 }
-.updateUsername > span{
+.eneterUserNameDiv{
+  margin-top: 5 0px;
+}
+.labelspan{
   font-size: 13px;
-  color: grey;
+  color: rgb(210, 203, 203);
 }
 
 /* Small screens (less than 576px) */

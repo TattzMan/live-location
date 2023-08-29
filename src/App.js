@@ -430,7 +430,16 @@ function App(){
       let [addLoad , setaddLoad] = React.useState(false)
 
       useEffect(() => {
-        document.body.style.paddingTop = addLoad ? '70px' : '250px'
+        // document.body.style.paddingTop = addLoad ? '70px' : '250px'
+        if(addLoad){
+          document.body.style.paddingTop = '70px'
+        }else if(allThingsByUser.length > 0) {
+          document.body.style.paddingTop = '70px'
+        }else{
+          document.body.style.paddingTop = '250px'
+
+        }
+
       }, [addLoad]);
 
 
@@ -520,9 +529,9 @@ function App(){
     fetchBio(userId);
   };
 
-    useEffect(() => {
-      document.body.style.paddingTop = allThingsByUser.length > 0 ? '70px' : '250px';
-    }, [allThingsByUser]);
+  useEffect(() => {
+    document.body.style.paddingTop = allThingsByUser.length > 0 ? '70px' : '250px';
+  }, [allThingsByUser]);
 
   
       function handleClick(id){
@@ -611,11 +620,9 @@ function App(){
             />
           );
         });     
-      }
+      }    
      
-     
-     
-        const allData = [ ...BulkTrailer , ...LowBed , ...SideTipper , ...tankers , ...Taultliner ]
+        const allData = [  ...loadsList]
           
 
         const [filteredData, setFilteredData] = React.useState([]);
@@ -625,7 +632,7 @@ function App(){
           const searchWord = event.target.value;
           setWordEntered(searchWord);
           const newFilter = allData.filter((value) => {
-            return ( value.CompanyName ||  value.fromLocation || value.toLocation ).toLowerCase().includes(searchWord.toLowerCase());
+            return ( value.companyName ||  value.fromLocation || value.toLocation ).toLowerCase().includes(searchWord.toLowerCase());
           });
       
           if (searchWord === "") {
@@ -642,7 +649,7 @@ function App(){
         const displaySearched =  filteredData.slice(0, 15).map((value , key)=>{
             return(
               <div className="dataItem">
-              <div className='wordsSearched' >{value.CompanyName} </div>
+              <div className='wordsSearched' >{value.companyName} </div>
               <div  className='wordsSearched' >from {value.fromLocation } </div>
               <div className='wordsSearched' >to {value.toLocation  } </div>
               </div>

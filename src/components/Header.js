@@ -6,9 +6,9 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import BulkTrailers from "./DataBase/addBulkTrailer";
 import SideTipper from "./DataBase/addSideTipper";
 import LowBeds from "./DataBase/addLowBeds";
-import tankers from "./DataBase/addTankers";
-import tauntliner from "./DataBase/addTauntliner";
-import addLoaadDB from "./DataBase/addloadDB";
+import Tankers from "./DataBase/addTankers";
+import Tauntliner from "./DataBase/addTauntliner";
+import AddLoaadDB from "./DataBase/addloadDB";
 import { signOut} from  'firebase/auth'
 import { auth  } from "./config/fireBase"
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -29,7 +29,8 @@ function Header(props){
   let currentMneu = menu ? <MenuOpenIcon onClick={toggleSideBar} className="menu" /> : <MenuIcon onClick={toggleSideBar} className="menu"/>
   let  [dropDown , setDropdown] = React.useState(false)
   function displayDropdown(){   
-    setDropdown(prevDropdown => !prevDropdown)      
+    setDropdown(prevDropdown => !prevDropdown)   
+    setSmallMenu(prev=> false)   
 }
   let [addBulkTrailer , setBulkTrailer] = React.useState(false)  
   function toggleBulkTrailer(){
@@ -77,8 +78,14 @@ function Header(props){
     return (
       dropDown ? (
         <div className="dropDown">
-          <button onClick={displayAddLooads} className='firstButtonIsnDrop'>add load</button>
-          {addLoads && addLoaadDB()}
+
+        <button onClick={displayAddLooads} className='firstButtonIsnDrop'>add load</button>
+
+          {addLoads && <div className="addLoadDB">
+          <div onClick={displayAddLooads}>back</div>
+            <AddLoaadDB/>
+          </div>
+          }
   
           <button onClick={displayAddTrucks} className='firstButtonIsnDrop'>add Truck</button>
           {addTrucks && displayTrucks()}
@@ -90,39 +97,40 @@ function Header(props){
     function displayTrucks(){
       return(
         <div className="dropDown">
+    <div onClick={displayAddTrucks}> back</div>
         <button onClick={toggleBulkTrailer} className='specifytruck'>Bulk trailers</button>
         {addBulkTrailer && BulkTrailers()}
 
         <button onClick={toggleSideTipper} className='specifytruck'>SideTipper</button>
-        {addSideTipper && SideTipper()}
+        {addSideTipper && <div className="dropDown">
+          <div onClick={toggleSideTipper}> back </div>
+          <SideTipper/>
+        </div> }
 
         <button onClick={toggleLowBeds} className='specifytruck'>Low Beds</button>
-        {addLowBeds && LowBeds()}
+        {addLowBeds && <div className="dropDown">
+          <div onClick={toggleLowBeds}>back</div>
+          <LowBeds/>
+        </div>
+        }
+        
 
         <button onClick={toggleTankers} className='specifytruck'>tankers</button>
-        {addTankers && tankers()}
+        {addTankers && <div className="dropDown">
+          <div onClick={toggleTankers}>back</div>
+          <Tankers/>
+          </div>}
 
         <button onClick={toggleTauntliner} className='specifytruck'>tauntliner</button>
-        {addTauntliner && tauntliner()}
+
+        {addTauntliner && <div className="dropDown">
+          <div onClick={toggleTauntliner} >back</div>
+          <Tauntliner/>
+        </div>}
 
       </div>     
       )
-    }
-
-    BulkTrailers(props.username)
-   SideTipper(props.username) 
-   addLoaadDB(props.username)
-    LowBeds(props.username)
-    tankers(props.username) 
-    tauntliner(props.username) 
-
-  function setErythingFalse(){
-    setBulkTrailer(prevStae => false)
-    setLowBeds(prevState => false)
-    setTankers(prevState =>false)
-    setTauntliner(prevStae => false)
-    setSideTipper(prevStae => false)
-  }
+    } 
   
   const logout = async ()=>{
     
@@ -148,6 +156,7 @@ function Header(props){
 
    function toggleSmallMenu(){
     setSmallMenu(prevState => !prevState)
+    setDropdown(prev=> false)
    }
    if(window.innerWidth >= 500 ){
     menu = true
@@ -190,6 +199,7 @@ function Header(props){
     const [myAccountBTN , setMyAcountBTN] = React.useState(false)
 
     function toggleMyAccBTN(){
+      setSmallMenu(()=>false)
       setMyAcountBTN(prevState => !prevState)
     }
     const [displayInputUsername , setdisplayInputUsername] = React.useState(true)
@@ -221,7 +231,9 @@ function Header(props){
       CurrentUserDisplay = (
         <div className="updateUsername">
           <p>this name will display on your added items</p>
-          <span>username</span>
+
+          <div className="eneterUserNameDiv">
+          <span className="labelspan">username</span>
           <div className="inputContainer">
                 <input
             type="text"
@@ -237,6 +249,7 @@ function Header(props){
             }}
       />
           <button onClick={handleUpdateUsername} className="inputUsernameBTN"><SendIcon/></button>
+          </div>
           </div>
         </div>
       );
@@ -278,7 +291,6 @@ function Header(props){
               <div className="addLoad" onClick={displayDropdown} >Add </div> 
 
           <DropDown/>
-        { dropDown && <button onClick={setErythingFalse} className="backButton">back</button>}
         <MoreVertIcon onClick={toggleSmallMenu}/>
 
         {smallMenu ?
@@ -288,14 +300,11 @@ function Header(props){
 
           </div>
           : null
-        }
-        
-        
+        }       
 
 
         { myAccountBTN && <div className="EnterCurrentUser">
         <h1>Welcome {props.username}</h1>
-
         <div className="sise-bar"> 
         <div className="all-names">
         <div onClick={ttoggleDisplayInputUsername} className="name"> Enter new username </div>  
