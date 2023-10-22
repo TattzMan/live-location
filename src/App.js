@@ -4,8 +4,8 @@ import "./App.css"
 import Header from "./components/Header";
 import AddLoad from "./components/AddLoad";
 
-import SideBar from "./components/SideBar";
-import SideBarData from "./components/SideBarData";
+import SideBar from "./components/SideBar/SideBar";
+import SideBarData from "./components/SideBar/SideBarData";
 
 import Tankers from "./components/pages/Tankers";
 
@@ -20,8 +20,8 @@ import Tauntliners from "./components/pages/Taultliner";
 import { auth, db, storage } from "./components/config/fireBase"
 import { collection, getDocs, doc, updateDoc, addDoc, query, where , getDoc} from 'firebase/firestore';
 
-import MiniLoad from './components/miniLoads';
-import ThingsByUser from './components/ThingsByUser'
+import MiniLoad from './components/pages/miniLoads';
+import ThingsByUser from './components/pages/ThingsByUser'
 
 require('events').EventEmitter.defaultMaxListeners = 15;
 
@@ -306,7 +306,6 @@ function App(){
       });
     }
 
-
     
     let trucks 
 
@@ -397,17 +396,14 @@ function App(){
         )
       } )
 
-
-
-
       const sortRatingBulkTrailer = BulkTrailer.sort((a , b)=> b.rating -  a.rating)
       const topRatingsBulk = sortRatingBulkTrailer.slice(0 , 2)
        const     takeBestBulks = topRatingsBulk.map(Bulks => (
          <p className="ratingNames" key={ Bulks.id}>{Bulks.CompanyName}</p>) )
          
     const sortRatingLowBed = LowBed.sort((a , b)=> b.rating -  a.rating)
-      const topRatingsLowbed = sortRatingLowBed.slice(0 , 2)
-       const   takeBestLowbeds = topRatingsLowbed.map(Lowbed =>(
+    const topRatingsLowbed = sortRatingLowBed.slice(0 , 2)
+    const   takeBestLowbeds = topRatingsLowbed.map(Lowbed =>(
         <p className="ratingNames" key={Lowbed.id}>{Lowbed.CompanyName}</p>) )
 
       const sortRatingSideTipper = SideTipper.sort((a , b)=> b.rating -  a.rating)
@@ -442,14 +438,11 @@ function App(){
 
       }, [addLoad]);
 
-
       function toggleAddLoad(){
         setaddLoad(prevState => !prevState)
       }
 
-
-
-      const [mainLoadsList, setMainLoadsList] = useState([]);
+  const [mainLoadsList, setMainLoadsList] = useState([]);
   const [loadsList, setLoadsList] = useState([]);
   const [allThingsByUser, setAllThings] = useState([]);
 
@@ -582,10 +575,7 @@ function App(){
       React.useEffect(() => {
         fetchLoads();
       }, [currentUser]);
-
-
-     
-       
+      
 
       let miniLoad
     
@@ -741,4 +731,3 @@ function App(){
       }
 
 export default App
-

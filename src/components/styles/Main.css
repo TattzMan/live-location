@@ -151,7 +151,7 @@
 }
 .labelspan{
   font-size: 13px;
-  color: rgb(210, 203, 203);
+  color: black ;
 }
 
 /* Small screens (less than 576px) */
@@ -162,6 +162,10 @@
     right: 30px;
     height: 200px;
   }  
+  .updateUsername{
+    position: fixed;
+    left: 30px;
+  }
   .Main-grid {
     grid-template-columns: 1fr; /* Change to one column grid layout */
     row-gap: 20px; /* Reduce row gap */
@@ -188,6 +192,9 @@
   .price, .location {
     font-size: 16px; /* Reduce font size */
   }
+
+
+
 }
 
 /* Medium screens (between 576px and 768px) */

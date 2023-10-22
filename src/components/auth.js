@@ -58,6 +58,7 @@ function Auth() {
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
           className="singIN"
+          type="email"
         />
 
         <input

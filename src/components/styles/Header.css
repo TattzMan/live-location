@@ -14,7 +14,6 @@ header{
 
   z-index: 100;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-
 }
 .left-section{
 
@@ -26,6 +25,7 @@ header{
 }
 .left-section > h1{
     font-style: italic;
+    color: white;
 }
 
 .menu{
@@ -144,20 +144,21 @@ background-color: rgb(102, 100, 100);
 .dropDown{
  background-color:  white ;
   height: 350px;
-  width: 180px;
+  width: 280px;
   position:fixed;
-  top: 58px;
+  top: 90px;
   right: 0;
 
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;  
   align-items: center;
-  z-index: 50;
+  z-index: 10;
 }
  
 .dropDown > button ,
-.addloadDBform > button 
+.addloadDBform > button , 
+.bacInDropDown
 {
   height: 30px;
   margin: 3px;
@@ -165,12 +166,14 @@ background-color: rgb(102, 100, 100);
   border: none;
   cursor: pointer;
   border: none ;
+  color: white;
+  background-color: rgb(54, 69, 79);
 }
 .addLoadDB{
-  background-color:  white ;
+  background-color: white;
   position:fixed;
   top: 70px;
-  left: 450px;
+  right:auto;
   bottom: 0;
   right: 0;
 }
@@ -197,48 +200,71 @@ background-color: rgb(102, 100, 100);
   transition: border-color 0.3s ease-in-out;
   margin-bottom: 7px;
   border: none;
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid darkgray;
   background-color: transparent;
 }
-.submitINAddload{
+.submitINAddload {
   position: absolute;
-  top: 50%;
-  right: 30%;
+  top: 80%;
+  left: 50%;
+
+  height: 1000px;
 }
+.bacInDropDown {
+  position: absolute;
+  top: 80%;
+  left: 15%;
+  background-color:  tomato;
+
+}
+.backInddForm{
+  background-color: red;
+  border: none;
+  padding: 8px;
+  width: 100px;
+  position: relative ;
+  left: 60%;
+  }
+  .backNewTruck{
+    background-color: green;
+    width: 100px;
+    position: relative;
+    border: none;
+    top: -9%;
+    padding: 8px;
+  }
 
 .addloadDBform > input:focus {
   outline: none;
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid lightgrey;
 
 }
 .addloadDBform > label{
      font-size: 12px;
-    color: rgb(96, 96, 96);
-}
+     color: black;
+    }
 .firstButtonIsnDrop{
   background-color:  rgb(83, 83, 83) ;
+  color: white;
  }
  .specifytruck{
   background-color:  rgb(129, 127, 127) ;
  }
- form > button{
-  background-color: rgb(28, 189, 68) ;
+ .inputTruckDiv{
+  background-color: white;
+  height: 350px;
+  width: 280px;
+  position:fixed;
+  top: 90px;
+  right: 0;
  }
-
-.inputFIle{
-  height: 20px;
-  width: 50px;
-}
-
-.backButton{
-  position: absolute;
-  top: 58px;
-  right: 0px;
-  border: none;
-  background-color: rgb(255, 92, 92);
-  width:  40px;
-  z-index: 51;
-}
+ .inputTruckform{
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 15px
+   }
 
 .smallMenu{
   background-color:  white ;
@@ -305,7 +331,7 @@ background-color: rgb(102, 100, 100);
 }
 .left-section > h1{
   font-size: 20px;
-
+  color: white;
 }
 .menu{
   height: 24px;

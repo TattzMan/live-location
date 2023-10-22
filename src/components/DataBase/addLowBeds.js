@@ -1,4 +1,4 @@
-import React from "react"
+  import React from "react"
 import { storage } from "../config/fireBase";
 import {getDownloadURL, ref , uploadBytes} from "firebase/storage"
 import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
@@ -71,7 +71,7 @@ function LowBeds(username){
 
 
   return(
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="inputTruckform">
 
       <input
       type="file"
@@ -100,7 +100,7 @@ function LowBeds(username){
             name="contact"
             value={formDta.contact}
           />
-            <button onClick={uploadImage} >submit</button>
+            <button onClick={uploadImage} className="backInddForm" >submit</button>
           </form>
   )
 }

@@ -72,7 +72,7 @@ function Tankers(username){
 
 
   return(
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="inputTruckform">
 
       <input
       className="inputFIle"
@@ -102,7 +102,7 @@ function Tankers(username){
         name="contact"
         value={formDta.contact}
           />
-            <button onClick={uploadImage} >submit</button>
+            <button onClick={uploadImage} className="backInddForm" >submit</button>
           </form>
   )
 }

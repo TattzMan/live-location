@@ -16,10 +16,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, doc, updateDoc , getDoc } from 'firebase/firestore';
-import CurrentUser from '../components/DisplayCurrentUser'
+import { getFirestore, doc, updateDoc } from 'firebase/firestore';
+import CurrentUser from './pages/DisplayCurrentUser'
 import SendIcon from '@mui/icons-material/Send';
-
 
 function Header(props){
   let [menu , seMenu] = React.useState(false)  
@@ -28,6 +27,7 @@ function Header(props){
   }
   let currentMneu = menu ? <MenuOpenIcon onClick={toggleSideBar} className="menu" /> : <MenuIcon onClick={toggleSideBar} className="menu"/>
   let  [dropDown , setDropdown] = React.useState(false)
+  
   function displayDropdown(){   
     setDropdown(prevDropdown => !prevDropdown)   
     setSmallMenu(prev=> false)   
@@ -82,7 +82,7 @@ function Header(props){
         <button onClick={displayAddLooads} className='firstButtonIsnDrop'>add load</button>
 
           {addLoads && <div className="addLoadDB">
-          <div onClick={displayAddLooads}>back</div>
+          <button onClick={displayAddLooads} className="bacInDropDown" >back</button>
             <AddLoaadDB/>
           </div>
           }
@@ -97,35 +97,42 @@ function Header(props){
     function displayTrucks(){
       return(
         <div className="dropDown">
-    <div onClick={displayAddTrucks}> back</div>
+    <button onClick={displayAddTrucks}> back</button>
         <button onClick={toggleBulkTrailer} className='specifytruck'>Bulk trailers</button>
-        {addBulkTrailer && BulkTrailers()}
+        
+        {addBulkTrailer && <div className="inputTruckDiv">
+          <BulkTrailers/>
+          <div onClick={toggleBulkTrailer}  className="backNewTruck" > back </div>
 
-        <button onClick={toggleSideTipper} className='specifytruck'>SideTipper</button>
-        {addSideTipper && <div className="dropDown">
-          <div onClick={toggleSideTipper}> back </div>
+        </div>
+
+        }
+
+        <button onClick={toggleSideTipper} >SideTipper</button>
+        {addSideTipper && <div className="inputTruckDiv">
           <SideTipper/>
+          <div onClick={toggleSideTipper}  className="backNewTruck" > back </div>
         </div> }
 
-        <button onClick={toggleLowBeds} className='specifytruck'>Low Beds</button>
-        {addLowBeds && <div className="dropDown">
-          <div onClick={toggleLowBeds}>back</div>
+        <button onClick={toggleLowBeds} >Low Beds</button>
+        {addLowBeds && <div className="inputTruckDiv">
           <LowBeds/>
+          <div onClick={toggleLowBeds} className="backNewTruck" >back</div>
         </div>
         }
         
 
         <button onClick={toggleTankers} className='specifytruck'>tankers</button>
-        {addTankers && <div className="dropDown">
-          <div onClick={toggleTankers}>back</div>
+        {addTankers && <div className="inputTruckDiv">
           <Tankers/>
+          <div onClick={toggleTankers} className="backNewTruck" >back</div >
           </div>}
 
         <button onClick={toggleTauntliner} className='specifytruck'>tauntliner</button>
 
-        {addTauntliner && <div className="dropDown">
-          <div onClick={toggleTauntliner} >back</div>
+        {addTauntliner && <div className="inputTruckDiv">
           <Tauntliner/>
+          <div onClick={toggleTauntliner}  className="backNewTruck" >back</div>
         </div>}
 
       </div>     
@@ -176,10 +183,10 @@ function Header(props){
        } else {
          setUserId('');
          setUsernameDB(null);
-       }
-     });
- 
+       }});
+
      return () => unsubscribe();
+
    }, []);
  
    const handleUpdateUsername = async (event) => {
@@ -233,7 +240,7 @@ function Header(props){
           <p>this name will display on your added items</p>
 
           <div className="eneterUserNameDiv">
-          <span className="labelspan">username</span>
+          <span className="labelspan">Enter new username</span>
           <div className="inputContainer">
                 <input
             type="text"
@@ -302,17 +309,21 @@ function Header(props){
           : null
         }       
 
+        
 
         { myAccountBTN && <div className="EnterCurrentUser">
-        <h1>Welcome {props.username}</h1>
-        <div className="sise-bar"> 
-        <div className="all-names">
-        <div onClick={ttoggleDisplayInputUsername} className="name"> Enter new username </div>  
-        <div onClick={toggleCurrentUser} className="name" >Loads   </div>
-        <div className="name">trucks</div>
-        </div>
-        </div>
-            
+        <h1 style={{color :"black"} }>Welcome {props.username}</h1>
+        { menu &&      
+         <div className="sise-bar"> 
+         <div className="all-names">
+ 
+          <div onClick={ttoggleDisplayInputUsername} className="name"> Enter new username </div>  
+         <div onClick={toggleCurrentUser} className="name" >Loads   </div>
+         <div className="name">trucks</div> 
+         </div>
+         </div>
+        
+        }           
 
         <div className="currentUserMain">
         {CurrentUserDisplay}
@@ -335,10 +346,6 @@ function Header(props){
            <SearchIcon width="30px" />
            </button>
 
-       </header>
-        }
-</div>
-    )
-}
+       </header> }</div>)}
 
 export default  React.memo(Header)

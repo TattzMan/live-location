@@ -8,7 +8,7 @@ body{
   background-color:  white;
 
   font-family:  'Roboto' , sans-serif;
-  color: black;
+  color: black  ;
  }
  p{
    margin: 0;
@@ -42,8 +42,4 @@ body{
       padding-right:15px ;
 
    }
- }
- .usernamePopup{
-  background-color: red;
-  color: green;
  }

@@ -70,7 +70,7 @@ function BulkTrailers( username ) {
   };
 
   return (
-      <form className="dropDown" onSubmit={handleSubmit}>
+      <form className="inputTruckform" onSubmit={handleSubmit} >
         <input
           type="file"
           onChange={(e) => {
@@ -100,7 +100,7 @@ function BulkTrailers( username ) {
           name="contact"
           value={formDta.contact}
         />
-        <button onClick={uploadImage}>submit</button>
+        <button onClick={uploadImage} className="backInddForm">submit</button>
       </form>
 
   );
