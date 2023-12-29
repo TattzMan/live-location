@@ -20,6 +20,5 @@ console.log(props.item)
 
       </div>     
   )
-
 }
 export default React.memo( AddLoad)

@@ -10,7 +10,6 @@ function ThingsByUser( props){
   return(
     <div className="bigLoad"  >
       <button onClick={goBackToMini} className="moreLessBTN" > less</button>
-      
         <h3>Company {props.item.companyName} </h3>
         
         <p>Contact : <span className="spaninMini">{props.item.contact}</span></p>
