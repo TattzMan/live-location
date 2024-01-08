@@ -19,14 +19,32 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 import CurrentUser from './pages/DisplayCurrentUser'
 import SendIcon from '@mui/icons-material/Send';
+import Auth from './auth'  
+import Feedback from "./feedback";
 
 function Header(props){
+
+
+  const [currentUser, setCurrentUser] = React.useState(null);
+
+  React.useEffect(() => {
+    // Check if user is already signed in
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+    });
+
+    // Cleanup function
+    return () => unsubscribe();
+  }, []);
+
   let [menu , seMenu] = React.useState(false)  
   function toggleSideBar(){
     seMenu(prevMenu => !prevMenu)
   }
   let currentMneu = menu ? <MenuOpenIcon onClick={toggleSideBar} className="menu" /> : <MenuIcon onClick={toggleSideBar} className="menu"/>
   let  [dropDown , setDropdown] = React.useState(false)
+
+
   
   function displayDropdown(){   
     setDropdown(prevDropdown => !prevDropdown)   
@@ -67,15 +85,29 @@ function Header(props){
     setAddTrucks(prevsate => !prevsate)
   }
 
+  //  This is going to trigger thee option for users to send their feedback using whatsapp and is connected to the feedback file were there is the rest of code for feedback
+
+  const [feedback , setFeedback] = useState(false);
+
+  function displayFeedback(){
+    setFeedback(prevstate => !prevstate)
+  }
+
+  
+
+
   const [addLoads , setAddloads] = React.useState(false)
 
   function displayAddLooads(){
     setAddloads(prevsate => !prevsate)
   }
+  
 
 
+  //  THe dropdown that allow you to add item like load or truck 
   function DropDown() {
     return (
+
       dropDown ? (
         <div className="dropDown">
 
@@ -92,6 +124,7 @@ function Header(props){
         </div>
       ) : null
     );
+  
   }
 
     function displayTrucks(){
@@ -262,6 +295,18 @@ function Header(props){
       );
     }
 
+    //  check is a user has singed in before adding items to the datatbase they must sing in and it is connected with a file named auth were they are way used to sing in 
+// so first check if the add button is clicked and user has not singed in n if true return a sing in page
+    if(dropDown && currentUser === null){
+      return(
+        <Auth/>
+      )
+    }
+  // THe end of drop down 
+
+  
+  //  The start of the main return for the whole header element 
+
     return(
       <div>
       {addMiniSearch ?
@@ -276,6 +321,7 @@ function Header(props){
         </div>
 
         <div className="middle-section">
+          {/* ?\ A search bar used to search for loads found on header   */}
           <input 
           type="text" 
           className="search-bar" 
@@ -283,6 +329,7 @@ function Header(props){
           onChange={props.handleFilter}
            />
 
+           {/* A submit button with a search icon inisde which is beside a search input on middle section */}
            <button className="SearchButton">
            <SearchIcon/>
            </button>
@@ -294,11 +341,22 @@ function Header(props){
           {window.innerWidth <= 500 && < SearchIcon  onClick={handleMinisearchBar} width="30px" /> }
 
           <button className="addLoad" style={addNewCss} onClick={props.addLoadState}  >Loads</button>
+
       
-              <div className="addLoad" onClick={displayDropdown} >Add </div> 
+          <div className="addLoad" onClick={  displayDropdown} >Add </div> 
 
           <DropDown/>
+          
         <MoreVertIcon onClick={toggleSmallMenu}/>
+
+        {/*the first feed back is a small letter when start for variable name that can be true or false and toggle feedback elemet  */}
+        {/* THe second feed back have a capital letter to tke elements from the feedback file and display on the sreen  */}
+
+        {feedback &&    <div   className="makeBackgroundColor">   
+        <Feedback/>  <div onClick={displayFeedback}> back </div>  </div>      }
+
+        {/* the feedback button can trigeer the feedback to be true and then display the emelemts */}
+          <div className="feedbackButton"  onClick={displayFeedback} > feedback </div> 
 
         {smallMenu ?
           <div className="smallMenu">

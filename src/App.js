@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Auth from './components/auth'  
 import "./App.css"
 import Header from "./components/Header";
 import AddLoad from "./components/AddLoad";
@@ -22,6 +21,7 @@ import { collection, getDocs, doc, updateDoc, addDoc, query, where , getDoc} fro
 
 import MiniLoad from './components/pages/miniLoads';
 import ThingsByUser from './components/pages/ThingsByUser'
+
 
 require('events').EventEmitter.defaultMaxListeners = 15;
 
@@ -62,10 +62,12 @@ function App(){
     }
   }
     
-  
-  React.useEffect(()=>{
-    getBulktrailers()
-  }, [])
+
+
+    
+  // React.useEffect(()=>{
+  //   getBulktrailers()
+  // }, [])
 
     
   const LowBedsDB = collection(db , "LowBeds")
@@ -89,9 +91,11 @@ function App(){
   }
     
   
-  React.useEffect(()=>{
-    getLoBeds()
-  }, [])
+  // React.useEffect(()=>{
+  //   getLoBeds()
+  // }, [])
+
+
 
       
   const SideTipperDB = collection(db , "sideTippers")
@@ -138,9 +142,9 @@ function App(){
       console.error(err)
     }
   }
-  React.useEffect(()=>{
-    getTankers()
-  }, [])
+  // React.useEffect(()=>{
+  //   getTankers()
+  // }, [])
 
   const TaultlinerDB = collection(db , "tauntliner")
   let [ Taultliner , setTautliner] = React.useState([])
@@ -666,9 +670,9 @@ function App(){
               weed()
             }, [currentUser])
 
+
     return(
     <body>
-    { currentUser  ?
                 
       <div>
       <div>
@@ -676,6 +680,7 @@ function App(){
         addLoadState ={toggleAddLoad}
         addBulkTrailer ={ getBulktrailers}
         addSideTippers = { getSideTippers}
+        // handle flter is used to filter things within the searched items
         handleFilter = {handleFilter}
         username = {username}
         currentUserLoads = {currentUserLoads}
@@ -707,7 +712,9 @@ function App(){
           
           </aside>
         }
-      />      { filteredData.length > 0 && (
+      />   
+                  
+         { filteredData.length > 0 && (
               <div className='displaySearched' >
               {displaySearched}
              </div>
@@ -723,9 +730,7 @@ function App(){
       </section>
       </div>
       </div>            
-       :
-       <Auth/>
-    }
+       
       </body>
        )
       }

@@ -44,7 +44,7 @@
 .location{
   font-size: 15px;
 }
-.makeBackgroundColor{
+.makeBackgroundColor  , .feedback{
   position: fixed;
   top: 0;
   left: 0;
@@ -52,6 +52,8 @@
   right: 0;
   background-color: #23242a;
   z-index: 200;
+}
+.feedback{
 }
 .authDiv{
   display: flex;

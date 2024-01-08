@@ -63,7 +63,7 @@
 }
 .moreLessBTN{
   position: absolute;
-  top: 0;
+  top: 10px;
   right: 0;
   box-shadow: none;
   text-transform: none;

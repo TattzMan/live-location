@@ -8,8 +8,8 @@ const MiniLoad = ({ item, handleClickOneData , handleClickWholeDiv}) => {
   return (
 
     <div className="frontloadDisplay" >
-      <button onClick={handleClick} className='moreLessBTN'>more</button>
-      <div onClick={handleClickWholeDiv}>
+      <button onClick={handleClickWholeDiv} className='moreLessBTN'>more </button>
+      <div   onClick={handleClick}>
         <div className='miniloadH3Div'>
 
       <h3 className='miniloadH3'> {item.companyName} </h3>

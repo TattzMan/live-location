@@ -51,7 +51,6 @@ header{
   
   flex: 1;
   height: 36px;
-  padding-left: 10px;
   font-size: 16px;
 
   border-width: 1px;
@@ -72,9 +71,9 @@ header{
 .displaySearched{
   position: absolute;
   z-index: 300;
-  top: 60px;
-  right: 400px;
-  left: 350px;
+  top: 73px;
+  right: 515px;
+  left: 41  0px;
   height: 250px;
   background-color: white ;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -87,7 +86,6 @@ header{
   height: 50px;
   display: flex;
   align-items: center;
-  color: white ;
 }
 .dataItem:hover {
   background-color: lightgrey;
@@ -123,7 +121,7 @@ header{
   flex-shrink: 0;
  
 }
-.addLoad{
+.addLoad  {
   background-color: transparent;
   height: 35px;
   width: 90px;
@@ -140,6 +138,13 @@ background-color: rgb(102, 100, 100);
 }
 .addLoad:active{
   background-color: rgb(129, 124, 124);
+}
+.feedbackButton {
+  position: fixed;
+  top: 85%;
+  left: 90%;
+  border: 1px;
+
 }
 .dropDown{
  background-color:  white ;
