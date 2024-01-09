@@ -7,7 +7,7 @@ function AddLoadDB (displayAddLooads) {
   const [ username , setUsername] = React.useState('');
 
   React.useEffect(()=>{
-  const weed = async () => {
+  const getCurrentUserName = async () => {
     try {
       if (auth.currentUser) {
         const userId = auth.currentUser.uid;
@@ -22,7 +22,7 @@ function AddLoadDB (displayAddLooads) {
       console.error(err);
     }
   };
-  weed()
+  getCurrentUserName()
 }, [])
 
 

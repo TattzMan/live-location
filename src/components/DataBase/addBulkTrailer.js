@@ -1,17 +1,40 @@
 import React from "react";
+import { db, auth } from "../config/fireBase";
+import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
+
 import { storage } from "../config/fireBase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
-import { db, auth } from "../config/fireBase";
-
 import { v4 } from "uuid";
 
-function BulkTrailers( username ) {
+function BulkTrailers(  ) {
 
+  const [ username , setUsername] = React.useState('');
+
+  React.useEffect(()=>{
+  const getCurrentUserName = async () => {
+    try {
+      if (auth.currentUser) {
+        const userId = auth.currentUser.uid;
+
+        const docRef = doc(db, 'usernames', userId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setUsername(docSnap.data().username);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  getCurrentUserName()
+}, [])
+
+console.log(username)
 
   const bulkTrailersDB = collection(db, "BulkTrailers");
 
   const [formDta, setFormData] = React.useState({
+    CompanyName: "",
     fromLocation: "",
     toLocation: "",
     like: false,
@@ -40,7 +63,6 @@ function BulkTrailers( username ) {
     });
   };
 
- 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const imageRef = ref(storage, `BulkTrailer/${imageUpload.name}`);
@@ -49,7 +71,7 @@ function BulkTrailers( username ) {
 
     try {
       const docRef = await addDoc(bulkTrailersDB, {
-        CompanyName : username ,
+        CompanyName: username,
         fromLocation: formDta.fromLocation,
         toLocation: formDta.toLocation,
         like: formDta.like,
@@ -59,8 +81,12 @@ function BulkTrailers( username ) {
       });
 
        setFormData({
+        onLoading: 6,
+        onDelivery: 9,
         fromLocation: "",
         toLocation: "",
+        like: false,
+        rating: 0,
         contact: "",
       });
       setImageUpload(null);
@@ -70,13 +96,15 @@ function BulkTrailers( username ) {
   };
 
   return (
-      <form className="inputTruckform" onSubmit={handleSubmit} >
+      <form className="inputTruckform" onSubmit={handleSubmit}>
         <input
           type="file"
           onChange={(e) => {
             setImageUpload(e.target.files[0]);
           }}
-        />     
+        />
+
+   
         <input
           placeholder="from location"
           type="text"
@@ -100,7 +128,8 @@ function BulkTrailers( username ) {
           name="contact"
           value={formDta.contact}
         />
-        <button onClick={uploadImage} className="backInddForm">submit</button>
+        <button onClick={uploadImage} className="backInddForm" >submit</button>
+
       </form>
 
   );

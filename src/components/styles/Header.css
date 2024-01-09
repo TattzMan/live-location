@@ -223,7 +223,7 @@ background-color: rgb(102, 100, 100);
 
 }
 .backInddForm{
-  background-color: red;
+  background-color: green;
   border: none;
   padding: 8px;
   width: 100px;
@@ -231,7 +231,7 @@ background-color: rgb(102, 100, 100);
   left: 60%;
   }
   .backNewTruck{
-    background-color: green;
+    background-color: red;
     width: 100px;
     position: relative;
     border: none;

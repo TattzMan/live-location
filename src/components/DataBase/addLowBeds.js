@@ -5,8 +5,28 @@ import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
 import { db, auth } from "../config/fireBase";
 import {v4} from "uuid"
 
-function LowBeds(username){
+function LowBeds(){
 
+  const [ username , setUsername] = React.useState('');
+
+  React.useEffect(()=>{
+  const getCurrentUserName = async () => {
+    try {
+      if (auth.currentUser) {
+        const userId = auth.currentUser.uid;
+
+        const docRef = doc(db, 'usernames', userId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setUsername(docSnap.data().username);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  getCurrentUserName()
+}, [])
   
   // specify the database to use
   const LowBedsDB = collection(db,"LowBeds")

@@ -203,7 +203,6 @@ function Header(props){
    }
 
    const [NewUserName, setNewUserName] = useState('');
-   const [userId, setUserId] = useState('');
    const [usernameDB, setUsernameDB] = useState(null);
    const db = getFirestore();
  
@@ -211,10 +210,8 @@ function Header(props){
      const auth = getAuth();
      const unsubscribe = onAuthStateChanged(auth, (user) => {
        if (user) {
-         setUserId(user.uid);
          setUsernameDB(doc(db, 'usernames', user.uid));
        } else {
-         setUserId('');
          setUsernameDB(null);
        }});
 
@@ -242,10 +239,8 @@ function Header(props){
       setSmallMenu(()=>false)
       setMyAcountBTN(prevState => !prevState)
     }
-    const [displayInputUsername , setdisplayInputUsername] = React.useState(true)
 
     function ttoggleDisplayInputUsername(){
-      setdisplayInputUsername(prevState => !prevState)
       setCurrentUserBtn(prevState => false)
 
     }
@@ -356,7 +351,7 @@ function Header(props){
         <Feedback/>  <div onClick={displayFeedback}> back </div>  </div>      }
 
         {/* the feedback button can trigeer the feedback to be true and then display the emelemts */}
-          <div className="feedbackButton"  onClick={displayFeedback} > feedback </div> 
+          {/* <div className="feedbackButton"  onClick={displayFeedback} > feedback </div>  */}
 
         {smallMenu ?
           <div className="smallMenu">

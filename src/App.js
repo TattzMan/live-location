@@ -16,8 +16,8 @@ import SideTippers from "./components/pages/SideTippers";
 
 import Tauntliners from "./components/pages/Taultliner";
 
-import { auth, db, storage } from "./components/config/fireBase"
-import { collection, getDocs, doc, updateDoc, addDoc, query, where , getDoc} from 'firebase/firestore';
+import { auth, db} from "./components/config/fireBase"
+import { collection, getDocs, doc, updateDoc, query, where , getDoc} from 'firebase/firestore';
 
 import MiniLoad from './components/pages/miniLoads';
 import ThingsByUser from './components/pages/ThingsByUser'
@@ -65,9 +65,9 @@ function App(){
 
 
     
-  // React.useEffect(()=>{
-  //   getBulktrailers()
-  // }, [])
+  React.useEffect(()=>{
+    getBulktrailers()
+  }, [])
 
     
   const LowBedsDB = collection(db , "LowBeds")
@@ -91,9 +91,9 @@ function App(){
   }
     
   
-  // React.useEffect(()=>{
-  //   getLoBeds()
-  // }, [])
+  React.useEffect(()=>{
+    getLoBeds()
+  }, [])
 
 
 
@@ -142,9 +142,9 @@ function App(){
       console.error(err)
     }
   }
-  // React.useEffect(()=>{
-  //   getTankers()
-  // }, [])
+  React.useEffect(()=>{
+    getTankers()
+  }, [])
 
   const TaultlinerDB = collection(db , "tauntliner")
   let [ Taultliner , setTautliner] = React.useState([])
@@ -466,13 +466,10 @@ function App(){
         // If we haven't processed an item for this user yet, add it to the filteredData array
         if (!userIds.has(userId)) {
           const item = {
-            id: doc.id,
-            companyName: doc.data().companyName,
-            typeofLoad: doc.data().typeofLoad,
-            fromLocation: doc.data().fromLocation,
-            toLocation: doc.data().toLocation,
-            ratePerTonne: doc.data().ratePerTonne,
+            id: doc.id,       
             userId: userId,
+            // spread everthing in doc.data 
+            ...doc.data(),
           };
 
           filteredData.push(item);
@@ -498,17 +495,15 @@ function App(){
     }
   };
 
+  //  the getloadsList elemet s working to add loads to the Addload file this is taking loads from database adn asinging it to the addload whch will display when load is clicked
   const getLoadsList = async () => {
     try {
       const data = await getDocs(loadsCollection);
       const filteredData = data.docs.map((doc) => ({
         id: doc.id,
         userId: doc.data().userId,
-        companyName: doc.data().companyName,
-        typeofLoad: doc.data().typeofLoad,
-        fromLocation: doc.data().fromLocation,
-        toLocation: doc.data().toLocation,
-        ratePerTonne: doc.data().ratePerTonne,
+        // Spread everthing in the doc.data() to reduce lines of code it work to take everyhting in doc.data()
+        ...doc.data()
       }));
 
       setLoadsList(filteredData);
@@ -522,9 +517,7 @@ function App(){
     getLoadsList();
   }, []);
 
-  const handleClickOneData = (userId) => {
-    fetchBio(userId);
-  };
+
 
   useEffect(() => {
     document.body.style.paddingTop = allThingsByUser.length > 0 ? '70px' : '250px';
@@ -585,8 +578,7 @@ function App(){
     
 
       if(addLoad === true){  
-        trucks = loadsList.map(load => {
-
+          trucks = loadsList.map(load => {
           return(           
             <AddLoad
               item = {load}
@@ -641,9 +633,13 @@ function App(){
         };
         
         const displaySearched =  filteredData.slice(0, 15).map((value , key)=>{
+
+       
+        
+      // use the handleclick function from the mini load to only changed the clicked etm and redirect it to the main loads which the user has selected or clicked  also set the array empty tp remove the div from the screen  
             return(
-              <div className="dataItem">
-              <div className='wordsSearched' >{value.companyName} </div>
+
+<div className="dataItem" onClick={() => { handleClick(value.id); setFilteredData([]); }}> <div className='wordsSearched' >{value.companyName} </div>
               <div  className='wordsSearched' >from {value.fromLocation } </div>
               <div className='wordsSearched' >to {value.toLocation  } </div>
               </div>

@@ -7,9 +7,9 @@ function SideTippers(props){
   const starIcon = props.liked ? likedstar : unlikedStar
   return(
     <div >
-    <img src={props.item.imageUrl} className="truck-image"/>
+    <img src={props.item.imageUrl} className="truck-image" alt="" />
     <div className="About" >
-      <img src = {starIcon } className="star"  onClick={props.handleClick}/>
+      <img src = {starIcon } className="star"  onClick={props.handleClick} alt="" />
       <span>({props.item.rating}) </span>      
     </div>
     <h2 className="truck-name">{props.item.CompanyName} </h2>

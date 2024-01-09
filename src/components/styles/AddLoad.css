@@ -1,9 +1,10 @@
 
 .bigLoad{
+  margin-top: 30px;
   padding: 10px;
   background-color: #EDEDED ;
   position: relative;
-
+  
 }
 .welcmeMyAcc{
   z-index: 50;
@@ -71,13 +72,13 @@
   padding: 2px 4px ;
   border: 1px solid;
   line-height: 1.5 ;
-  background-color: lightslategray;
+  background-color: rgb(120, 163, 206);
   border-color:  #36454F;
   color: white; 
   cursor: pointer;
 }
 .moreLessBTN:hover {
-  background-color: #9FA8B3;; 
+  background-color: rgb(87, 112, 137) ; 
 }
 
 .moreLessBTN:active {
@@ -85,7 +86,7 @@
 }
 .spaninMini{
   margin: 4px;
-  color: black;
+  color: #333333;
   font-size: 16px;
 }
 .miniloadH3Div{
@@ -99,6 +100,27 @@
   text-emphasis-position:initial ;
 }
 
+
+
+.companyName {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+
+.loadType, .location, .rate, .dueDate, .requirements, .additionalInfo {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.loadType.custom, .location.custom, .rate.custom, .dueDate.custom, .requirements.custom, .additionalInfo.custom {
+  font-weight: bold;
+  background-color: #f8f9fa;
+  padding: 5px;
+  border-radius: 3px;
+}
 /* Small screens (less than 576px) */
 @media only screen and (max-width: 575px) {
 .miniloads{
