@@ -665,14 +665,15 @@ function App(){
             React.useEffect(()=>{
               weed()
             }, [currentUser])
-
-
+            
     return(
     <body>
                 
       <div>
       <div>
       <Header
+        getLoadsList = {getLoadsList}
+        getMainLoadsList = {getMainLoadsList}
         addLoadState ={toggleAddLoad}
         addBulkTrailer ={ getBulktrailers}
         addSideTippers = { getSideTippers}

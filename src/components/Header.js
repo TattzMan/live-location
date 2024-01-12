@@ -102,8 +102,6 @@ function Header(props){
     setAddloads(prevsate => !prevsate)
   }
   
-
-
   //  THe dropdown that allow you to add item like load or truck 
   function DropDown() {
     return (
@@ -112,10 +110,13 @@ function Header(props){
         <div className="dropDown">
 
         <button onClick={displayAddLooads} className='firstButtonIsnDrop'>add load</button>
-
+          
           {addLoads && <div className="addLoadDB">
           <button onClick={displayAddLooads} className="bacInDropDown" >back</button>
-            <AddLoaadDB/>
+            <AddLoaadDB
+            getloadsList = {props.getLoadsList}
+            getMainLoadsList = {props.getMainLoadsList}
+            />
           </div>
           }
   

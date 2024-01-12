@@ -1,11 +1,35 @@
 import React, { useState } from 'react';
 // get rating feature from material ui and use it for the stars fr ratung 
 import Rating from "@mui/material/Rating";
+import {db } from "./config/fireBase"
+import {getDocs , collection , addDoc , deleteDoc, doc} from "firebase/firestore"
+
 
   
 function Feedback() {
 
+  const [feedback , setFeedback] = React.useState([])
 
+  const getFeedback = async()=>{
+    //read the data
+    // set the movie list
+    try {
+      const data = await getDocs(Feedback)
+    const filteredData = data.docs.map((doc)=> ({
+      ...doc.data(),
+      id : doc.id      
+    }))
+    setFeedback(filteredData)
+    }catch(err){
+      console.error(err)  
+    }
+    }
+
+    React.useEffect(()=>{
+      getFeedback()
+    }, [])
+
+    console.log(feedback)
 
 const [usability, setUsability] = useState('');
 const [keyFeatures, setKeyFeatures] = useState([]);
@@ -30,11 +54,28 @@ const handleKeyFeaturesChange = (event) => {
   }
 };
 
-const handleSubmit = (event) => {
+const Feedback = collection(db,"feedback")
+
+
+const handleSubmit =  async(event)=>{
   event.preventDefault();
 
   // Handle the form submission
   // You can perform actions like sending the feedback data to a server
+
+  try{
+    await addDoc(Feedback , {
+      usability : usability ,
+      keyFeatures : keyFeatures ,
+      improvements : improvements, 
+      competitorComparison: competitorComparison ,
+      callToAction : callToAction , 
+      selectedRating : selectedRating 
+    })
+    getFeedback()
+    }catch(err){
+      console.error(err)
+    }
 
   // Reset form fields
   setUsability('');
@@ -46,6 +87,20 @@ const handleSubmit = (event) => {
   setSelectedRating('')
 };
 
+// const onsubmitMovie = async()=>{
+//   try{
+//   await addDoc(moviesCOllection , {
+//     recievedAndOscar : isNewOscar ,
+//     releaseDate : newReleaseDate ,
+//     tittle : newmovieTittle, 
+//     userID : auth?.currentUser?.uid
+//   })
+//   getMovieList()
+//   }catch(err){
+//     console.error(err)
+//   }
+  
+// }
 
 return (
   <form onSubmit={handleSubmit}   >
@@ -84,8 +139,8 @@ return (
       <input
         type="checkbox"
         name="keyFeatures"
-        value="Feature 1"
-        checked={keyFeatures.includes('Feature 1')}
+        value="the structure of the whole website"
+        checked={keyFeatures.includes('the structure of the whole website')}
         onChange={handleKeyFeaturesChange}
       />
           the structure of the whole website  
@@ -93,8 +148,8 @@ return (
       <input
         type="checkbox"
         name="keyFeatures"
-        value="Feature 2"
-        checked={keyFeatures.includes('Feature 2')}
+        value="the search option to easy find loads"
+        checked={keyFeatures.includes('the search option to easy find loads')}
         onChange={handleKeyFeaturesChange}
         />
       
@@ -103,11 +158,12 @@ return (
       <input
         type="checkbox"
         name="keyFeatures"
-        value="Feature 3"
-        checked={keyFeatures.includes('Feature 3')}
+        value="markerting of trucks and loads on front page"
+        checked={keyFeatures.includes('markerting of trucks and loads on front page')}
         onChange={handleKeyFeaturesChange}
-      />
+        />
       markerting of trucks and loads on front page 
+
     </label>
     <br/>
 
@@ -176,8 +232,17 @@ return (
          value={selectedRating}
          onChange={handleRatingSelect}
        />
+          <button type="submit">Submit</button>
+        {
+          feedback.map((item)=>(
+            <div>
+              <p> {item.usability} </p>
+              <p> {item.improvements} </p>
+            </div>
+          ))
+        }
 
-    <button type="submit">Submit</button>
+
   </form>
 );
 

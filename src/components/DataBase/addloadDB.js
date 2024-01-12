@@ -2,7 +2,8 @@ import React from "react";
 import { db, auth } from "../config/fireBase";
 import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
 
-function AddLoadDB (displayAddLooads) {
+function AddLoadDB (props) {
+       
 
   const [ username , setUsername] = React.useState('');
 
@@ -98,6 +99,8 @@ function AddLoadDB (displayAddLooads) {
         date : ""
 
       });
+      props.getloadsList() 
+      props.getMainLoadsList()
     } catch (err) {
       console.error(err);
     }
