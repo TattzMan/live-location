@@ -675,7 +675,7 @@ function App(){
         getLoadsList = {getLoadsList}
         getMainLoadsList = {getMainLoadsList}
         addLoadState ={toggleAddLoad}
-        addBulkTrailer ={ getBulktrailers}
+        getBulktrailers  ={ getBulktrailers}
         addSideTippers = { getSideTippers}
         // handle flter is used to filter things within the searched items
         handleFilter = {handleFilter}

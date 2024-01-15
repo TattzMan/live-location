@@ -115,7 +115,6 @@ function Header(props){
           <button onClick={displayAddLooads} className="bacInDropDown" >back</button>
             <AddLoaadDB
             getloadsList = {props.getLoadsList}
-            getMainLoadsList = {props.getMainLoadsList}
             />
           </div>
           }
@@ -128,6 +127,7 @@ function Header(props){
   
   }
 
+
     function displayTrucks(){
       return(
         <div className="dropDown">
@@ -135,7 +135,10 @@ function Header(props){
         <button onClick={toggleBulkTrailer} className='specifytruck'>Bulk trailers</button>
         
         {addBulkTrailer && <div className="inputTruckDiv">
-          <BulkTrailers/>
+          <BulkTrailers
+          getBulktrailers={props.getBulktrailers}
+          setDropdown =  {setDropdown} 
+          />
           <div onClick={toggleBulkTrailer}  className="backNewTruck" > back </div>
 
         </div>

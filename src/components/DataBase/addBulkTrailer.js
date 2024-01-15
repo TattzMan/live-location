@@ -6,7 +6,8 @@ import { storage } from "../config/fireBase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 
-function BulkTrailers(  ) {
+
+function BulkTrailers( props ) {
 
   const [ username , setUsername] = React.useState('');
 
@@ -29,7 +30,6 @@ function BulkTrailers(  ) {
   getCurrentUserName()
 }, [])
 
-console.log(username)
 
   const bulkTrailersDB = collection(db, "BulkTrailers");
 
@@ -59,8 +59,8 @@ console.log(username)
     if (imageUpload === null) return;
     const imageRef = ref(storage, `BulkTrailer/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      alert("refresh page to see changes");
     });
+
   };
 
   const handleSubmit = async (event) => {
@@ -90,11 +90,13 @@ console.log(username)
         contact: "",
       });
       setImageUpload(null);
+      props.getBulktrailers()
+      props.setDropdown(prev => !prev)
     } catch (err) {
       console.error(err);
     }
   };
-
+  
   return (
       <form className="inputTruckform" onSubmit={handleSubmit}>
         <input
