@@ -1,11 +1,9 @@
-.Main-grid{
+.Main-grid , .mainGridGetFeedBack{
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr ;
-
   row-gap: 40px;
   column-gap: 16px;
-
 }
 .truck-image{
   width: 100%;
@@ -108,7 +106,8 @@
   row-gap: 40px;
   column-gap: 16px;
 }
-.EnterCurrentUser{
+/* The enter current usser allow us to have a background color when a ser want to manage thhier account  and the feuaters are reuired for feedback display aslo */
+.EnterCurrentUser , .displayAddedLoads{
   position: fixed;
   top: 70px;
   bottom: 0;
@@ -118,6 +117,15 @@
   padding-left: 240px;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
+}
+/* Display the items which were added for feedback by user and re,pve the paddoong on EnterCurrent user */
+.displayAddedLoads{
+  padding: 0;
+}
+/* take all the elemts used in Min-Grid that display 3 items and for the feedbacks taken display 4 items because they have a full screen  */
+.mainGridGetFeedBack{
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
 }
 .updateUsername{
   position: fixed;

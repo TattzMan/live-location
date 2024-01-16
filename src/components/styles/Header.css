@@ -264,11 +264,25 @@ background-color: rgb(102, 100, 100);
   right: 0;
  }
  .inputTruckform{
+  position:relative;
   height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin-top: 15px
+   }
+   /* Adding css for the loading item hich appear when an form want to submit  */
+   .loadingItem{
+    position: absolute;
+    top: 0;
+    bottom: -10px ;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
    }
 
 .smallMenu{

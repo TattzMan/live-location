@@ -16,6 +16,8 @@ function BulkTrailers(props){
     <h2 className="truck-name">{props.item.CompanyName} </h2>
       <p className="location"> From {props.item.fromLocation} to {props.item.toLocation} </p>
       <p>contact {props.item.contact}</p>
+      <p> trailer type {props.item.trailerType}  </p>
+      <p> additional Info {props.item.additionalInfo} </p>
     </div>
   )
 }

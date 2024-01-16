@@ -21,6 +21,7 @@ import CurrentUser from './pages/DisplayCurrentUser'
 import SendIcon from '@mui/icons-material/Send';
 import Auth from './auth'  
 import Feedback from "./feedback";
+import GetFeedback from "./getFeedbacks";
 
 function Header(props){
 
@@ -206,6 +207,19 @@ function Header(props){
     menu = true
    }
 
+
+  // CHeck if somoene is running local host and display the feedbacks added by pple on the dropdown 
+  const isLocalhost = window.location.hostname === 'localhost';
+
+  const [ feedbackDisplay , setDisplayFeedback] = React.useState(false)
+
+  function toggleDisplayFeedback(){
+     setDisplayFeedback(prevState => !prevState)
+  }
+
+//  End of displaying feedback
+
+
    const [NewUserName, setNewUserName] = useState('');
    const [usernameDB, setUsernameDB] = useState(null);
    const db = getFirestore();
@@ -255,6 +269,9 @@ function Header(props){
     function toggleCurrentUser(){
       setCurrentUserBtn(prevState => !prevState)
     }
+
+
+    
 
     let CurrentUserDisplay
     if(CurrentUserBtn){
@@ -362,6 +379,17 @@ function Header(props){
         <div onClick={toggleMyAccBTN} className="myAccount" > <AccountBoxIcon /> <span>my account </span>  </div>
         <div onClick={logout} className="logOut">  <span>logout</span> <LogoutIcon/> </div>
 
+
+           { isLocalhost && <div>     <div onClick={toggleDisplayFeedback}> feedBacks </div>    
+           
+           {/* Displat these items if the feebacks button is clicked   */}
+           {/* the GetFeeedback elemt is from getFeedbac.js elemtnwere thre is logic to displa the feedbacks  */}
+            {feedbackDisplay && <div className="displayAddedLoads">
+              <div onClick={toggleDisplayFeedback}>back</div>
+              < GetFeedback />
+            </div>  }
+
+             </div> }
           </div>
           : null
         }       
@@ -376,6 +404,7 @@ function Header(props){
  
           <div onClick={ttoggleDisplayInputUsername} className="name"> Enter new username </div>  
          <div onClick={toggleCurrentUser} className="name" >Loads   </div>
+
          <div className="name">trucks</div> 
          </div>
          </div>
