@@ -128,6 +128,7 @@ function Header(props){
   
   }
 
+  console.log()
 
     function displayTrucks(){
       return(
@@ -148,13 +149,19 @@ function Header(props){
 
         <button onClick={toggleSideTipper} >SideTipper</button>
         {addSideTipper && <div className="inputTruckDiv">
-          <SideTipper/>
+          <SideTipper
+            getSideTippers = {props.getSideTippers}
+              setDropdown =  {setDropdown} 
+          />
           <div onClick={toggleSideTipper}  className="backNewTruck" > back </div>
         </div> }
 
         <button onClick={toggleLowBeds} >Low Beds</button>
         {addLowBeds && <div className="inputTruckDiv">
-          <LowBeds/>
+          <LowBeds
+              getLowBeds = {props.getLowBeds}
+              setDropdown =  {setDropdown} 
+          />
           <div onClick={toggleLowBeds} className="backNewTruck" >back</div>
         </div>
         }
@@ -162,14 +169,20 @@ function Header(props){
 
         <button onClick={toggleTankers} className='specifytruck'>tankers</button>
         {addTankers && <div className="inputTruckDiv">
-          <Tankers/>
+          <Tankers
+          getTankers = {props.getTankers}
+          setDropdown =  {setDropdown} 
+          />
           <div onClick={toggleTankers} className="backNewTruck" >back</div >
           </div>}
 
         <button onClick={toggleTauntliner} className='specifytruck'>tauntliner</button>
 
         {addTauntliner && <div className="inputTruckDiv">
-          <Tauntliner/>
+          <Tauntliner
+            getTauntliner = {props.getTauntliner}
+            setDropdown =  {setDropdown} 
+          />
           <div onClick={toggleTauntliner}  className="backNewTruck" >back</div>
         </div>}
 
@@ -368,11 +381,11 @@ function Header(props){
         {/*the first feed back is a small letter when start for variable name that can be true or false and toggle feedback elemet  */}
         {/* THe second feed back have a capital letter to tke elements from the feedback file and display on the sreen  */}
 
-        {feedback &&    <div   className="makeBackgroundColor">   
+        {feedback &&    <div  className="dropDown" >   
         <Feedback/>  <div onClick={displayFeedback}> back </div>  </div>      }
 
         {/* the feedback button can trigeer the feedback to be true and then display the emelemts */}
-          {/* <div className="feedbackButton"  onClick={displayFeedback} > feedback </div>  */}
+          <div className="feedbackButton"  onClick={displayFeedback} > feedback </div> 
 
         {smallMenu ?
           <div className="smallMenu">

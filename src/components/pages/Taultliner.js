@@ -7,15 +7,21 @@ function Tauntliners(props){
   const starIcon = props.liked ? likedstar : unlikedStar 
   return(
     <div >
-    <img src={props.item.imageUrl} className="truck-image" alt=" " />
+    <img src={props.item.imageUrl} className="truck-image"alt="" />
     <div className="About" >
-      <img src = {starIcon } className="star"  onClick={props.handleClick} alt="" />
+      <img src = {starIcon } className="star"  onClick={props.handleClick} alt=" " />
       <span>({props.item.rating}) </span>      
     </div>
+
     <h2 className="truck-name">{props.item.CompanyName} </h2>
-      <p className="location"> From {props.item.fromLocation} to {props.item.toLocation} </p>
-      <p>contact : {props.item.contact}</p>
-    </div>
+      {  props.item.fromLocation && (  <p className="location"> From {props.item.fromLocation} to {props.item.toLocation} </p>) }
+
+      { props.item.contact && ( <p>contact {props.item.contact}</p> )}
+
+      { props.item.trailerType && ( <p> trailer type {props.item.trailerType}  </p> ) }
+
+      {props.item.additionalInfo && (<p> additional Info {props.item.additionalInfo} </p>)}
+    </div>  
   )
 }
 export default React.memo(Tauntliners)

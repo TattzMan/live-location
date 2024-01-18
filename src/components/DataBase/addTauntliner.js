@@ -1,12 +1,13 @@
-
 import React from "react"
 import { storage } from "../config/fireBase";
 import {getDownloadURL, ref , uploadBytes} from "firebase/storage"
 import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
 import { db, auth } from "../config/fireBase";
 import {v4} from "uuid"
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-function Tauntliner(){
+
+function Tauntliner(props){
 
   const [ username , setUsername] = React.useState('');
 
@@ -37,7 +38,9 @@ function Tauntliner(){
     toLocation : "",
     like : false,
     rating : 0,
-    contact : ''
+    contact : '' ,
+    additionalInfo : "" ,
+    trailerType : "" ,
   })
 
     function handlechange(event){
@@ -51,13 +54,19 @@ function Tauntliner(){
         }
       })
     }
+  // loading effect will start here
+
+  const [startLOading , setStartLoading ] = React.useState(false)
+
     const [ imageUpload, setImageUpload] = React.useState(null)    
 
     const uploadImage = ()=>{
+                // ths is were we ay start loading 
+    setStartLoading(prevState => !prevState)
+
       if(imageUpload === null) return
       const imageRef = ref(storage , `tauntliner/${imageUpload.name + v4() }`)
       uploadBytes(imageRef , imageUpload).then(()=>{
-        alert("refresh page to see changes")
       })
     }
     
@@ -77,13 +86,20 @@ function Tauntliner(){
           like : formDta.like,
           rating : formDta.rating,
           contact : formDta.contact,
-          imageUrl : imageUrl
+          imageUrl : imageUrl ,
+          trailerType : formDta.trailerType ,
+          additionalInfo : formDta.additionalInfo 
         })
         setFormData({
           fromLocation: "",
           toLocation: "",
           contact: "",
+          trailerType : "" ,
+          additionalInfo : ""
         });
+        props.getTauntliner()
+        props.setDropdown(prev => !prev)
+  
       }catch(err){
         console.error(err)
       }
@@ -92,38 +108,62 @@ function Tauntliner(){
 
 
   return(
-    <form  onSubmit={handleSubmit} className="inputTruckform" >
-
-      <input
+    <form className="inputTruckform" onSubmit={handleSubmit}>
+    <label>Add an image </label>
+    <input
       type="file"
-      onChange={(e)=>{setImageUpload(e.target.files[0])}}
-      />
+      onChange={(e) => {
+        setImageUpload(e.target.files[0]);
+      }}
+    />
 
-     
-      <input
-        placeholder="from location"
-        type="text"
-        onChange={handlechange}
-        name="fromLocation"
-        value={formDta.fromLocation}
-         />
+  {startLOading && <div className="loadingItem" > < CircularProgress /> </div> }
 
-        <input
-        placeholder="to location"
-        type="text"
-        onChange={handlechange}
-        name="toLocation"
-        value={formDta.toLocation}
-          />
-               <input
-        placeholder="Contact"
-        type="text"
-        onChange={handlechange}
-        name="contact"
-        value={formDta.contact}
-          />
-          <button onClick={uploadImage} className="backInddForm" >submit</button>
-          </form>
+  <label> From location  </label>
+    <input
+      placeholder="from location"
+      type="text"
+      onChange={handlechange}
+      name="fromLocation"
+      value={formDta.fromLocation}
+    />
+  <label> To location </label>
+    <input
+      placeholder="to location"
+      type="text"
+      onChange={handlechange}
+      name="toLocation"
+      value={formDta.toLocation}
+    />
+  <label> contact  </label>
+    <input
+      placeholder="Contact"
+      type="text"
+      onChange={handlechange}
+      name="contact"
+      value={formDta.contact}
+    />
+
+    <label>Specify your trailer</label>
+       <input
+      placeholder="trailerType"
+      type="text"
+      onChange={handlechange}
+      name="trailerType"
+      value={formDta.trailerType}
+    />
+    <b> <label >additional infomation about the truck</label> </b>
+          <input
+      placeholder="additionalInfo"
+      type="text"
+      onChange={handlechange}
+      name="additionalInfo"
+      value={formDta.additionalInfo}
+    />
+    
+    <button onClick={uploadImage} className="backInddForm" >submit</button>
+
+  </form>
   )
 }
 export default Tauntliner

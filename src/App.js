@@ -73,7 +73,7 @@ function App(){
   const LowBedsDB = collection(db , "LowBeds")
   let [ LowBed , setLowBeds] = React.useState([])
 
-  const getLoBeds= async()=>{
+  const getLowBeds= async()=>{
     //read data 
     //set movieList 
     try{
@@ -92,7 +92,7 @@ function App(){
     
   
   React.useEffect(()=>{
-    getLoBeds()
+    getLowBeds()
   }, [])
 
 
@@ -666,6 +666,7 @@ function App(){
               weed()
             }, [currentUser])
             
+            
     return(
     <body>
                 
@@ -676,7 +677,12 @@ function App(){
         getMainLoadsList = {getMainLoadsList}
         addLoadState ={toggleAddLoad}
         getBulktrailers  ={ getBulktrailers}
+        getSideTippers = {getSideTippers}
+        getLowBeds = {getLowBeds}
+        getTankers = {getTankers}
+        getTauntliner = {getTauntliner}
         addSideTippers = { getSideTippers}
+
         // handle flter is used to filter things within the searched items
         handleFilter = {handleFilter}
         username = {username}
