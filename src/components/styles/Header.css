@@ -144,9 +144,17 @@ background-color: rgb(102, 100, 100);
   top: 85%;
   left: 90%;
   border: 1px;
-
+ 
+  background-color: #F1F1F1;
+  color: #333333;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, padding 0.3s;
 }
-.dropDown{
+
+.dropDown , .sendFeedback {
  background-color:  white ;
   height: 350px;
   width: 280px;
@@ -160,7 +168,10 @@ background-color: rgb(102, 100, 100);
   align-items: center;
   z-index: 10;
 }
- 
+.sendFeedback{
+          
+}
+
 .dropDown > button ,
 .addloadDBform > button , 
 .bacInDropDown

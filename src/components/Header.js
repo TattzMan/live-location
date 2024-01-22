@@ -381,7 +381,7 @@ function Header(props){
         {/*the first feed back is a small letter when start for variable name that can be true or false and toggle feedback elemet  */}
         {/* THe second feed back have a capital letter to tke elements from the feedback file and display on the sreen  */}
 
-        {feedback &&    <div  className="dropDown" >   
+        {feedback &&    <div  className="sendFeedback" >   
         <Feedback/>  <div onClick={displayFeedback}> back </div>  </div>      }
 
         {/* the feedback button can trigeer the feedback to be true and then display the emelemts */}
@@ -393,7 +393,7 @@ function Header(props){
         <div onClick={logout} className="logOut">  <span>logout</span> <LogoutIcon/> </div>
 
 
-           { isLocalhost && <div>     <div onClick={toggleDisplayFeedback}> feedBacks </div>    
+           { isLocalhost && <div >     <div onClick={toggleDisplayFeedback}> feedBacks </div>    
            
            {/* Displat these items if the feebacks button is clicked   */}
            {/* the GetFeeedback elemt is from getFeedbac.js elemtnwere thre is logic to displa the feedbacks  */}
