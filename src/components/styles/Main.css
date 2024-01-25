@@ -50,8 +50,7 @@
   right: 0;
   background-color: #23242a;
   z-index: 200;
-}
-.feedback{
+  overflow: auto;
 }
 .authDiv{
   display: flex;

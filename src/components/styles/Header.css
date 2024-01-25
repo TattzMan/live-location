@@ -145,7 +145,7 @@ background-color: rgb(102, 100, 100);
   left: 90%;
   border: 1px;
  
-  background-color: #F1F1F1;
+  background-color:rgb(21, 177, 21);
   color: #333333;
   padding: 10px 20px;
   border-radius: 8px;
@@ -168,9 +168,7 @@ background-color: rgb(102, 100, 100);
   align-items: center;
   z-index: 10;
 }
-.sendFeedback{
-          
-}
+
 
 .dropDown > button ,
 .addloadDBform > button , 

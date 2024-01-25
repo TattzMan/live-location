@@ -1,0 +1,27 @@
+.bigDisplay{
+  height: 700px;
+  width:100%;
+  background-color: #000080;
+  margin-top: 35px;
+  padding-top: 60px;
+  
+}
+.flexIterms{
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 75px;
+}
+.imageAndCatchText{
+  display: flex;
+  justify-content: space-evenly;
+
+}
+.frstTextDiv{
+  width: 450px;
+  margin-right:100px ;
+}
+.scndImg{
+  height: 500px;
+  width: 500px;
+  border-radius: 5%;
+}

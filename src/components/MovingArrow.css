@@ -1,0 +1,22 @@
+.moving-arrow-container {
+  height: 100px; /* Adjust the container height as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.moving-arrow-wrapper {
+  animation: moveArrow 2s ease-in-out infinite;
+}
+
+@keyframes moveArrow {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

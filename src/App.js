@@ -21,7 +21,7 @@ import { collection, getDocs, doc, updateDoc, query, where , getDoc} from 'fireb
 
 import MiniLoad from './components/pages/miniLoads';
 import ThingsByUser from './components/pages/ThingsByUser'
-
+import Intro from './components/intro'
 
 require('events').EventEmitter.defaultMaxListeners = 15;
 
@@ -672,6 +672,7 @@ function App(){
                 
       <div>
       <div>
+        
       <Header
         getLoadsList = {getLoadsList}
         getMainLoadsList = {getMainLoadsList}
@@ -717,6 +718,8 @@ function App(){
         }
       />   
                   
+        <Intro/>
+
          { filteredData.length > 0 && (
               <div className='displaySearched' >
               {displaySearched}
