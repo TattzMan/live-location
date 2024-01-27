@@ -154,7 +154,7 @@ background-color: rgb(102, 100, 100);
   transition: background-color 0.3s, color 0.3s, padding 0.3s;
 }
 
-.dropDown , .sendFeedback {
+.dropDown  {
  background-color:  white ;
   height: 350px;
   width: 280px;
@@ -170,6 +170,70 @@ background-color: rgb(102, 100, 100);
 }
 
 
+.sendFeedback{
+  position: relative;
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  background-color: red;
+  z-index: 10;
+  height: 458px;
+  width: 350px;
+  border-radius: 25px;
+}
+.sendFeedback > div{
+  position: absolute;
+  top: 30px;
+  right: 15px;
+  z-index: 12;
+}
+.topSendFB{
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  position: absolute;
+  top: 0;
+  width: 330px;
+  background-color: black;
+  padding: 12px;
+  text-align: center;
+}
+.middleSendFB{
+  margin-top: 90px;
+  background-color:  rgb(54, 69, 79) ;
+  height: 300px;
+    overflow: hidden;
+    word-break: break-all;
+}
+.middleSendFB > p{
+  font-size: 15px;
+  color: lightgray;
+  margin-left: 13px;
+  margin-top: 10px;
+}
+.belowSendFB{
+  position: absolute;
+  bottom: 0;
+  background-color: black;
+  width: 290px;
+  padding-top:20px ;
+  padding-bottom: 20px;
+  padding-left: 60px;
+
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.belowSendFB > input{
+  border: none;
+  margin-right: -3px;
+  padding: 5px;
+  padding-top: 10px;
+}
+.belowSendFB > button{
+  border: none;
+  cursor: pointer;
+  padding-bottom:5px ;
+  padding-left: 5px;
+}
 .dropDown > button ,
 .addloadDBform > button , 
 .bacInDropDown
@@ -217,6 +281,7 @@ background-color: rgb(102, 100, 100);
   border-bottom: 1px solid darkgray;
   background-color: transparent;
 }
+
 .submitINAddload {
   position: absolute;
   top: 80%;

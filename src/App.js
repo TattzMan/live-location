@@ -666,6 +666,11 @@ function App(){
               weed()
             }, [currentUser])
             
+            const [displayIntro , setDisplayIntro ] = React.useState(true)
+
+            function toggleIntro(){
+              setDisplayIntro(prevstate => !prevstate)
+            }
             
     return(
     <body>
@@ -718,7 +723,9 @@ function App(){
         }
       />   
                   
-        <Intro/>
+       { displayIntro && <Intro
+        toggleIntro = {toggleIntro}
+       />}
 
          { filteredData.length > 0 && (
               <div className='displaySearched' >

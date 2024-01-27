@@ -22,9 +22,8 @@ import SendIcon from '@mui/icons-material/Send';
 import Auth from './auth'  
 import Feedback from "./feedback";
 import GetFeedback from "./getFeedbacks";
-
+import CancelIcon from '@material-ui/icons/Cancel';
 function Header(props){
-
 
   const [currentUser, setCurrentUser] = React.useState(null);
 
@@ -382,7 +381,7 @@ function Header(props){
         {/* THe second feed back have a capital letter to tke elements from the feedback file and display on the sreen  */}
 
         {feedback &&    <div  className="sendFeedback" >   
-        <Feedback/>  <div onClick={displayFeedback}> back </div>  </div>      }
+        <Feedback/>  <div onClick={displayFeedback}> <CancelIcon/> </div>  </div>      }
 
         {/* the feedback button can trigeer the feedback to be true and then display the emelemts */}
           <div className="feedbackButton"  onClick={displayFeedback} > feedback </div> 

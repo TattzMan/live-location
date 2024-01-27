@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Rating from "@mui/material/Rating";
 import {db } from "./config/fireBase"
 import { collection , addDoc } from "firebase/firestore"
-
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
   
 function Feedback() {
@@ -37,14 +37,15 @@ const handleSubmit =  async(event)=>{
 
   // Reset form fields
   setSelectedRating('')
+  setImprovements('')
 };
 
-
+ 
 
 return (
   <form onSubmit={handleSubmit}   >
-    <h2>Lets build the site togather </h2>    
- 
+
+      <div className='topSendFB'>
     <p>Select your rating:</p>
 
     {/* create the stars for rating we got them form material ui it have an item for rating which make it easy for use to create a rating feature  */}
@@ -53,23 +54,21 @@ return (
       value={selectedRating}
       onChange={handleRatingSelect}
     />
-<br/>
-    <label>
-      <p> Areas for improvement: What aspects of our website do you think could be improved? </p>
-      
-      <br/>
+    </div>
+    <div className='middleSendFB'>
+      <p>Help us serve you better. Share your feedback.</p>
+      {improvements}
+    </div>
+    <div className='belowSendFB'>
 
-      <textarea
+      <input
+        placeholder='TYpe your message'
         name="improvements"
         value={improvements}
         onChange={(event) => setImprovements(event.target.value)}
-      />
-
-    </label>
-    <br/>    
-  
-          <button type="submit">Submit</button>
-        
+      />  
+          <button type="submit"> <ArrowForwardIcon/>  </button>
+          </div>        
 
   </form>
 );
