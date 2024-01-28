@@ -6,6 +6,8 @@ import { db, auth } from "../config/fireBase";
 import {v4} from "uuid"
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { IconButton } from "@mui/material";
 
 function Tauntliner(props){
 
@@ -109,13 +111,22 @@ function Tauntliner(props){
 
   return(
     <form className="inputTruckform" onSubmit={handleSubmit}>
-    <label>Add an image </label>
-    <input
-      type="file"
-      onChange={(e) => {
-        setImageUpload(e.target.files[0]);
-      }}
-    />
+     <label>Add an image </label>
+             <input
+        accept="image/*"
+        id="image-upload"
+        type="file"
+        style={{ display: 'none' }}
+        
+          onChange={(e) => {
+            setImageUpload(e.target.files[0]);
+          }}
+      />
+          <label htmlFor="image-upload">
+        <IconButton component="span" className="image-upload-button">
+          <AddAPhotoIcon style={{ color: "#0000FF" }} />
+          </IconButton>
+      </label>
 
   {startLOading && <div className="loadingItem" > < CircularProgress /> </div> }
 
@@ -152,7 +163,7 @@ function Tauntliner(props){
       name="trailerType"
       value={formDta.trailerType}
     />
-    <b> <label >additional infomation about the truck</label> </b>
+     <label >additional infomation about the truck</label> 
           <input
       placeholder="additionalInfo"
       type="text"

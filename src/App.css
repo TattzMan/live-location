@@ -16,6 +16,14 @@ body{
  h2{
    margin: 0;
  }
+
+  button{
+      opacity: 0.8 ;
+      
+  }
+  button{
+    opacity: 6;
+  }
  /* Small screens (less than 576px) */
  @media only screen and (max-width: 575px) {
    body {

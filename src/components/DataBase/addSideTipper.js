@@ -1,9 +1,11 @@
-import React from "react"
+import React from "react";
 import { storage } from "../config/fireBase";
 import {getDownloadURL, ref , uploadBytes} from "firebase/storage"
 import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
 import { db, auth } from "../config/fireBase";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { IconButton } from "@mui/material";
 
 import {v4} from "uuid"
 
@@ -103,14 +105,23 @@ function SideTipper(props){
 
   return(
     <form className="inputTruckform" onSubmit={handleSubmit}>
-        <label>Add an image </label>
-        <input
-          type="file"
+ 
+ <label>Add an image </label>
+             <input
+        accept="image/*"
+        id="image-upload"
+        type="file"
+        style={{ display: 'none' }}
+        
           onChange={(e) => {
             setImageUpload(e.target.files[0]);
           }}
-        />
-
+      />
+          <label htmlFor="image-upload">
+        <IconButton component="span" className="image-upload-button">
+          <AddAPhotoIcon style={{ color: "#0000FF" }} />
+          </IconButton>
+      </label>
       {startLOading && <div className="loadingItem" > < CircularProgress /> </div> }
 
       <label> From location  </label>
@@ -146,7 +157,7 @@ function SideTipper(props){
           name="trailerType"
           value={formDta.trailerType}
         />
-        <b> <label >additional infomation about the truck</label> </b>
+         <label >additional infomation about the truck</label> 
               <input
           placeholder="additionalInfo"
           type="text"

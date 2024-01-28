@@ -345,8 +345,8 @@ function Header(props){
           
         {window.innerWidth <= 500 && currentMneu }
 
-         <h1>Truckerz</h1>
-        </div>
+         <h1 color="#0000FF">Truckerz</h1>
+          </div>
 
         <div className="middle-section">
           {/* ?\ A search bar used to search for loads found on header   */}

@@ -23,10 +23,14 @@ import MiniLoad from './components/pages/miniLoads';
 import ThingsByUser from './components/pages/ThingsByUser'
 import Intro from './components/intro'
 
-require('events').EventEmitter.defaultMaxListeners = 15;
 
 
 function App(){  
+
+const EventEmitter = require('events').EventEmitter;
+const tlssocketEmitter = new EventEmitter();
+tlssocketEmitter.setMaxListeners(15);
+
   const [currentUser, setCurrentUser] = React.useState(null);
 
   React.useEffect(() => {
