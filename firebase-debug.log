@@ -1,0 +1,188 @@
+[debug] [2024-01-28T20:20:03.336Z] ----------------------------------------------------------------------
+[debug] [2024-01-28T20:20:03.339Z] Command:       /usr/bin/node /home/weed/.npm-global/bin/firebase deploy --debug
+[debug] [2024-01-28T20:20:03.340Z] CLI Version:   13.0.2
+[debug] [2024-01-28T20:20:03.340Z] Platform:      linux
+[debug] [2024-01-28T20:20:03.340Z] Node Version:  v20.8.0
+[debug] [2024-01-28T20:20:03.340Z] Time:          Sun Jan 28 2024 22:20:03 GMT+0200 (Central Africa Time)
+[debug] [2024-01-28T20:20:03.340Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-01-28T20:20:03.426Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-01-28T20:20:03.427Z] > authorizing via signed-in user (kelvinyaya8@gmail.com)
+[debug] [2024-01-28T20:20:03.428Z] [iam] checking project truckers-cace6 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-01-28T20:20:03.430Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/truckers-cace6:testIamPermissions [none]
+[debug] [2024-01-28T20:20:03.431Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/truckers-cace6:testIamPermissions x-goog-quota-user=projects/truckers-cace6
+[debug] [2024-01-28T20:20:03.431Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/truckers-cace6:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-01-28T20:20:05.820Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/truckers-cace6:testIamPermissions 200
+[debug] [2024-01-28T20:20:05.821Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/truckers-cace6:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-01-28T20:20:05.822Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/truckers-cace6 [none]
+[debug] [2024-01-28T20:20:06.854Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/truckers-cace6 200
+[debug] [2024-01-28T20:20:06.854Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/truckers-cace6 {"projectId":"truckers-cace6","projectNumber":"355769728168","displayName":"Truckers","name":"projects/truckers-cace6","resources":{"hostingSite":"truckers-cace6","storageBucket":"truckers-cace6.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_89299553-fc55-45c8-b6ea-b620fd864674"}
+[info] 
+[info] === Deploying to 'truckers-cace6'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2024-01-28T20:20:06.860Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/truckers-cace6/versions [none]
+[debug] [2024-01-28T20:20:06.860Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/truckers-cace6/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2024-01-28T20:20:10.515Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/truckers-cace6/versions 200
+[debug] [2024-01-28T20:20:10.516Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/truckers-cace6/versions {"name":"projects/355769728168/sites/truckers-cace6/versions/4b7a9601d019b9a3","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[truckers-cace6]: beginning deploy... 
+[info] i  hosting[truckers-cace6]: found 20 files in build 
+[debug] [2024-01-28T20:20:10.526Z] [hosting] uploading with 200 concurrency
+[debug] [2024-01-28T20:20:10.531Z] [hosting] hash cache [YnVpbGQ] stored for 20 files
+[debug] [2024-01-28T20:20:10.531Z] [hosting][hash queue][FINAL] {"max":1,"min":0,"avg":0,"active":0,"complete":20,"success":20,"errored":0,"retried":0,"total":20,"elapsed":3}
+[debug] [2024-01-28T20:20:10.531Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/355769728168/sites/truckers-cace6/versions/4b7a9601d019b9a3:populateFiles [none]
+[debug] [2024-01-28T20:20:10.532Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/355769728168/sites/truckers-cace6/versions/4b7a9601d019b9a3:populateFiles {"files":{"/404.html":"b7bab6b83fa074653ff28c8d2a64135d3434575f70a12ab3d3ba8080461b9537","/asset-manifest.json":"043e94ecbb3703d0dfb7d746ae2e63137e2d1d2e602aa4edf570fa6609bc35c0","/index.html":"32dc9b33ff0efff4d563986ba34a4565c982b7504ec9506ef4e4f1b3f0b9fe85","/logo192.png":"76c449ccb9cd117c2f2338f091b18f7050f3210e249b2228f5c81b23f34377cd","/logo512.png":"7779210d56c1f3741e2e487799fe3092def4fa6ac450a60532b807c3a8971205","/manifest.json":"0958a5e0c831126100c8c2d06a6bbaa665a3900f21aaff4130238a6f5a113aa1","/robots.txt":"2544ca049f223a42bff01f72ad930a5edba75bbb7199d0f8430a02ff5aca16ec","/static/css/main.08fc352a.css":"ec5ecb115ec16566f8e3ff23cc92af85b676acec2fdd6cb77d0647a4ac9aa826","/static/css/main.08fc352a.css.map":"b0e5d444508452b0964247dfae0aa8f799d7f2ee351b3a502db63dff0db0ba15","/static/js/main.854c0570.js":"bfcf2b565745b37d89c3c70d6db50d17c18423a786c2b2f06cde53a86fc993bc","/static/js/main.854c0570.js.LICENSE.txt":"a25b7dc6e31e54be7a539f73db14fd8495951e97c8ab29be56f4bd5f73e2efb0","/static/js/main.854c0570.js.map":"ae5caf9032649414f5b697e3985efc1cd0539860967e2424ba038a054024675f","/static/media/Original on Transparent.2985a89578c85f801a74.png":"03ab80c967a59b95c28a89a2d644a12f2fa76081e2dcdada6f2b22f306857820","/static/media/google.85078161c85c9374b18a7212c53637ae.svg":"54674f3447c935bdccabdf21047e37862173783fd7b0b14c088e12313d21dcb6","/static/media/grade_FILL0_wght400_GRAD0_opsz48.f81f8f568603a82c367aa70482e64fed.svg":"9c356626395e8a85a3263940e0fdb9bea4f138757531536dfe0684a28f49ce7a","/static/media/medium-shot-man-wearing-helmet.c2c1bbf74e055eb9c34d.jpg":"6f2fd864aaf37a61e979706f69c3ca8f16543ce0f888f1e6668c88b9f599011a","/static/media/star_rate_black_24dp.2e0c214c6872ab230d56bc9399d4fe34.svg":"d8e0bba3513f4f2e6d426530e5e6b787803548268b54761506c0d9dee7771bb6","/static/media/supply-chain-representation-still-life(1).9428c1e3270c12dcfd8e.jpg":"219aeb2291011c3d2731e6e81697ce270bf2b0b0b045be8106b1697f59b8937a","/static/media/supply-chain-representation-still-life.9428c1e3270c12dcfd8e.jpg":"219aeb2291011c3d2731e6e81697ce270bf2b0b0b045be8106b1697f59b8937a","/static/media/vehicles-laptop-supply-chain-representation.c03402efcd749dc0827d.jpg":"9ab00a1228e4e9858f4e8176d4bac217c89540e713641dbae31d336b0a6484e6"}}
+[debug] [2024-01-28T20:20:11.746Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/355769728168/sites/truckers-cace6/versions/4b7a9601d019b9a3:populateFiles 200
+[debug] [2024-01-28T20:20:11.746Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/355769728168/sites/truckers-cace6/versions/4b7a9601d019b9a3:populateFiles {"uploadRequiredHashes":["219aeb2291011c3d2731e6e81697ce270bf2b0b0b045be8106b1697f59b8937a","6f2fd864aaf37a61e979706f69c3ca8f16543ce0f888f1e6668c88b9f599011a","9ab00a1228e4e9858f4e8176d4bac217c89540e713641dbae31d336b0a6484e6"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/truckers-cace6/versions/4b7a9601d019b9a3/files"}
+[debug] [2024-01-28T20:20:11.748Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/truckers-cace6/versions/4b7a9601d019b9a3/files/219aeb2291011c3d2731e6e81697ce270bf2b0b0b045be8106b1697f59b8937a [none]
+[debug] [2024-01-28T20:20:11.748Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/truckers-cace6/versions/4b7a9601d019b9a3/files/219aeb2291011c3d2731e6e81697ce270bf2b0b0b045be8106b1697f59b8937a [stream]
+[debug] [2024-01-28T20:20:11.750Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/truckers-cace6/versions/4b7a9601d019b9a3/files/6f2fd864aaf37a61e979706f69c3ca8f16543ce0f888f1e6668c88b9f599011a [none]
+[debug] [2024-01-28T20:20:11.750Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/truckers-cace6/versions/4b7a9601d019b9a3/files/6f2fd864aaf37a61e979706f69c3ca8f16543ce0f888f1e6668c88b9f599011a [stream]
+[debug] [2024-01-28T20:20:11.752Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/truckers-cace6/versions/4b7a9601d019b9a3/files/9ab00a1228e4e9858f4e8176d4bac217c89540e713641dbae31d336b0a6484e6 [none]
+[debug] [2024-01-28T20:20:11.752Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/truckers-cace6/versions/4b7a9601d019b9a3/files/9ab00a1228e4e9858f4e8176d4bac217c89540e713641dbae31d336b0a6484e6 [stream]
+[debug] [2024-01-28T20:20:11.753Z] [hosting][populate queue][FINAL] {"max":1218,"min":1218,"avg":1218,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1223}
+[debug] [2024-01-28T20:20:11.753Z] [hosting] uploads queued: 3
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
+[info] i  hosting: uploading new files [0/3] (0%) 
