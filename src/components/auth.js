@@ -9,6 +9,7 @@ function Auth() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [username, setUsername] = React.useState("");
+  
   const [signedIn, setSignedIn] = React.useState(false);
 
   const signIn = async () => {
