@@ -1,3 +1,6 @@
+import React from "react"
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import logo from "../public/images/logo/Original on Transparent.png"
 import pic1 from  "../public/images/IntroPics/medium-shot-man-wearing-helmet.jpg"
 import pic2 from "../public/images/IntroPics/supply-chain-representation-still-life(1).jpg"
@@ -6,28 +9,80 @@ import pic4 from "../public/images/IntroPics/vehicles-laptop-supply-chain-repres
 import { ArrowDropDown } from '@material-ui/icons';
 import "../components/Intro.css"
 function Intro(props) {
+  let [menu , seMenu] = React.useState(false)  
+  function toggleSideBar(){
+    seMenu(prevMenu => !prevMenu)
+  }
+  let currentMneu = menu ? <MenuOpenIcon onClick={toggleSideBar} className="menu" /> : <MenuIcon onClick={toggleSideBar} className="menu"/>
+
+  
+
+   if(window.innerWidth >= 500 ){
+    menu = true
+   }
+   console.log(menu)
   return(
-  <div className="mainDiv">
+    <div className="mainDiv">
+
+
+      {/* This is were a dropdown will show for small screen only */}
+    {menu && <div>
+      
+        <div className="drpDownIntro">
+
+        <div  >
+          home
+        </div>
+
+        <div className="homeIntro">Contact
+
+        <div className="inHomeIntro">
+        
+      
+      <a href="https://wa.me/263787884434  " target="_blank" >  Contact us via WhatsApp </a>
+      <a href="mailto:truckerz2023@gmail.com" target="_blank" > Contact us via  email</a>
+      <a href="tel:+263787884434"> Contact us via  Phone Calls </a>
+        </div>
+        </div>
+
+        <div className="third">Learn more</div>
+        <div className="forth">Help Center</div>
+
+        </div>
+    </div> }
+
+      {/* and it end hew */}
+
    <div className="placeHolder">
     c
     </div> 
     <div className="bigDisplay"  >
-       <div className="flexIterms">
-        
-        <div className="first">
-      {/* <img src="https://img.freepik.com/premium-photo/orange-colored-uniform-with-tablet-black-man-is-standing-road-with-truck-it_146671-107319.jpg?w=826" height="200px" /> */}
+      
 
-      {/* <img src="https://img.freepik.com/premium-photo/smile-african-male-postal-delivery-courier-man-front-car-delivering-package_255667-61290.jpg?size=626&ext=jpg&ga=GA1.2.1476958990.1706186997&semt=ais"   height="200px"/> */}
-          <img src={logo} width="250px"/>
-        </div>
-        {/* <img src={pic1} height="150px" /> */}
-        {/* <img src={pic2} height="150px" /> */}
-        {/* <img src={pic3} height="150px" /> */}
+       <div className="flexIterms">
+    {window.innerWidth <= 500 && currentMneu}
+          <img src={logo} width="250px" className="logoImage" />
         <div className="scnd">
-        <div>home</div>
-        <div>Contact</div>
+
+        <div  >
+          home
+
+
+        </div>
+
+        <div className="homeIntro">Contact
+
+        <div className="inHomeIntro">
+        
+      <a href="https://wa.me/263787884434  " target="_blank" >  Contact us via WhatsApp </a>
+      <a href="mailto:truckerz2023@gmail.com" target="_blank" > Contact us via  email</a>
+      <a href="tel:+263787884434"> Contact us via  Phone Calls </a>
+        </div>
+
+        </div>
+
         <div className="third">Learn more</div>
-        <div className="forth">weed</div>
+        <div className="forth">Help Center</div>
           </div>
 
         <button className="fifth , introBtn" onClick={props.toggleIntro} >Get Started</button>
@@ -41,9 +96,9 @@ function Intro(props) {
         <button onClick={props.toggleIntro} className="introBtn">    Get Going </button>
 
       </div>
-        <img src="https://img.freepik.com/premium-photo/3d-transport-online-concept-with-forklift-cargo-boxes-magnifying-glass-mobile-phone-3d-rendering_265427-258.jpg?size=626&ext=jpg&ga=GA1.1.1476958990.1706186997&semt=ais" className="scndImg"/>
+        {/* <img src="https://img.freepik.com/premium-photo/3d-transport-online-concept-with-forklift-cargo-boxes-magnifying-glass-mobile-phone-3d-rendering_265427-258.jpg?size=626&ext=jpg&ga=GA1.1.1476958990.1706186997&semt=ais" className="scndImg"/> */}
 
-        {/* <img src={pic4} height="150px" /> */}
+        <img src={pic4} className="scndImg"/>
      </div>
 
     <div className="textBelowFirstINtro">

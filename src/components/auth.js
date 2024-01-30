@@ -11,7 +11,7 @@ function Auth() {
   const [username, setUsername] = React.useState("");
   
   const [signedIn, setSignedIn] = React.useState(false);
-
+  
   const signIn = async () => {
     try {
       const cred = await createUserWithEmailAndPassword(auth, email, password);

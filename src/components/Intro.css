@@ -1,4 +1,5 @@
 .mainDiv{
+  
   position: fixed;
   top: 0;
   left: 0;
@@ -6,8 +7,8 @@
   right: 0;
   background-color: #23242a;
   z-index: 200;
-  overflow: auto;
-  padding-top: 195px;
+  overflow:scroll;
+  padding-top: 35px;
 }
 .placeHolder{
   position: fixed;
@@ -23,11 +24,16 @@
   background-color: #000080;
   padding-top: 60px;
   height: 100px;
-  position: fixed;
-  top: 35px;
+  position:sticky;
+  top: -35px;
   left: 0;
-  right: o;
+  right: 0;
+  
 }
+.bigDisplay > div{
+  padding-left: 40px;
+}
+
 .imageAndCatchText{
   display: flex;
   justify-content: space-evenly;
@@ -51,12 +57,56 @@ h1{
   margin-left: 30px;
   
 }
-.scnd{
+.scnd {
   flex: 1;
   display: flex;
   justify-content: space-evenly;
   align-items:last baseline;
 }
+.scnd > div , .drpDownIntro > div {
+    padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #0074D9 ;
+  border-radius: 4px; 
+  cursor: pointer;
+}
+.scnd >div:hover {
+    cursor: pointer;
+    background-color:  #3c3cac ;
+ 
+
+  }
+
+
+.inHomeIntro {
+  display: none;
+  width: 200px;
+  height: 200px;
+  position: fixed;
+  left: 40%;
+  /* right: 30%; */
+  top: 140px;
+}
+.inHomeIntro >  a{
+    background-color: lightgray;
+  height: 66.6px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+}
+.inHomeIntro > a:hover{
+  background-color:#191970;
+}
+.homeIntro:hover .inHomeIntro{
+  display: block;
+
+}
+.inHomeIntro:hover  .inHomeIntro ,  .drpDownIntro:active .inHomeIntro {
+  display: block;
+}
+
 .fifth{
  
   margin-right: 100px; 
@@ -135,4 +185,148 @@ p {
 }
 .textBelowFirstINtro > h2 > span{
   border-bottom: 7px solid #0000FF ;
+}
+/* Media Queries */
+
+@media only screen and (max-width: 768px ) {
+  .mainDiv {
+    padding-top: 20px;
+  }
+   .logoImage{
+    height: 100%;
+    width: 190px;
+    margin-left: 30px;
+    margin-right:20px ;
+  }
+  .placeHolder {
+    height: 20px;
+  }
+
+  .bigDisplay {
+    padding-top: 40px;
+    height: 80px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .bigDisplay > div{
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .imageAndCatchText {
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .frstTextDiv {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .flexItems {
+    width: 100%;
+  }
+
+  .first {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+
+  .scnd {
+    display: none;
+  }
+  
+  .drpDownIntro{
+    position: fixed;
+    top: 129px;
+    left: 0;
+    z-index: 100;
+    height: 250px;
+    width: 220px;
+    background-color: #000080;
+  }
+ 
+  .scnd > div {
+    margin-bottom: 10px;
+  }
+
+  .inHomeIntro {
+    position: fixed;
+    top: 100px;
+    
+  }
+
+  .fifth {
+    margin-right: 0;
+    margin-left: 10px;
+
+  }
+
+  .moreInfo {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .introBtn {
+    padding: 5px 10px;
+  }
+
+  .frstTextDiv {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .fordwardWord{
+    margin-left: 10px;
+  }
+
+.textBelowFirstINtro{
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 60px;
+}
+  .textBelowFirstINtro > h2{
+    font-size: 20px;
+  }
+  .scndImg {
+    width: 100%;
+  }
+  .wlcmImage{
+    width: 100%;
+  }
+
+  .lastDiv {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 200px;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .frstTextDiv {
+    width: 350px;
+  }
+
+  .scndImg {
+    max-width: 400px;
+  }
+
+  .wlcmImage {
+    width: 450px;
+  }
+
+  .textBelowFirstIntro {
+    margin-left: 100px;
+    margin-right: 50px;
+  }
+
+  .fordwardWord {
+    margin-left: 200px;
+  }
 }
