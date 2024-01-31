@@ -14,6 +14,7 @@ import { auth  } from "./config/fireBase"
 import LogoutIcon from '@mui/icons-material/Logout';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import CloseIcon from '@material-ui/icons/Close';
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, updateDoc } from 'firebase/firestore';
@@ -23,8 +24,8 @@ import Auth from './auth'
 import Feedback from "./feedback";
 import GetFeedback from "./getFeedbacks";
 import CancelIcon from '@material-ui/icons/Cancel';
+import { FunctionsOutlined } from "@mui/icons-material";
 function Header(props){
-
   const [currentUser, setCurrentUser] = React.useState(null);
 
   React.useEffect(() => {
@@ -49,7 +50,8 @@ function Header(props){
   
   function displayDropdown(){   
     setDropdown(prevDropdown => !prevDropdown)   
-    setSmallMenu(prev=> false)   
+    setSmallMenu(prev=> false)  
+    setTellAdd(prevState => false) 
 }
   let [addBulkTrailer , setBulkTrailer] = React.useState(false)  
   function toggleBulkTrailer(){
@@ -115,8 +117,10 @@ function Header(props){
           {addLoads && <div className="addLoadDB">
           <button onClick={displayAddLooads} className="bacInDropDown" >back</button>
             <AddLoaadDB
-            getloadsList = {props.getLoadsList}
-            />
+            getMainLoadsList =    {props.getMainLoadsList}
+            getLoadsList = {props.getLoadsList} 
+
+                              />
           </div>
           }
   
@@ -128,7 +132,6 @@ function Header(props){
   
   }
 
-  console.log()
 
     function displayTrucks(){
       return(
@@ -283,7 +286,13 @@ function Header(props){
       setCurrentUserBtn(prevState => !prevState)
     }
 
+// Toggling the elemtn that tell pple to add items when they sign in 
 
+    const [ tellAdd , setTellAdd ] = React.useState(true)
+
+    function togglleTellAdd(){
+      setTellAdd(prevState => ! prevState)
+    }
     
 
     let CurrentUserDisplay
@@ -340,7 +349,6 @@ function Header(props){
       <div>
       {addMiniSearch ?
         <header>
-          
         {menu && props.sideBar }
         <div className="left-section"> 
           
@@ -371,8 +379,12 @@ function Header(props){
 
           <button className="addLoad" style={addNewCss} onClick={props.addLoadState}  >Loads</button>
 
-      
           <div className="addLoad" onClick={  displayDropdown} >Add </div> 
+      
+          {/* an element that tell pple to add something when they enter */}
+          {tellAdd && <div   className="click-overlay">  <div onClick={displayDropdown} className="tellAddFrst" > Add new item  </div> <div className="tellAddCancel" onClick={togglleTellAdd} > <CloseIcon/> </div>  </div> }
+
+          
 
           <DropDown/>
           

@@ -4,7 +4,8 @@
   padding: 10px;
   background-color: #EDEDED ;
   position: retive;
-  
+  z-index: 9;
+  position: relative; 
 }
 .welcmeMyAcc{
   z-index: 50;

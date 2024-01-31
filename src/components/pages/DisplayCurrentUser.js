@@ -20,7 +20,6 @@ function CurrentUserLoads( props){
   if(props.item.DueDate === formattedDate){
     deleteLoad(props.item.id)
   }
-console.log((props.item.DueDate))
   return(    
     <div className="bigLoad"  >
         <h3>Company {props.item.companyName} </h3>

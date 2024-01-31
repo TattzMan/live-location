@@ -18,9 +18,17 @@ function Intro(props) {
   
 
    if(window.innerWidth >= 500 ){
-    menu = true
+    menu = false
    }
-   console.log(menu)
+   
+   let [ contact , setContact ] = React.useState(false)
+
+   function toggleContact(){
+    setContact(prevState => !prevState)
+   }
+
+   
+
   return(
     <div className="mainDiv">
 
@@ -34,15 +42,15 @@ function Intro(props) {
           home
         </div>
 
-        <div className="homeIntro">Contact
+        <div className="homeIntro" onClick={toggleContact}>Contact
 
-        <div className="inHomeIntro">
+     {contact &&  <div className="inHomeIntro">
         
       
       <a href="https://wa.me/263787884434  " target="_blank" >  Contact us via WhatsApp </a>
       <a href="mailto:truckerz2023@gmail.com" target="_blank" > Contact us via  email</a>
       <a href="tel:+263787884434"> Contact us via  Phone Calls </a>
-        </div>
+        </div> }
         </div>
 
         <div className="third">Learn more</div>

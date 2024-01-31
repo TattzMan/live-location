@@ -79,6 +79,7 @@ h1{
 
 
 .inHomeIntro {
+  
   display: none;
   width: 200px;
   height: 200px;
@@ -103,7 +104,7 @@ h1{
   display: block;
 
 }
-.inHomeIntro:hover  .inHomeIntro ,  .drpDownIntro:active .inHomeIntro {
+.inHomeIntro:hover  .inHomeIntro  {
   display: block;
 }
 
@@ -111,8 +112,7 @@ h1{
  
   margin-right: 100px; 
 }
-.moreINfo{
-  
+.moreINfo{  
   display: flex;
   justify-content: space-evenly;
   background-color: #4B0082 ;
@@ -179,6 +179,7 @@ p {
   font-size: 40px;
 
 }
+
 .fordwardWord{
   
   margin-left: 280px;
@@ -267,10 +268,6 @@ p {
 
   }
 
-  .moreInfo {
-    padding: 20px;
-    margin-bottom: 20px;
-  }
 
   .introBtn {
     padding: 5px 10px;
@@ -285,7 +282,18 @@ p {
   .fordwardWord{
     margin-left: 10px;
   }
+  .moreINfo{  
+    display: block;
+    justify-content: space-evenly;
 
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+
+.wlcmText{
+  width: 100%;
+  height: 100%;
+}
 .textBelowFirstINtro{
     margin-left: 15px;
     margin-right: 15px;

@@ -5,7 +5,6 @@ function AddLoad( props){
   const styles = {
     backgroundColor : props.backgroundColor
   }
-console.log(props.item)
   return(
     <div className="bigLoad" style={styles} >
 

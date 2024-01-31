@@ -4,8 +4,8 @@ import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
 
 function AddLoadDB (props) {
        
-
-  const [ username , setUsername] = React.useState('');
+    
+   [ username , setUsername] = React.useState('');
 
   React.useEffect(()=>{
   const getCurrentUserName = async () => {
@@ -99,8 +99,10 @@ function AddLoadDB (props) {
         date : ""
 
       });
-      props.getloadsList() 
-      props.getMainLoadsList()
+
+    props.getMainLoadsList()
+    props.getLoadsList()
+
     } catch (err) {
       console.error(err);
     }

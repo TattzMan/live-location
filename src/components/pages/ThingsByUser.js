@@ -14,7 +14,6 @@ function ThingsByUser( props){
       {/*   the props.item .....  checks if an elemnt has something to dispaly bfr dispaling it t it have t will apear if notit will not we are getting props from things by user element and importing css from addload a file  the loads are taken from the app were there are passed as props   */}
 
       { props.item.companyName && (  <h3 className="companyName">{props.item.companyName}</h3> )}
-        
       {props.item.contact && ( <p className="contact">CONTACT: <span className="spaninMini"> {props.item.contact}</span></p>)}
 
       { props.item.typeofLoad && (<p className="loadType">TYPE of LOAD: <span className="spaninMini">  {props.item.typeofLoad}</span></p>)} 
