@@ -10,6 +10,7 @@ import Tankers from "./components/pages/Tankers";
 
 import LowBeds from "./components/pages/LowBeds";
 
+
 import BulkTrailers from "./components/pages/BulkTrailers";
 
 import SideTippers from "./components/pages/SideTippers";
