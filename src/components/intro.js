@@ -1,13 +1,11 @@
 import React from "react"
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import logo from "../public/images/logo/Original on Transparent.png"
-import pic1 from  "../public/images/IntroPics/medium-shot-man-wearing-helmet.jpg"
-import pic2 from "../public/images/IntroPics/supply-chain-representation-still-life(1).jpg"
-import pic3 from "../public/images/IntroPics/supply-chain-representation-still-life.jpg"
-import pic4 from "../public/images/IntroPics/vehicles-laptop-supply-chain-representation.jpg"
+import logo from "../public/images/logo/Black on Transparent.png"
 import { ArrowDropDown } from '@material-ui/icons';
 import "../components/Intro.css"
+import frstPicIntro from "../public/images/introPics/frst.jpg"
+import secndPicIntro from "../public/images/introPics/scndPic.jpg"
 function Intro(props) {
   let [menu , seMenu] = React.useState(false)  
   function toggleSideBar(){
@@ -37,6 +35,7 @@ function Intro(props) {
     {menu && <div>
       
         <div className="drpDownIntro">
+          
 
         <div  >
           home
@@ -61,9 +60,9 @@ function Intro(props) {
 
       {/* and it end hew */}
 
-   <div className="placeHolder">
+   {/* <div className="placeHolder">
     c
-    </div> 
+    </div>  */}
     <div className="bigDisplay"  >
       
 
@@ -93,31 +92,30 @@ function Intro(props) {
         <div className="forth">Help Center</div>
           </div>
 
-        <button className="fifth , introBtn" onClick={props.toggleIntro} >Get Started</button>
+        <button className="fifth" onClick={props.toggleIntro} >Get Started</button>
       </div>
     
     </div>
-     <div className="imageAndCatchText">
+     <div className="imageAndCatchText"   style={{ backgroundImage: `url(${frstPicIntro})`  }} >
       <div className="frstTextDiv">
     <h1>Find Trucks, Find Loads, Find Success!</h1>
     <h3>Embrace Success Today, for <span>  FREE! </span> Click 'Start' to Explore, Add, and Amplify Your Loads and Trucks. Join our Community of Industry Leaders and Experience the Power of Connection. Scroll Down to Know Your Journey.</h3>
-        <button onClick={props.toggleIntro} className="introBtn">    Get Going </button>
+        <button onClick={props.toggleIntro} className="introBtnFrstText">    Get Going </button>
 
       </div>
         {/* <img src="https://img.freepik.com/premium-photo/3d-transport-online-concept-with-forklift-cargo-boxes-magnifying-glass-mobile-phone-3d-rendering_265427-258.jpg?size=626&ext=jpg&ga=GA1.1.1476958990.1706186997&semt=ais" className="scndImg"/> */}
 
-        <img src={pic4} className="scndImg"/>
+        {/* <img src={pic4} className="scndImg"/> */}
      </div>
 
     <div className="textBelowFirstINtro">
     <p> Truckerz All loads and trucks connected </p>
-    <h2> <span > Fuel your growth,</span> conquer new horizons. Let our platform be your trusted partner in <span>driving your Freight business</span>   </h2>
-      <h2 className="fordwardWord"> forward </h2>
+    <h2> <span > Fuel your growth,</span> conquer new horizons. Let our platform be your trusted partner in <span>driving your Freight business</span>   forward </h2>
     </div>
 
     <div  className="moreINfo" >
-      <div>
-        <img src={pic1} className="wlcmImage" />
+      <div className="picDivIntro">
+        <img src={frstPicIntro} className="wlcmImage" />
         </div>      
 
       <div className="wlcmText">
@@ -133,24 +131,23 @@ function Intro(props) {
     <br/>
     <br/>
 
-    <div className="moreINfo">
+    <div className="scndmoreINfo">
 
       <div className="wlcmText">
     <p>At Truckerz, our mission is simple: to improve the trucking and loads industry by seamlessly connecting truckers and load providers through our innovative platform. With our user-friendly interface and powerful search capabilities, finding the perfect truck or load has never been easier. Say goodbye to time-consuming phone calls and endless searches; we're here to streamline the process and provide you with more options than ever before.</p>
 
-        <hr/>
     <br/>
-    <p>Harnessing the power of technology, we elevate trucking and loads. Experience convenience, speed, and endless possibilities at [Your Website Name]. Let's build a stronger, connected trucking community.</p>
+    <p>Harnessing the power of technology, we elevate trucking and loads. Experience convenience, speed, and endless possibilities at Truckerz. Let's build a stronger, connected trucking community.</p>
 
  </div>
-        <img src={pic2} className="wlcmImage"/>
+        <img src={secndPicIntro} className="wlcmImage"/>
  </div>
 
 
     <div className="lastDiv">
       <h2>Take the next step </h2>
       <h4>Start transforming your customer experience on Truckerz Platform.</h4>
-    <button onClick={props.toggleIntro} className="introBtn" >Explore Now</button>
+    <button onClick={props.toggleIntro} className="introLastBtnIntro" >Explore Now</button>
     </div>
 
   </div>

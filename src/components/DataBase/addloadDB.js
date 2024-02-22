@@ -3,9 +3,8 @@ import { db, auth } from "../config/fireBase";
 import { collection, doc, getDoc, addDoc } from 'firebase/firestore';
 
 function AddLoadDB (props) {
-       
     
-   [ username , setUsername] = React.useState('');
+  const   [ username , setUsername] = React.useState('');
 
   React.useEffect(()=>{
   const getCurrentUserName = async () => {
@@ -102,7 +101,7 @@ function AddLoadDB (props) {
 
     props.getMainLoadsList()
     props.getLoadsList()
-
+    props.fetchLoads()  
     } catch (err) {
       console.error(err);
     }

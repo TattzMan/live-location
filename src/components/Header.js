@@ -119,6 +119,7 @@ function Header(props){
             <AddLoaadDB
             getMainLoadsList =    {props.getMainLoadsList}
             getLoadsList = {props.getLoadsList} 
+            fetchLoads = {props.fetchLoads}
 
                               />
           </div>
@@ -301,6 +302,9 @@ function Header(props){
       return(
         <CurrentUser
           item = {item}
+        getLoadsList = {props.getLoadsList}
+        getMainLoadsList = {props.getMainLoadsList}
+        fetchLoads = {props.fetchLoads}
         />
       )
     })

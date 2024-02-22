@@ -6,11 +6,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 
 function CurrentUserLoads( props){
-
   const deleteLoad = async (id) => {
     const loadsDocRef = doc(db, 'Loads' , id);
-    await deleteDoc(loadsDocRef);
-  };
+    await deleteDoc(loadsDocRef);    
+        props.getLoadsList()
+        props.getMainLoadsList()
+        props.fetchLoads()  
+        };
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = String(currentDate.getMonth() + 1).padStart(2, '0');

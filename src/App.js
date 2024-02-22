@@ -683,6 +683,7 @@ tlssocketEmitter.setMaxListeners(15);
       <div>
         
       <Header
+       fetchLoads = {fetchLoads}
         getLoadsList = {getLoadsList}
         getMainLoadsList = {getMainLoadsList}
         addLoadState ={toggleAddLoad}
